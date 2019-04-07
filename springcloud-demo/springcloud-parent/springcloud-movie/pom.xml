@@ -20,6 +20,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
+        <!--调用user服务-->
+        <dependency>
+            <groupId>com.cdn</groupId>
+            <artifactId>springcloud-user</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

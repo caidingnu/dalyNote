@@ -10,6 +10,7 @@ public class SpringcloudMovieApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringcloudMovieApplication.class, args);
+        System.out.println("=====电影服务====");
     }
 
 }
