@@ -1,264 +1,247 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<title>layui</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="js/jquery-1.9.1.min.js"></script>
+	</head>
+	<style type="text/css">
+		.layui-table[lay-even] tr:nth-child(even) {
+			background-color: #CACEDA;
+		}
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>html首页</title>
-</head>
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap.css" />
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		.a {
+			color: #0000FF;
+		}
 
-<body>
-<div class="container-fluid">
-	<nav class="navbar navbar-inverse" style="background-color: orange;">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+		.a:hover {
+			cursor: pointer;
+		}
+.tan:hover {
+			cursor: pointer;
+		}
 
-			</div>
+		.layui-table[lay-even] tr:nth-child(even):hover {
+			cursor: pointer;
+		}
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" style="margin: 0 auto;text-align: center;" id="bs-example-navbar-collapse-1">
-				<div class="container">
-					<div class="row">
-
-						<ul class="nav navbar-nav" style="width: 100%;">
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店1
-										</div>
-									</a>
-								</li>
-							</div>
-
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店2
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-								<li>
-									<a href="#">
-										<div class="col-lg-1">
-											大酒店3
-										</div>
-									</a>
-								</li>
-							</div>
-							<div class="col-lg-1">
-
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-										<div class="col-lg-1">
-											Dropdown <span class="caret"></span>
-										</div>
-
-									</a>
-									<ul class="dropdown-menu" role="menu" style="text-align: center;">
-										<li>
-											<a href="#">電腦</a>
-										</li>
-										<li>
-											<a href="#">電腦</a>
-										</li>
-										<li>
-											<a href="#">電腦</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="#">電腦</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="#">電腦</a>
-										</li>
-									</ul>
-								</li>
-							</div>
-
-						</ul>
-					</div>
-
-				</div>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-
-	<ul class="nav nav-pills">
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation" class="active">
-			<a href="#">Home</a>
-		</li>
-		<li role="presentation">
-			<a href="#">Profile</a>
-		</li>
-		<li role="presentation">
-			<a href="#">Messages</a>
-		</li>
-	</ul>
-</div>
-
-</body>
-<style type="text/css">
-	body{
-		background-image: url(../img/QQ图片20180716093513.jpg);
-	}
-	div {
-		border: 1px solid red;
-	}
-
-	.zpading {
-		padding: 0;
-	}
-
-	.tou {
-		opacity: 0;
-	}
-
-	.can {
-		margin: 0;
-	}
-
-	.jun {
-		display: flex;
-		justify-content: space-between;
-	}
-</style>
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $(".ok").on("click", bb);
-        v();
-    })
-
-    function bb() {
-        $(".ok").css("border-bottom", "2px solid orange");
-        $(this).css("border-bottom", "2px solid white");
-    }
-
-    function v() {
-        var tit = $(document).attr("title");
-        var daohang = $(".ok").text();
-
-        console.log(daohang)
-        console.log(daohang[0])
-        for(i = 0; i <= 4; i++) {
-            //				alert(daohang[i].text())
-            //				if(daohang[i].text()==tit){
-            //					$(daohang[i]).css("border-bottom","2px solid white");
-            //				}
-        }
-    }
+		.layui-table-view {
+			margin: 0 auto;
+		}
+	</style>
+	<body>
+		<table class="layui-hide" id="test" lay-filter="test" lay-data="{initSort: {field:'userid', type:'desc'}}"></table>
+		<script type="text/html" id="barDemo">
+			<a class="a" lay-event="edit">编辑</a>
+	 <a class="a" lay-event="del">删除</a>
+	{{#  if(d.sex==1){ }}
+	 <button class="layui-btn layui-btn-danger">男操作</button>
+	{{#  } else { }}
+	 <button class="layui-btn layui-btn-disabled">女操作</button>
+	{{#  } }} 
 </script>
 
+
+		<!--laytpl 模板引擎-->
+		<script type="text/html" id="addAdminModel">
+			<div id="view" style="margin-top: 5%;">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="userName" value={{d.username}} name="userName" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="phone" value={{d.phone}} name="phone" autocomplete="off"
+                           placeholder="请输入真实姓名">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value={{d.sex}} title="男" {{d.sex==0?"checked":""}}/>
+                    <input type="radio" name="sex" value={{d.sex}} title="女" {{d.sex==1?"checked":""}}/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">复选框</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" {{d.sex==0?"checked":""}} name="like[nan]" title="男">
+                    <input type="checkbox" {{d.sex==1?"checked":""}} name="like[nv]" title="女">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block submit-btn">
+                    <button class="layui-btn my-add-btn" id="kl">保存</button>&nbsp;&nbsp;
+                    <button class="layui-btn layui-btn-danger  cancel">取消</button>
+                </div>
+            </div>
+			</form>
+            <style>
+                .my-submit-btn {
+                    width: 140px;
+                }
+            </style>
+        </form>
+    </div>
+</script>
+<script type="text/html" id="zizeng">
+    {{d.LAY_TABLE_INDEX+1}}
+	 {{d.username}}
+</script>
+
+		<script type="text/javascript" src="layui/layui.js"></script>
+		<script>
+			layui.use(['table', 'layer', 'form', 'laytpl', 'jquery'], function() {
+				var table = layui.table;
+				var layer = layui.layer;
+				var $ = layui.jquery;
+				var form = layui.form;
+				var laytpl = layui.laytpl;
+
+				table.render({
+					elem: '#test', //html中的table
+					id: 'suggestTabData',
+					url: 'http://127.0.0.1:8099/userinfo/select_paged',
+					toolbar: '#toolbarDemo', //
+					title: '用户数据表',
+					defaultToolbar: ['print'], //
+					method: 'post',
+					skin: 'line', //行边框风格
+					size: 'lg',
+					width: 1000,
+					align: 'center',
+					even: true, //开启隔行背景
+					page: true, //开启分页
+					where: { //传递参数到后台
+						"id": "id"
+					},
+					request: {
+						pageName: 'page', //页码的参数名称，默认：page
+						limitName: 'pageSize' //每页数据量的参数名，默认：limit
+					},
+					response: {
+						statusCode: 200,
+						statusName: 'StateCode',
+						msgName: 'StateInfo',
+						countName: 'DataCount',
+						dataName: 'Data'
+					},
+					cols: [
+						[
+							{
+								field: 'userid',
+								title: '序号',
+								width: 100,
+								align: "center",
+								templet:"#zizeng"
+							},{
+							field: 'userid',
+							title: 'ID',
+							width: 80,
+							align: "center"
+						}, {
+							field: 'username',
+							title: '用户名',
+							align: "center"
+						}, {
+							field: 'phone',
+							title: '电话',
+							style: "color:red",
+							align: "center",
+							templet: function(re) {
+								if(re.sex==0){
+								return '<img src="img/b.png" width="40px" height="40px" />'
+							}else{
+								return '<img src="img/a.png" width="40px" height="40px" />'
+							}
+							}
+						}, {
+							field: 'sex',
+							title: '性别',
+							align: "center",
+							templet: function(re) {
+								if (re.sex == "0") {
+									return '<button class="layui-btn  layui-btn-normal">男</button>'
+								} else {
+									return '<button class="layui-btn layui-btn-radius">女</button>'
+								}
+							}
+						}, {
+							toolbar: '#barDemo',
+							title: '操作',
+							align: "center"
+						}]
+					],
+					done: function() {
+						$("span").click(function() {
+							console.log(this.id)
+						})
+					}
+				});
+
+
+
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var mydata = obj.data;
+					console.log(mydata)
+					if (obj.event === 'del') {
+						//询问框
+						layer.confirm('確定刪除？', {
+							btn: ['確定', '取消'] //按钮
+						}, function() {
+							layer.closeAll('dialog');
+
+							// alert(data.userid)
+							$.ajax({
+								url: 'http://127.0.0.1:8099/userinfo/delete_by_id',
+								data: {
+									"userid": mydata.userid
+								},
+								type: "post",
+								dataType: "json",
+								success: function(res) {
+									if (res.data == "1") {
+										layer.msg("刪除成功")
+									}
+									table.reload('suggestTabData', {}); //重新渲染表格,suggestTabData是渲染時候的表格id
+								}
+							});
+						}, function() {
+							layer.closeAll();
+						});
+					} else if (obj.event === 'edit') {
+						layer.open({
+							type: 1,
+							title: ["编辑用户", "background-color:green;color:white;text-align:center"],
+							skin: 'layui-layer-rim', //加上边框
+							area: ['400px', '350px'], //宽高
+							content: $("#addAdminModel").html(),
+							success: function() {
+								// 模板的id addAdminModel
+								// 模板层中最大的div的id--view
+								var gettpl = document.getElementById('addAdminModel').innerHTML;
+								laytpl(gettpl).render(mydata, function(html) {
+									document.getElementById('view').innerHTML = html;
+								});
+								form.render();
+							}
+						});
+					}
+
+				});
+			});
+		</script>
+	</body>
 </html>
