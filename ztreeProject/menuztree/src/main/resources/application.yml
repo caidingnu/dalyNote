@@ -1,0 +1,39 @@
+#####################################################################################################
+server:
+  port: 80
+#####################################################################################################
+#####################################################################################################
+# mysql 属性配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ztree?serverTimezone=GMT%2B8&characterEncoding=utf8
+    username: root
+    password: root
+#####################################################################################################
+
+#####################################################################################################
+# 打印日志
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.springms: DEBUG
+#####################################################################################################
+
+#####################################################################################################
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.demo.menuztree.entity
+#####################################################################################################
+
+#####################################################################################################
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+
