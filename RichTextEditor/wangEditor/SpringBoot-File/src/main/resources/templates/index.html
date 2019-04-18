@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Spring Boot File Upload / Download Rest API Example</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/main.css" rel="stylesheet"/>
+</head>
+<body>
+
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+
+<div class="upload-container">
+    <div class="upload-header">
+        <h2>Spring Boot 文件上传下载</h2>
+    </div>
+    <div class="upload-content">
+        <div class="single-upload">
+            <h3>单文件上传</h3>
+            <form id="singleUploadForm" name="singleUploadForm"  method="post" action="/uploadFile"  enctype="multipart/form-data">
+                <input id="singleFileUploadInput" type="file" name="file"  class="file-input" required/>
+                <button type="submit"  class="primary submit-btn">上传</button>
+            </form>
+
+            <div class="upload-response">
+                <div id="singleFileUploadError"></div>
+                <div id="singleFileUploadSuccess"></div>
+
+            </div>
+            <img id="review" src="http://127.0.0.1/downloadFile/0ce1622817380300be02b5be8eb9c6f6.jpg" />
+        </div>
+
+
+
+        <div class="multiple-upload">
+            <h3>多文件上传</h3>
+            <form id="multipleUploadForm" name="multipleUploadForm"  method="post" action="/uploadMultipleFiles"  enctype="multipart/form-data">
+                <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple="multiple" required />
+                <button type="submit" class="primary submit-btn">上传</button>
+            </form>
+            <div class="upload-response">
+                <div id="multipleFileUploadError"></div>
+                <div id="multipleFileUploadSuccess"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!--<script src="/js/main.js"></script>-->
+<script src="js/jquery-1.9.1.min.js"></script>
+<!--导入jquery.form.min.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<!--或者-->
+<!--<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>-->
+<script src="js/test.js"></script>
+</body>
+</html>
