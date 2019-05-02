@@ -1,0 +1,23 @@
+#客户端默认是30s发送一次心跳，90s服务端没有收到心跳就把服务剔除
+spring:
+
+    #-----------------本地-----------------
+  cloud:
+    config:
+      uri: http://localhost:8888/
+      name: testData
+      profile: dev
+
+
+#------------  GItHub---------------
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: http://localhost:8888/
+#          search-paths: respo
+#          username:
+#          password:
+#      label: master
+#      profile: dev
+
