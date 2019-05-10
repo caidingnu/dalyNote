@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="static/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="static/js/util.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
+</head>
+<body>
+<button id="a">获取token</button>
+<button type="button" id="b">提交token</button>
+</body>
+<script type="text/javascript">
+    $(function() {
+        $("#a").click(function() {
+            $.ajax({
+                type: "post",
+                url: "/registration",
+                data: {
+                    "username": 1
+                },
+                dataType: "text",
+                success: function(data, status, xhr) {
+                    console.log(data);
+                    saveToken(xhr)
+                    console.log(getToken())
+                },
+                error: function(err, s, b) {
+                    console.log("err")
+                    console.log(s)
+                    console.log(b)
+                }
+            });
+        })
+
+
+
+
+
+
+        $("#b").click(function() {
+            console.log(localStorage.getItem("token"))
+            $.ajax({
+                type: "post",
+                headers: {
+                    'Authorization':getToken()
+                },
+                url: "/api", //请求的action路径
+                dataType: "text",
+                data: {},
+                success: function(data,status,xhr) {
+                    saveToken(xhr)
+                },
+                error: function(jqXHR) {
+                    console.log('请求失败');
+                }
+            });
+        })
+    })
+</script>
+</html>
