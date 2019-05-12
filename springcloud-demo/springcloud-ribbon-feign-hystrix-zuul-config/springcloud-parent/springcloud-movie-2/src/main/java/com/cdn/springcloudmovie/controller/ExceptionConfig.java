@@ -16,6 +16,9 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public String baseErrorHandler(HttpServletRequest request, Exception e) {
+        if (e instanceof NullPointerException){
+            return "redirect:http://www.taobao.com";
+        }
         return "redirect:http://www.baidu.com";
     }
 
