@@ -5,14 +5,14 @@ server:
 spring:
   application:
     name: config-server
-#   本地
+  #   本地
   profiles:
     active: native
   cloud:
     config:
       server:
         native:
-#          配置文件在D盘的config文件夹下
+          #          配置文件在D盘的config文件夹下
           search-locations: file:///D:/config
 #    Github---
 #  cloud:

@@ -12,8 +12,8 @@
 <button type="button" id="b">提交token</button>
 </body>
 <script type="text/javascript">
-    $(function() {
-        $("#a").click(function() {
+    $(function () {
+        $("#a").click(function () {
             $.ajax({
                 type: "post",
                 url: "/registration",
@@ -21,12 +21,12 @@
                     "username": 1
                 },
                 dataType: "text",
-                success: function(data, status, xhr) {
+                success: function (data, status, xhr) {
                     console.log(data);
                     saveToken(xhr)
                     console.log(getToken())
                 },
-                error: function(err, s, b) {
+                error: function (err, s, b) {
                     console.log("err")
                     console.log(s)
                     console.log(b)
@@ -35,24 +35,20 @@
         })
 
 
-
-
-
-
-        $("#b").click(function() {
+        $("#b").click(function () {
             console.log(localStorage.getItem("token"))
             $.ajax({
                 type: "post",
                 headers: {
-                    'Authorization':getToken()
+                    'Authorization': getToken()
                 },
                 url: "/api", //请求的action路径
                 dataType: "text",
                 data: {},
-                success: function(data,status,xhr) {
+                success: function (data, status, xhr) {
                     saveToken(xhr)
                 },
-                error: function(jqXHR) {
+                error: function (jqXHR) {
                     console.log('请求失败');
                 }
             });

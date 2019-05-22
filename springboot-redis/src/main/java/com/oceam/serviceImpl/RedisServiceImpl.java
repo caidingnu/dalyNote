@@ -10,35 +10,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 /**
- *
  * Description:
  *
  * @author
- * @since JDK1.8
  * @history 2018年9月4日
+ * @since JDK1.8
  */
 @Service
 public class RedisServiceImpl implements RedisService {
 
     @Resource
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public void set(String key, Object value) {
-        ValueOperations<String,Object> vo = redisTemplate.opsForValue();
+        ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         vo.set(key, value);
     }
 
     @Override
     public Object get(String key) {
-        ValueOperations<String,Object> vo = redisTemplate.opsForValue();
+        ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         return vo.get(key);
     }
 
     @Override
     public boolean expire(String key, long time) {
         try {
-            if(time>0){
+            if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
             return true;
@@ -50,7 +49,7 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public long getExpire(String key) {
-        return redisTemplate.getExpire(key,TimeUnit.SECONDS);
+        return redisTemplate.getExpire(key, TimeUnit.SECONDS);
     }
 
     @Override
@@ -65,10 +64,10 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public void del(String... key) {
-        if(key!=null&&key.length>0){
-            if(key.length==1){
+        if (key != null && key.length > 0) {
+            if (key.length == 1) {
                 redisTemplate.delete(key[0]);
-            }else{
+            } else {
                 redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }

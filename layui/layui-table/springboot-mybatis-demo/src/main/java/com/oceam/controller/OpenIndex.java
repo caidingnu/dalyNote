@@ -17,7 +17,7 @@ public class OpenIndex {
 
 
     @RequestMapping(value = "/l")
-    public String name(){
+    public String name() {
 
         return "index";
     }

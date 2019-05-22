@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
-	</head>
-	<body>
-		<form id="view" class="layui-form"></form>
-		<script id="demo" type="text/html">
-			<input placeholder="请输入标题" class="layui-input" value="{{d.title}}">
-			<div class="layui-form-item">
-			    <label class="layui-form-label">选择框</label>
-			    <div class="layui-input-block">
-			        <select name="distinct" >
-								{{#  layui.each(d.data, function(index, item){ }}
-			            <option  value="{{ item }}">{{item}}</option>
-									 {{#  }); }}
-			        </select>
-			    </div>
-			</div>
-			<div class="layui-form-item">
-    <div class="layui-input-block">
-      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+</head>
+<body>
+<form id="view" class="layui-form"></form>
+<script id="demo" type="text/html">
+    <input placeholder="请输入标题" class="layui-input" value="{{d.title}}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="distinct">
+                {{# layui.each(d.data, function(index, item){ }}
+                <option value="{{ item }}">{{item}}</option>
+                {{# }); }}
+            </select>
+        </div>
     </div>
-  </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
 </script>
 </body>
 
 
-	<script type="text/javascript">
-		layui.use(['laytpl', 'form', 'jquery'], function() {
-			var laytpl = layui.laytpl,
-				form = layui.form,
-				$ = layui.jquery;
+<script type="text/javascript">
+    layui.use(['laytpl', 'form', 'jquery'], function () {
+        var laytpl = layui.laytpl,
+            form = layui.form,
+            $ = layui.jquery;
 
 
-			$.ajax({
-				type: "get",
-				url: "js/data.json",
-				data: {},
-				dataType: "json",
-				success: function(res) {
-					var getTpl = demo.innerHTML,
-						view = document.getElementById('view');
-					laytpl(getTpl).render(res, function(html) {
-						view.innerHTML = html;
-					});
-					form.render();
-				},
-				error: function() {
-					layer.msg("错误")
-				}
-			});
+        $.ajax({
+            type: "get",
+            url: "js/data.json",
+            data: {},
+            dataType: "json",
+            success: function (res) {
+                var getTpl = demo.innerHTML,
+                    view = document.getElementById('view');
+                laytpl(getTpl).render(res, function (html) {
+                    view.innerHTML = html;
+                });
+                form.render();
+            },
+            error: function () {
+                layer.msg("错误")
+            }
+        });
 
-			//监听提交
-			form.on('submit(demo1)', function(data) {
-				layer.alert(JSON.stringify(data.field), {
-					title: '最终的提交信息'
-				})
-				return false;
-			});
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
 
-		});
-	</script>
+    });
+</script>
 </html>

@@ -7,8 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 //@MapperScan("com.oceam.dao.**")
-public class SpringbootMybatisDemoApplication extends SpringBootServletInitializer{
-
+public class SpringbootMybatisDemoApplication extends SpringBootServletInitializer {
 
 
     public static void main(String[] args) {

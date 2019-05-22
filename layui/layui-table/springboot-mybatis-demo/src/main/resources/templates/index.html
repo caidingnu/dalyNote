@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>layui</title>
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="layui/css/layui.css" />
-		<script src="js/jquery-1.9.1.min.js"></script>
-	</head>
-	<style type="text/css">
-		.layui-table[lay-even] tr:nth-child(even) {
-			background-color: #CACEDA;
-		}
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script src="js/jquery-1.9.1.min.js"></script>
+</head>
+<style type="text/css">
+    .layui-table[lay-even] tr:nth-child(even) {
+        background-color: #CACEDA;
+    }
 
-		.a {
-			color: #0000FF;
-		}
+    .a {
+        color: #0000FF;
+    }
 
-		.a:hover {
-			cursor: pointer;
-		}
-.tan:hover {
-			cursor: pointer;
-		}
+    .a:hover {
+        cursor: pointer;
+    }
 
-		.layui-table[lay-even] tr:nth-child(even):hover {
-			cursor: pointer;
-		}
+    .tan:hover {
+        cursor: pointer;
+    }
 
-		.layui-table-view {
-			margin: 0 auto;
-		}
-	</style>
-	<body>
-		<table class="layui-hide" id="test" lay-filter="test" lay-data="{initSort: {field:'userid', type:'desc'}}"></table>
-		<script type="text/html" id="barDemo">
-			<a class="a" lay-event="edit">编辑</a>
-	 <a class="a" lay-event="del">删除</a>
-	{{#  if(d.sex==1){ }}
-	 <button class="layui-btn layui-btn-danger">男操作</button>
-	{{#  } else { }}
-	 <button class="layui-btn layui-btn-disabled">女操作</button>
-	{{#  } }} 
+    .layui-table[lay-even] tr:nth-child(even):hover {
+        cursor: pointer;
+    }
+
+    .layui-table-view {
+        margin: 0 auto;
+    }
+</style>
+<body>
+<table class="layui-hide" id="test" lay-filter="test" lay-data="{initSort: {field:'userid', type:'desc'}}"></table>
+<script type="text/html" id="barDemo">
+    <a class="a" lay-event="edit">编辑</a>
+    <a class="a" lay-event="del">删除</a>
+    {{#  if(d.sex==1){ }}
+    <button class="layui-btn layui-btn-danger">男操作</button>
+    {{#  } else { }}
+    <button class="layui-btn layui-btn-disabled">女操作</button>
+    {{#  } }}
 </script>
 
 
-		<!--laytpl 模板引擎-->
-		<script type="text/html" id="addAdminModel">
-			<div id="view" style="margin-top: 5%;">
+<!--laytpl 模板引擎-->
+<script type="text/html" id="addAdminModel">
+    <div id="view" style="margin-top: 5%;">
         <form class="layui-form">
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>
@@ -85,163 +86,161 @@
                     <button class="layui-btn layui-btn-danger  cancel">取消</button>
                 </div>
             </div>
-			</form>
-            <style>
-                .my-submit-btn {
-                    width: 140px;
-                }
-            </style>
+        </form>
+        <style>
+            .my-submit-btn {
+                width: 140px;
+            }
+        </style>
         </form>
     </div>
 </script>
 <script type="text/html" id="zizeng">
     {{d.LAY_TABLE_INDEX+1}}
-	 {{d.username}}
+    {{d.username}}
 </script>
 
-		<script type="text/javascript" src="layui/layui.js"></script>
-		<script>
-			layui.use(['table', 'layer', 'form', 'laytpl', 'jquery'], function() {
-				var table = layui.table;
-				var layer = layui.layer;
-				var $ = layui.jquery;
-				var form = layui.form;
-				var laytpl = layui.laytpl;
+<script type="text/javascript" src="layui/layui.js"></script>
+<script>
+    layui.use(['table', 'layer', 'form', 'laytpl', 'jquery'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var $ = layui.jquery;
+        var form = layui.form;
+        var laytpl = layui.laytpl;
 
-				table.render({
-					elem: '#test', //html中的table
-					id: 'suggestTabData',
-					url: 'http://127.0.0.1:8099/userinfo/select_paged',
-					toolbar: '#toolbarDemo', //
-					title: '用户数据表',
-					defaultToolbar: ['print'], //
-					method: 'post',
-					skin: 'line', //行边框风格
-					size: 'lg',
-					width: 1000,
-					align: 'center',
-					even: true, //开启隔行背景
-					page: true, //开启分页
-					where: { //传递参数到后台
-						"id": "id"
-					},
-					request: {
-						pageName: 'page', //页码的参数名称，默认：page
-						limitName: 'pageSize' //每页数据量的参数名，默认：limit
-					},
-					response: {
-						statusCode: 200,
-						statusName: 'StateCode',
-						msgName: 'StateInfo',
-						countName: 'DataCount',
-						dataName: 'Data'
-					},
-					cols: [
-						[
-							{
-								field: 'userid',
-								title: '序号',
-								width: 100,
-								align: "center",
-								templet:"#zizeng"
-							},{
-							field: 'userid',
-							title: 'ID',
-							width: 80,
-							align: "center"
-						}, {
-							field: 'username',
-							title: '用户名',
-							align: "center"
-						}, {
-							field: 'phone',
-							title: '电话',
-							style: "color:red",
-							align: "center",
-							templet: function(re) {
-								if(re.sex==0){
-								return '<img src="img/b.png" width="40px" height="40px" />'
-							}else{
-								return '<img src="img/a.png" width="40px" height="40px" />'
-							}
-							}
-						}, {
-							field: 'sex',
-							title: '性别',
-							align: "center",
-							templet: function(re) {
-								if (re.sex == "0") {
-									return '<button class="layui-btn  layui-btn-normal">男</button>'
-								} else {
-									return '<button class="layui-btn layui-btn-radius">女</button>'
-								}
-							}
-						}, {
-							toolbar: '#barDemo',
-							title: '操作',
-							align: "center"
-						}]
-					],
-					done: function() {
-						$("span").click(function() {
-							console.log(this.id)
-						})
-					}
-				});
-
-
+        table.render({
+            elem: '#test', //html中的table
+            id: 'suggestTabData',
+            url: 'http://127.0.0.1:8099/userinfo/select_paged',
+            toolbar: '#toolbarDemo', //
+            title: '用户数据表',
+            defaultToolbar: ['print'], //
+            method: 'post',
+            skin: 'line', //行边框风格
+            size: 'lg',
+            width: 1000,
+            align: 'center',
+            even: true, //开启隔行背景
+            page: true, //开启分页
+            where: { //传递参数到后台
+                "id": "id"
+            },
+            request: {
+                pageName: 'page', //页码的参数名称，默认：page
+                limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            },
+            response: {
+                statusCode: 200,
+                statusName: 'StateCode',
+                msgName: 'StateInfo',
+                countName: 'DataCount',
+                dataName: 'Data'
+            },
+            cols: [
+                [
+                    {
+                        field: 'userid',
+                        title: '序号',
+                        width: 100,
+                        align: "center",
+                        templet: "#zizeng"
+                    }, {
+                    field: 'userid',
+                    title: 'ID',
+                    width: 80,
+                    align: "center"
+                }, {
+                    field: 'username',
+                    title: '用户名',
+                    align: "center"
+                }, {
+                    field: 'phone',
+                    title: '电话',
+                    style: "color:red",
+                    align: "center",
+                    templet: function (re) {
+                        if (re.sex == 0) {
+                            return '<img src="img/b.png" width="40px" height="40px" />'
+                        } else {
+                            return '<img src="img/a.png" width="40px" height="40px" />'
+                        }
+                    }
+                }, {
+                    field: 'sex',
+                    title: '性别',
+                    align: "center",
+                    templet: function (re) {
+                        if (re.sex == "0") {
+                            return '<button class="layui-btn  layui-btn-normal">男</button>'
+                        } else {
+                            return '<button class="layui-btn layui-btn-radius">女</button>'
+                        }
+                    }
+                }, {
+                    toolbar: '#barDemo',
+                    title: '操作',
+                    align: "center"
+                }]
+            ],
+            done: function () {
+                $("span").click(function () {
+                    console.log(this.id)
+                })
+            }
+        });
 
 
-				//监听行工具事件
-				table.on('tool(test)', function(obj) {
-					var mydata = obj.data;
-					console.log(mydata)
-					if (obj.event === 'del') {
-						//询问框
-						layer.confirm('確定刪除？', {
-							btn: ['確定', '取消'] //按钮
-						}, function() {
-							layer.closeAll('dialog');
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var mydata = obj.data;
+            console.log(mydata)
+            if (obj.event === 'del') {
+                //询问框
+                layer.confirm('確定刪除？', {
+                    btn: ['確定', '取消'] //按钮
+                }, function () {
+                    layer.closeAll('dialog');
 
-							// alert(data.userid)
-							$.ajax({
-								url: 'http://127.0.0.1:8099/userinfo/delete_by_id',
-								data: {
-									"userid": mydata.userid
-								},
-								type: "post",
-								dataType: "json",
-								success: function(res) {
-									if (res.data == "1") {
-										layer.msg("刪除成功")
-									}
-									table.reload('suggestTabData', {}); //重新渲染表格,suggestTabData是渲染時候的表格id
-								}
-							});
-						}, function() {
-							layer.closeAll();
-						});
-					} else if (obj.event === 'edit') {
-						layer.open({
-							type: 1,
-							title: ["编辑用户", "background-color:green;color:white;text-align:center"],
-							skin: 'layui-layer-rim', //加上边框
-							area: ['400px', '350px'], //宽高
-							content: $("#addAdminModel").html(),
-							success: function() {
-								// 模板的id addAdminModel
-								// 模板层中最大的div的id--view
-								var gettpl = document.getElementById('addAdminModel').innerHTML;
-								laytpl(gettpl).render(mydata, function(html) {
-									document.getElementById('view').innerHTML = html;
-								});
-								form.render();
-							}
-						});
-					}
+                    // alert(data.userid)
+                    $.ajax({
+                        url: 'http://127.0.0.1:8099/userinfo/delete_by_id',
+                        data: {
+                            "userid": mydata.userid
+                        },
+                        type: "post",
+                        dataType: "json",
+                        success: function (res) {
+                            if (res.data == "1") {
+                                layer.msg("刪除成功")
+                            }
+                            table.reload('suggestTabData', {}); //重新渲染表格,suggestTabData是渲染時候的表格id
+                        }
+                    });
+                }, function () {
+                    layer.closeAll();
+                });
+            } else if (obj.event === 'edit') {
+                layer.open({
+                    type: 1,
+                    title: ["编辑用户", "background-color:green;color:white;text-align:center"],
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['400px', '350px'], //宽高
+                    content: $("#addAdminModel").html(),
+                    success: function () {
+                        // 模板的id addAdminModel
+                        // 模板层中最大的div的id--view
+                        var gettpl = document.getElementById('addAdminModel').innerHTML;
+                        laytpl(gettpl).render(mydata, function (html) {
+                            document.getElementById('view').innerHTML = html;
+                        });
+                        form.render();
+                    }
+                });
+            }
 
-				});
-			});
-		</script>
-	</body>
+        });
+    });
+</script>
+</body>
 </html>

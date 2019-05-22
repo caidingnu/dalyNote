@@ -20,17 +20,16 @@ public class UserController {
     private IUserService userService;
 
 
-
-
     /**
      * 查询所有
+     *
      * @return
      */
-    @RequestMapping(value = {"/findAll"},produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/findAll"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public List getAllUsers(){
+    public List getAllUsers() {
         System.out.println("sssssss");
-        List list =  userService.findAllUser();
+        List list = userService.findAllUser();
         System.out.println(list);
         return list;
     }
@@ -39,13 +38,14 @@ public class UserController {
     /**
      * 通过id查询用户,
      * 加了@ResponseBody，返回list数据给ajax============================>>>>>>>>>
+     *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"/find3"},method = RequestMethod.GET)
-    public UserInfo getAllUsers3(){
+    @RequestMapping(value = {"/find3"}, method = RequestMethod.GET)
+    public UserInfo getAllUsers3() {
         System.out.println("sssssss");
-       UserInfo list =  userService.selectByPrimaryKey(1);
+        UserInfo list = userService.selectByPrimaryKey(1);
         System.out.println(list);
         return list;
     }

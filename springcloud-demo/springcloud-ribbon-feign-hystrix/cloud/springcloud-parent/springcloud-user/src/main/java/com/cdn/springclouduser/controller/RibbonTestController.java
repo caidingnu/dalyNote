@@ -21,7 +21,7 @@ public class RibbonTestController {
 
     @RequestMapping("/getmovieRibbon")
     public String getmovieRibbon() {
-       String message = "我是ribbon参数";
+        String message = "我是ribbon参数";
         return restTemplate.getForObject("http://service-movie/ribbon?message=" + message, String.class);
     }
 

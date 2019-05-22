@@ -1,351 +1,349 @@
 <!DOCTYPE html>
 <HTML>
-	<HEAD>
-		<TITLE> ZTREE DEMO - Simple Data</TITLE>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" type="text/css" href="zTree_v3/css/demo.css" />
-		<link rel="stylesheet" href="zTree_v3/css/metroStyle/metroStyle.css" type="text/css">
-		<script type="text/javascript" src="zTree_v3/js/jquery-1.4.4.min.js"></script>
-		<script type="text/javascript" src="zTree_v3/js/jquery.ztree.core.js"></script>
-		<script type="text/javascript" src="zTree_v3/js/jquery.ztree.excheck.js"></script>
-		<script type="text/javascript" src="zTree_v3/js/jquery.ztree.exedit.js"></script>
-		<script src="zTree_v3/js/jquery.ztree.all.js" type="text/javascript" charset="utf-8"></script>
-		<script src="zTree_v3/js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
-		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<SCRIPT type="text/javascript">
-			layui.use(['form', 'layedit', 'laydate', 'jquery'], function() {
-				var form = layui.form,
-					layer = layui.layer,
-					layedit = layui.layedit,
-					laydate = layui.laydate;
+<HEAD>
+    <TITLE> ZTREE DEMO - Simple Data</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="zTree_v3/css/demo.css"/>
+    <link rel="stylesheet" href="zTree_v3/css/metroStyle/metroStyle.css" type="text/css">
+    <script type="text/javascript" src="zTree_v3/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="zTree_v3/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="zTree_v3/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="zTree_v3/js/jquery.ztree.exedit.js"></script>
+    <script src="zTree_v3/js/jquery.ztree.all.js" type="text/javascript" charset="utf-8"></script>
+    <script src="zTree_v3/js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <SCRIPT type="text/javascript">
+        layui.use(['form', 'layedit', 'laydate', 'jquery'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
 
-				var setting = {
-					view: {
-						addHoverDom: addHoverDom, //显示按钮
-						removeHoverDom: removeHoverDom, //隐藏按钮
-						selectedMulti: true, //允许同时选中多个节点。
-						dblClickExpand: true, //双击展开
-						expandSpeed: "fast",
-						showIcon: true, //设置是否显示节点图标
-						showLine: false, //设置是否显示节点与节点之间的连线
-						fontCss: setFontCss_ztree //进行样式设置的方法
-					},
-					callback: {
-						onClick: zTreeOnOnClick,
-						// onRemove: onRemove, //移除事件
-						beforeRemove: beforeRemove,
-						// onRename: onRename, //修改事件
-						beforeRename: beforeRename,
-						beforeEditName: beforeEditName, //点击编辑时触发，用来判断该节点是否能编辑,是否进入编辑状态
-						// onAsyncSuccess: ztreeOnAsyncSuccess //异步加载成功后执行的方法
-					},
-					check: {
-						enable: false,
-					},
-					async: {
-						enable: true,
-						type: "post",
-						dataType: 'json',
-						url: "http://127.0.0.1:80/oneLevel",
-						autoParam: ["id"]
-					},
-					data: {
-						keep:{
-							leaf:false,
-							parent:false
-						},
-						key: {
-							name: "name", //标题名称
-						},
-						simpleData: {
-							enable: true,
-							idKey: "id", //数据库的id
-							pIdKey: "pid", //数据库的父级id
-							rootPId: 0
-						}
-					},
-					edit: {
-						enable: true, //设置 zTree 进入编辑状态
-						// showRemoveBtn: showRemoveBtn,
-						// showRenameBtn: showRenameBtn
-						addTitle:"新增",
-						removeTitle: "删除", // 删除按钮的 Title 辅助信息
-						renameTitle: "重命名" // 编辑名称按钮的 Title 辅助信息。
-					}
-				};
-
-
-				// 异步加载
-				function zTreeOnOnClick(event, treeId, treeNode, clickFlag) {
-					$("#aa").text(treeNode.id)
-					// 判断是否父节点  
-					if (!treeNode.isParent) {
-						console.log(treeNode)
-						
-						//alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);  
-						$.ajax({
-							url: "http://127.0.0.1:80/oneLevel", //请求的action路径
-							dataType: "json",
-							data: {
-								"id": treeNode.id
-							},
-							success: function(data) { //添加子节点到指定的父节点
-								if (data.DataCount == 0) {
-									layer.msg("没有子级")
-									//末节点的数据为空   所以不再添加节点  这里可以根据业务需求自己写
-									//$("#treeFrame").attr("src",treeNode.url);
-								} else {
-									var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-									//treeNode.halfCheck = false;
-									var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null); //获取指定父节点
-									newNode = treeObj.addNodes(parentZNode, data.Data, false);
-								}
-							},
-							error: function() { //请求失败处理函数
-								alert('请求失败');
-							},
-						});
-					}
-				}
+            var setting = {
+                view: {
+                    addHoverDom: addHoverDom, //显示按钮
+                    removeHoverDom: removeHoverDom, //隐藏按钮
+                    selectedMulti: true, //允许同时选中多个节点。
+                    dblClickExpand: true, //双击展开
+                    expandSpeed: "fast",
+                    showIcon: true, //设置是否显示节点图标
+                    showLine: false, //设置是否显示节点与节点之间的连线
+                    fontCss: setFontCss_ztree //进行样式设置的方法
+                },
+                callback: {
+                    onClick: zTreeOnOnClick,
+                    // onRemove: onRemove, //移除事件
+                    beforeRemove: beforeRemove,
+                    // onRename: onRename, //修改事件
+                    beforeRename: beforeRename,
+                    beforeEditName: beforeEditName, //点击编辑时触发，用来判断该节点是否能编辑,是否进入编辑状态
+                    // onAsyncSuccess: ztreeOnAsyncSuccess //异步加载成功后执行的方法
+                },
+                check: {
+                    enable: false,
+                },
+                async: {
+                    enable: true,
+                    type: "post",
+                    dataType: 'json',
+                    url: "http://127.0.0.1:80/oneLevel",
+                    autoParam: ["id"]
+                },
+                data: {
+                    keep: {
+                        leaf: false,
+                        parent: false
+                    },
+                    key: {
+                        name: "name", //标题名称
+                    },
+                    simpleData: {
+                        enable: true,
+                        idKey: "id", //数据库的id
+                        pIdKey: "pid", //数据库的父级id
+                        rootPId: 0
+                    }
+                },
+                edit: {
+                    enable: true, //设置 zTree 进入编辑状态
+                    // showRemoveBtn: showRemoveBtn,
+                    // showRenameBtn: showRenameBtn
+                    addTitle: "新增",
+                    removeTitle: "删除", // 删除按钮的 Title 辅助信息
+                    renameTitle: "重命名" // 编辑名称按钮的 Title 辅助信息。
+                }
+            };
 
 
+            // 异步加载
+            function zTreeOnOnClick(event, treeId, treeNode, clickFlag) {
+                $("#aa").text(treeNode.id)
+                // 判断是否父节点
+                if (!treeNode.isParent) {
+                    console.log(treeNode)
 
-				// 初始化树
-				onLoadZTree();
-				var zNodes = [];
-				// 加载一级菜单
-				function onLoadZTree() {
-					$.ajax({
-						type: "get",
-						url: "http://127.0.0.1:80/list",
-						data: {},
-						dataType: "json",
-						success: function(res) {
-							if (res.StateCode == 200) {
-								// 初始化树
-								var t = $.fn.zTree.init($("#treeDemo"), setting, res.Data);
-							}
-							t.expandAll(true); //展开树
-						},
-						error: function() {
-							layer.msg("初始化树失败")
-						}
-					});
-				}
-
-				// 设置树节点字体样式
-				function setFontCss_ztree(treeId, treeNode) {
-					if (treeNode.level == 0) {
-						return {
-							'font-weight': 'bolder',
-							'color': 'red',
-							'font-Size': '20px'
-						};
-					} else if (treeNode.level == 1) {
-						return {
-							'font-weight': 'bold',
-							'color': 'green'
-						};
-					} else if (treeNode.level == 2) {
-						return {
-							'font-weight': 'bold',
-							'color': 'blue'
-						};
-					} else {
-						return {};
-					}
-				}
+                    //alert("treeId自动编号：" + treeNode.tId + ", 节点id是：" + treeNode.id + ", 节点文本是：" + treeNode.name);
+                    $.ajax({
+                        url: "http://127.0.0.1:80/oneLevel", //请求的action路径
+                        dataType: "json",
+                        data: {
+                            "id": treeNode.id
+                        },
+                        success: function (data) { //添加子节点到指定的父节点
+                            if (data.DataCount == 0) {
+                                layer.msg("没有子级")
+                                //末节点的数据为空   所以不再添加节点  这里可以根据业务需求自己写
+                                //$("#treeFrame").attr("src",treeNode.url);
+                            } else {
+                                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                                //treeNode.halfCheck = false;
+                                var parentZNode = treeObj.getNodeByParam("id", treeNode.id, null); //获取指定父节点
+                                newNode = treeObj.addNodes(parentZNode, data.Data, false);
+                            }
+                        },
+                        error: function () { //请求失败处理函数
+                            alert('请求失败');
+                        },
+                    });
+                }
+            }
 
 
+            // 初始化树
+            onLoadZTree();
+            var zNodes = [];
 
-				function showIconForTree(treeId, treeNode) {
-					return treeNode.level != 2; //二级不显示图标
-				};
+            // 加载一级菜单
+            function onLoadZTree() {
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:80/list",
+                    data: {},
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.StateCode == 200) {
+                            // 初始化树
+                            var t = $.fn.zTree.init($("#treeDemo"), setting, res.Data);
+                        }
+                        t.expandAll(true); //展开树
+                    },
+                    error: function () {
+                        layer.msg("初始化树失败")
+                    }
+                });
+            }
 
-
-				// 删除节点
-				function beforeRemove(treeId, treeNode) {
-					if (treeNode.isParent) {
-						layer.msg("请先删除子节点", {
-							icon: 5,
-							time: 1000
-						});
-						return false;
-					} else {
-						layer.confirm('确定删除该节点吗？', {
-							btn: ['确定', '取消'] //按钮
-						}, function() {
-							$.ajax({
-								type: "get",
-								url: "http://127.0.0.1:80/delete",
-								data: {
-									"id": treeNode.id
-								},
-								dataType: "json",
-								success: function(res) {
-									if (res.StateCode == 200) {
-										layer.msg("删除成功", {
-											icon: 1,
-											time: 1000
-										});
-									} else {
-										layer.msg("删除失败", {
-											icon: 5,
-											time: 1000
-										});
-									}
-								},
-								error: function() {
-									layer.msg("Ajax错误");
-								}
-							});
-						}, function() {
-							// onLoadZTree()
-							layer.closeAll();
-							return false;
-						});
-					}
-				}
+            // 设置树节点字体样式
+            function setFontCss_ztree(treeId, treeNode) {
+                if (treeNode.level == 0) {
+                    return {
+                        'font-weight': 'bolder',
+                        'color': 'red',
+                        'font-Size': '20px'
+                    };
+                } else if (treeNode.level == 1) {
+                    return {
+                        'font-weight': 'bold',
+                        'color': 'green'
+                    };
+                } else if (treeNode.level == 2) {
+                    return {
+                        'font-weight': 'bold',
+                        'color': 'blue'
+                    };
+                } else {
+                    return {};
+                }
+            }
 
 
-				function showRemoveBtn(treeId, treeNode) {
-					return !treeNode.isFirstNode;
-				}
-
-				function showRenameBtn(treeId, treeNode) {
-					return !treeNode.isLastNode;
-				}
+            function showIconForTree(treeId, treeNode) {
+                return treeNode.level != 2; //二级不显示图标
+            };
 
 
-				//新增节点
-				function addHoverDom(treeId, treeNode) {
-					var sObj = $("#" + treeNode.tId + "_span");
-					if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
-					var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
-						"' title='新增' onfocus='this.blur();'></span>";
-					sObj.after(addStr);
-					var btn = $("#addBtn_" + treeNode.tId);
-					if (btn) btn.bind("click", function() {
-						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-						layer.prompt({
-							formType: 0,
-							value: '',
-							title: '请输入新节点名称'
-						}, function(value, index) {
-							if (value.trim().length === 0) { //非空验证
-								return false;
-							}
-							layer.close(index)
-							var pid = treeNode.id;
-							var name = value;
-							$.ajax({
-								type: "POST",
-								async: false,
-								url: "http://127.0.0.1:80/add",
-								data: {
-									"pid": pid,
-									"name": name
-								},
-								success: function(res) {
-									if (res.result == 1) {
-										zTree.addNodes(treeNode, {
-											pId: treeNode.id,
-											name: value
-										});
-										// onLoadZTree() //重新加载，不然再次添加会报错
-										layer.msg('添加成功', {
-											icon: 1,
-											time: 1000
-										});
-									} else {
-										onLoadZTree()
-										layer.msg('' + data.msg + '', {
-											icon: 5,
-											time: 1000
-										});
-									}
-								}
-							});
-						});
-
-					});
-				};
+            // 删除节点
+            function beforeRemove(treeId, treeNode) {
+                if (treeNode.isParent) {
+                    layer.msg("请先删除子节点", {
+                        icon: 5,
+                        time: 1000
+                    });
+                    return false;
+                } else {
+                    layer.confirm('确定删除该节点吗？', {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        $.ajax({
+                            type: "get",
+                            url: "http://127.0.0.1:80/delete",
+                            data: {
+                                "id": treeNode.id
+                            },
+                            dataType: "json",
+                            success: function (res) {
+                                if (res.StateCode == 200) {
+                                    layer.msg("删除成功", {
+                                        icon: 1,
+                                        time: 1000
+                                    });
+                                } else {
+                                    layer.msg("删除失败", {
+                                        icon: 5,
+                                        time: 1000
+                                    });
+                                }
+                            },
+                            error: function () {
+                                layer.msg("Ajax错误");
+                            }
+                        });
+                    }, function () {
+                        // onLoadZTree()
+                        layer.closeAll();
+                        return false;
+                    });
+                }
+            }
 
 
+            function showRemoveBtn(treeId, treeNode) {
+                return !treeNode.isFirstNode;
+            }
 
-				//  removeHoverDom执行销毁功能，消除由addHoverDom带给我们的操作，
-				// 				虽然addHoverDom已经实现了我们的功能，但是若没有它来回收addHoverDom创造的成果，
-				// 				我们的页面就会加载出来一堆无效按钮，所以说加减平衡还是很重要的
-				//移除鼠标隐藏按钮
-				function removeHoverDom(treeId, treeNode) {
-					$("#addBtn_" + treeNode.tId).unbind().remove();
-				};
-
-				/*
-				 * 编辑
-				 */
-				function beforeEditName(treeId, treeNode) {
-					return true;
-				};
+            function showRenameBtn(treeId, treeNode) {
+                return !treeNode.isLastNode;
+            }
 
 
-				// 编辑
-				function beforeRename(treeId, treeNode, newName, isCancel) {
-					if (newName.trim().length === 0) {
-						layer.msg('名称不能为空', {
-							icon: 5,
-							time: 1000
-						})
-						return false;
-					} else {
-						if (newName == treeNode.name) {
-							layer.msg('名称一致，无需修改', {
-								icon: 1,
-								time: 1000
-							})
-						} else {
-								$.ajax({
-									type: "POST",
-									async: false,
-									url: "http://127.0.0.1:80/update",
-									data: {
-										"id": treeNode.id,
-										"name": treeNode.name
-									},
-									dataType: "json",
-									success: function(res) {
-										console.log(res)
-										if (res.StateCode == 200) {
-											layer.msg('修改成功', {
-												icon: 1,
-												time: 1000
-											});
-											// onLoadZTree() //重新加载，不然再次添加会报错
-											return true;
-										} else {
-											// onLoadZTree()
-											layer.msg('编辑失败', {
-												icon: 5,
-												time: 1000
-											});
-											return false;
-										}
-									}
-								});
-						}
-					}
-				}
-			})
-		</SCRIPT>
-	</HEAD>
+            //新增节点
+            function addHoverDom(treeId, treeNode) {
+                var sObj = $("#" + treeNode.tId + "_span");
+                if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+                var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
+                    "' title='新增' onfocus='this.blur();'></span>";
+                sObj.after(addStr);
+                var btn = $("#addBtn_" + treeNode.tId);
+                if (btn) btn.bind("click", function () {
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    layer.prompt({
+                        formType: 0,
+                        value: '',
+                        title: '请输入新节点名称'
+                    }, function (value, index) {
+                        if (value.trim().length === 0) { //非空验证
+                            return false;
+                        }
+                        layer.close(index)
+                        var pid = treeNode.id;
+                        var name = value;
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "http://127.0.0.1:80/add",
+                            data: {
+                                "pid": pid,
+                                "name": name
+                            },
+                            success: function (res) {
+                                if (res.result == 1) {
+                                    zTree.addNodes(treeNode, {
+                                        pId: treeNode.id,
+                                        name: value
+                                    });
+                                    // onLoadZTree() //重新加载，不然再次添加会报错
+                                    layer.msg('添加成功', {
+                                        icon: 1,
+                                        time: 1000
+                                    });
+                                } else {
+                                    onLoadZTree()
+                                    layer.msg('' + data.msg + '', {
+                                        icon: 5,
+                                        time: 1000
+                                    });
+                                }
+                            }
+                        });
+                    });
 
-	<BODY>
-		<div class="content_wrap">
-			<div class="zTreeDemoBackground left">
-				<ul id="treeDemo" class="ztree"></ul>
-			</div>
-		</div>
-		<iframe width="300px" height="300px"></iframe>
-	</BODY>
+                });
+            };
+
+
+            //  removeHoverDom执行销毁功能，消除由addHoverDom带给我们的操作，
+            // 				虽然addHoverDom已经实现了我们的功能，但是若没有它来回收addHoverDom创造的成果，
+            // 				我们的页面就会加载出来一堆无效按钮，所以说加减平衡还是很重要的
+            //移除鼠标隐藏按钮
+            function removeHoverDom(treeId, treeNode) {
+                $("#addBtn_" + treeNode.tId).unbind().remove();
+            };
+
+            /*
+             * 编辑
+             */
+            function beforeEditName(treeId, treeNode) {
+                return true;
+            };
+
+
+            // 编辑
+            function beforeRename(treeId, treeNode, newName, isCancel) {
+                if (newName.trim().length === 0) {
+                    layer.msg('名称不能为空', {
+                        icon: 5,
+                        time: 1000
+                    })
+                    return false;
+                } else {
+                    if (newName == treeNode.name) {
+                        layer.msg('名称一致，无需修改', {
+                            icon: 1,
+                            time: 1000
+                        })
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "http://127.0.0.1:80/update",
+                            data: {
+                                "id": treeNode.id,
+                                "name": treeNode.name
+                            },
+                            dataType: "json",
+                            success: function (res) {
+                                console.log(res)
+                                if (res.StateCode == 200) {
+                                    layer.msg('修改成功', {
+                                        icon: 1,
+                                        time: 1000
+                                    });
+                                    // onLoadZTree() //重新加载，不然再次添加会报错
+                                    return true;
+                                } else {
+                                    // onLoadZTree()
+                                    layer.msg('编辑失败', {
+                                        icon: 5,
+                                        time: 1000
+                                    });
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        })
+    </SCRIPT>
+</HEAD>
+
+<BODY>
+<div class="content_wrap">
+    <div class="zTreeDemoBackground left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</div>
+<iframe width="300px" height="300px"></iframe>
+</BODY>
 </HTML>

@@ -20,9 +20,9 @@ public interface MenuMapper {
 
     int updateByPrimaryKey(Menu record);
 
-    List<Menu>  selectAll();
+    List<Menu> selectAll();
 
-    List<Menu>  selectOne(Integer pid);
+    List<Menu> selectOne(Integer pid);
 
 
 }

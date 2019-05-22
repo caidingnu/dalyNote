@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *
  * Description:
  *
  * @author
- * @since JDK1.8
  * @history 2018年8月30日 新建
+ * @since JDK1.8
  */
 @Controller
 public class GoodsController {
@@ -30,7 +29,6 @@ public class GoodsController {
         redisService.set("name", "测试啊");
 
 
-
         return redisService.get("name");
     }
 
@@ -44,7 +42,7 @@ public class GoodsController {
     //  根据key删除缓存
     @RequestMapping("/delRediskey.do")
     @ResponseBody
-    public void del(@RequestParam String ... key) {
+    public void del(@RequestParam String... key) {
         redisService.del(key);
     }
 }

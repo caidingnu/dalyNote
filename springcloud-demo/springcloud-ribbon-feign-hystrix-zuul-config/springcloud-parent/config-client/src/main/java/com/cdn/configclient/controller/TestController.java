@@ -20,11 +20,12 @@ public class TestController {
 
 
     @RequestMapping("/hi")
-    public String hi(){
+    public String hi() {
         return "1";
     }
+
     @RequestMapping("/")
-    public String hello(){
+    public String hello() {
         return port;
     }
 

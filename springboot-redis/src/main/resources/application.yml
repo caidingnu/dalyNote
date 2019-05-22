@@ -33,6 +33,6 @@ mybatis:
 # Single file max size
 multipart:
   maxFileSize:50Mb
-  # All files max size
+# All files max size
 
 

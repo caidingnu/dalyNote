@@ -21,6 +21,7 @@ public class SpringbootMybatisDemoApplication {
 
     /**
      * 文件上传配置
+     *
      * @return
      */
     @Bean

@@ -62,10 +62,10 @@
             <artifactId>jstl</artifactId>
         </dependency>
         <!-- thymeleaf（html）必须先关闭jsp标签库 -->
-         <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-thymeleaf</artifactId>
-       </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <!-- FreeMarker（ftl） -->
         <dependency>

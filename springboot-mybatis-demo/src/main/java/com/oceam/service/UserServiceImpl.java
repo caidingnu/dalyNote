@@ -18,7 +18,7 @@ import java.util.List;
 @Service(value = "userService")
 public class UserServiceImpl implements IUserService {
 
-//    @Autowired  此处会报错，改为@Resource注入
+    //    @Autowired  此处会报错，改为@Resource注入
     @Resource
     private UserInfoMapper userDao;
 

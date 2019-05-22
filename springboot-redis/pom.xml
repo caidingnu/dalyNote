@@ -92,10 +92,10 @@
             <artifactId>jstl</artifactId>
         </dependency>
         <!-- thymeleaf（html） -->
-         <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-thymeleaf</artifactId>
-       </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <!-- FreeMarker（ftl） -->
         <dependency>

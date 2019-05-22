@@ -21,11 +21,8 @@ public class Test {
     }
 
 
-
-
-
     /**
-     * @Description:  提供给user利用ribbon调用
+     * @Description: 提供给user利用ribbon调用
      * @Param:
      * @return:
      * @Author: caidingnu
@@ -33,14 +30,13 @@ public class Test {
      */
     @RequestMapping("ribbon")
     public String returnRibbon(String message) {
-        return "我是被user服务使用ribbon调用的方法："+message;
+        return "我是被user服务使用ribbon调用的方法：" + message;
 
     }
 
 
-
     /**
-     * @Description:  提供给user利用feign调用
+     * @Description: 提供给user利用feign调用
      * @Param:
      * @return:
      * @Author: caidingnu
@@ -49,7 +45,7 @@ public class Test {
     @RequestMapping("feign")
     public String returnfeign(String message) {
         System.out.println(message);
-        return "我是被user服务使用feign调用的方法："+message;
+        return "我是被user服务使用feign调用的方法：" + message;
 
     }
 

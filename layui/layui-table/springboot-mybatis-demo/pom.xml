@@ -56,10 +56,10 @@
             <artifactId>jstl</artifactId>
         </dependency>
         <!-- thymeleaf（html）必须先关闭jsp标签库 -->
-         <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-thymeleaf</artifactId>
-       </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <!-- FreeMarker（ftl） -->
         <dependency>
@@ -87,7 +87,11 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-devtools</artifactId> <scope>runtime</scope> </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>

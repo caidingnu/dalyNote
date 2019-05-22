@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "service-movie") //这里的value对应调用服务的spring.applicatoin.name
 public interface FeignTestDao {
 
-//    如果在FeignClient中的方法有参数传递一般要加@RequestParam（“xxx”）注解
+    //    如果在FeignClient中的方法有参数传递一般要加@RequestParam（“xxx”）注解
 //    传递对象 @RequestBody User user
     @RequestMapping(value = "/feign")
-    String hi(@RequestParam("message")String message);
+    String hi(@RequestParam("message") String message);
 }

@@ -103,11 +103,11 @@ public class MenuController {
      * @Date: 2019/4/17
      */
     @RequestMapping("oneLevel")
-    public String selectOneLeve(Integer id){
+    public String selectOneLeve(Integer id) {
 
         List<Menu> list = menuMapper.selectOne(id);
-     System.out.println(id);
-        return JsonUtil.toJSon(new BaseResponseEntity(list,list.size()));
+        System.out.println(id);
+        return JsonUtil.toJSon(new BaseResponseEntity(list, list.size()));
     }
 
 }

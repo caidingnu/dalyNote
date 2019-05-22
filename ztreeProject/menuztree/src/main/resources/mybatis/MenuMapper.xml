@@ -1,114 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.demo.menuztree.mapper.MenuMapper" >
-  <resultMap id="BaseResultMap" type="com.demo.menuztree.entity.Menu" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="pid" property="pid" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="open" property="open" jdbcType="VARCHAR" />
-    <result column="isParent" property="isparent" jdbcType="VARCHAR" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, pid, name, open, isParent, url
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from menu
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from menu
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.demo.menuztree.entity.Menu" >
-    insert into menu (id, pid, name, 
-      open, isParent, url
-      )
-    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{open,jdbcType=VARCHAR}, #{isparent,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.demo.menuztree.entity.Menu" >
-    insert into menu
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="pid != null" >
-        pid,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="open != null" >
-        open,
-      </if>
-      <if test="isparent != null" >
-        isParent,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null" >
-        #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="open != null" >
-        #{open,jdbcType=VARCHAR},
-      </if>
-      <if test="isparent != null" >
-        #{isparent,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.demo.menuztree.entity.Menu" >
-    update menu
-    <set >
-      <if test="pid != null" >
-        pid = #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
+<mapper namespace="com.demo.menuztree.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.demo.menuztree.entity.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="open" property="open" jdbcType="VARCHAR"/>
+        <result column="isParent" property="isparent" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pid, name, open, isParent, url
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from menu
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.demo.menuztree.entity.Menu">
+        insert into menu (id, pid, name,
+        open, isParent, url
+        )
+        values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{open,jdbcType=VARCHAR}, #{isparent,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.demo.menuztree.entity.Menu">
+        insert into menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="open != null">
+                open,
+            </if>
+            <if test="isparent != null">
+                isParent,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                #{open,jdbcType=VARCHAR},
+            </if>
+            <if test="isparent != null">
+                #{isparent,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.demo.menuztree.entity.Menu">
+        update menu
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                open = #{open,jdbcType=VARCHAR},
+            </if>
+            <if test="isparent != null">
+                isParent = #{isparent,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.demo.menuztree.entity.Menu">
+        update menu
+        set pid = #{pid,jdbcType=INTEGER},
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="open != null" >
         open = #{open,jdbcType=VARCHAR},
-      </if>
-      <if test="isparent != null" >
         isParent = #{isparent,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.demo.menuztree.entity.Menu" >
-    update menu
-    set pid = #{pid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      open = #{open,jdbcType=VARCHAR},
-      isParent = #{isparent,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        url = #{url,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select * from menu where pid=0
-  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from menu where pid=0
+    </select>
 
-  <select id="selectOne"  resultMap="BaseResultMap">
-     select * from menu where pid=#{id}
-  </select>
+    <select id="selectOne" resultMap="BaseResultMap">
+        select * from menu where pid=#{id}
+    </select>
 </mapper>

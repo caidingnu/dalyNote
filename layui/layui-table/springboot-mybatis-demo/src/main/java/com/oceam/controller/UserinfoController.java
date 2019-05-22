@@ -42,7 +42,7 @@ public class UserinfoController {
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         System.out.println(page);
         PageHelper.startPage(page, pageSize);
-        List<UserinfoPo> list= userinfoDao.query();
+        List<UserinfoPo> list = userinfoDao.query();
         PageInfo<UserinfoPo> p = new PageInfo<UserinfoPo>(list);
         long total = p.getTotal();
         int sum = (int) total;
@@ -70,7 +70,7 @@ public class UserinfoController {
      */
     @RequestMapping("/delete_by_id")
     public Result<Integer> deleteByPrimaryKey(String userid) {
-        Integer uid=Integer.valueOf(userid);
+        Integer uid = Integer.valueOf(userid);
         System.out.println(userid);
         Result<Integer> result = new Result<>();
         Integer num = userinfoService.deleteByPrimaryKey(uid);
@@ -114,8 +114,7 @@ public class UserinfoController {
     public String queryByCondition(UserinfoPo userinfo) {
 
 
-
-  return null;
+        return null;
     }
 
 }

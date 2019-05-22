@@ -34,7 +34,7 @@ public class TestListexcelOut {
         String templateFileName = url.getPath();
         // 下载时候的excel名称
         String excelName = "测试用的表.xlsx";
-        List<UserInfo>   list = userInfoMapper.getitem();
+        List<UserInfo> list = userInfoMapper.getitem();
         // 调用excel工具,生成excel、下载
         new ExcelExportUtil().createExcel(templateFileName, list, excelName, response);
     }

@@ -21,6 +21,7 @@ public class BaseResponseEntity implements Serializable {
         return "BaseResponseEntity [stateInfo=" + stateInfo + ", stateCode=" + stateCode
                 + ", data=" + data + ", dataCount=" + dataCount + "]";
     }
+
     public BaseResponseEntity(int stateCode) {
         this.stateCode = stateCode;
         switch (stateCode) {

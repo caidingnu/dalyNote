@@ -74,7 +74,7 @@ public class JwtFilter implements Filter {
 
     @Override
     public void destroy() {
-     System.out.println("销毁方法");
+        System.out.println("销毁方法");
     }
 
     @Autowired
@@ -90,7 +90,7 @@ public class JwtFilter implements Filter {
      * @Date: 2019/5/11
      */
     private boolean checkPath(String myPath) {
-        return myPath.startsWith("/js") || myPath.startsWith("/css") || myPath.startsWith("/img")|| myPath.startsWith("/favicon.ico") || myPath.startsWith("/fonts") || myPath.startsWith("/static");
+        return myPath.startsWith("/js") || myPath.startsWith("/css") || myPath.startsWith("/img") || myPath.startsWith("/favicon.ico") || myPath.startsWith("/fonts") || myPath.startsWith("/static");
     }
 
 }

@@ -8,7 +8,7 @@ eureka:
   instance:
     #  instanc中的配置是让该服务使用IP注册到注册中心，而不是hostname
     #  instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    preferIpAddress : true
+    preferIpAddress: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
 
 

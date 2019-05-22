@@ -22,32 +22,35 @@ public class UserController {
 
     /**
      * 首页的配置方法(html)
+     *
      * @return
      */
-    @RequestMapping(value = {"/"},produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
-    public String getAllUsersindex(){
+    @RequestMapping(value = {"/"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public String getAllUsersindex() {
         return "index2";
     }
 
 
     /**
      * 重定向到另一个/find22请求
+     *
      * @return
      */
-    @RequestMapping(value = {"/open"},produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
-    public String getAllUsers2(){
+    @RequestMapping(value = {"/open"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public String getAllUsers2() {
         return "redict:/find22";
     }
 
 
     /**
      * 查询所有
+     *
      * @return
      */
-    @RequestMapping(value = {"/findAll"},produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
-    public List getAllUsers(){
+    @RequestMapping(value = {"/findAll"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public List getAllUsers() {
         System.out.println("sssssss");
-        List list =  userService.findAllUser();
+        List list = userService.findAllUser();
         System.out.println(list);
         return list;
     }
@@ -56,13 +59,14 @@ public class UserController {
     /**
      * 通过id查询用户,
      * 加了@ResponseBody，返回list数据给ajax============================>>>>>>>>>
+     *
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"/find3"},produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
-    public UserInfo getAllUsers3(){
+    @RequestMapping(value = {"/find3"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public UserInfo getAllUsers3() {
         System.out.println("sssssss");
-       UserInfo list =  userService.selectByPrimaryKey(1);
+        UserInfo list = userService.selectByPrimaryKey(1);
         System.out.println(list);
         return list;
     }

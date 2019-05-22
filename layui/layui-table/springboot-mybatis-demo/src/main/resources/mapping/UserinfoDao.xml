@@ -95,7 +95,7 @@
       -->
     <select id="selectPaged" resultMap="BaseResultMap">
         select
-       *
+        *
         from userinfo
     </select>
 

@@ -43,7 +43,6 @@ public class UserInfo {
      * This method returns the value of the database column userinfo.userId
      *
      * @return the value of userinfo.userId
-     *
      * @mbggenerated
      */
     public Integer getUserid() {
@@ -55,7 +54,6 @@ public class UserInfo {
      * This method sets the value of the database column userinfo.userId
      *
      * @param userid the value for userinfo.userId
-     *
      * @mbggenerated
      */
     public void setUserid(Integer userid) {
@@ -67,7 +65,6 @@ public class UserInfo {
      * This method returns the value of the database column userinfo.userName
      *
      * @return the value of userinfo.userName
-     *
      * @mbggenerated
      */
     public String getUsername() {
@@ -79,7 +76,6 @@ public class UserInfo {
      * This method sets the value of the database column userinfo.userName
      *
      * @param username the value for userinfo.userName
-     *
      * @mbggenerated
      */
     public void setUsername(String username) {
@@ -91,7 +87,6 @@ public class UserInfo {
      * This method returns the value of the database column userinfo.phone
      *
      * @return the value of userinfo.phone
-     *
      * @mbggenerated
      */
 
@@ -104,7 +99,6 @@ public class UserInfo {
      * This method sets the value of the database column userinfo.phone
      *
      * @param phone the value for userinfo.phone
-     *
      * @mbggenerated
      */
     public void setPhone(String phone) {
@@ -116,7 +110,6 @@ public class UserInfo {
      * This method returns the value of the database column userinfo.sex
      *
      * @return the value of userinfo.sex
-     *
      * @mbggenerated
      */
     public String getSex() {
@@ -128,7 +121,6 @@ public class UserInfo {
      * This method sets the value of the database column userinfo.sex
      *
      * @param sex the value for userinfo.sex
-     *
      * @mbggenerated
      */
     public void setSex(String sex) {

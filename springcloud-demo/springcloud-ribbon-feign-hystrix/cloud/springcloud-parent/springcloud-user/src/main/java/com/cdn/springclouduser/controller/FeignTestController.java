@@ -28,10 +28,10 @@ public class FeignTestController {
      * @Date: 2019/4/8
      */
     @RequestMapping("getMovieFeign")
-    public String getUserFeign(){
-        String message="我是feign参数";
-       String result= feignTestDao.hi(message);
-       System.out.println(result);
+    public String getUserFeign() {
+        String message = "我是feign参数";
+        String result = feignTestDao.hi(message);
+        System.out.println(result);
         return result;
     }
 

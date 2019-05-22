@@ -15,17 +15,17 @@ public class DesUtil {
     //解密数据   
     public static String decrypt(String message) throws Exception {
 
-            byte[] bytesrc =convertHexString(message);
-            Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
-            DESKeySpec desKeySpec = new DESKeySpec(key.getBytes("UTF-8"));
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
-            IvParameterSpec iv = new IvParameterSpec(key.getBytes("UTF-8"));
+        byte[] bytesrc = convertHexString(message);
+        Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+        DESKeySpec desKeySpec = new DESKeySpec(key.getBytes("UTF-8"));
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
+        IvParameterSpec iv = new IvParameterSpec(key.getBytes("UTF-8"));
 
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
 
-            byte[] retByte = cipher.doFinal(bytesrc);
-            return new String(retByte);
+        byte[] retByte = cipher.doFinal(bytesrc);
+        return new String(retByte);
     }
 
     public static String encrypt(String message)
@@ -42,17 +42,15 @@ public class DesUtil {
         return toHexString(cipher.doFinal(message.getBytes("UTF-8"))).toUpperCase();
     }
 
-    public static byte[] convertHexString(String ss)
-    {
-    byte digest[] = new byte[ss.length() / 2];
-    for(int i = 0; i < digest.length; i++)
-    {
-    String byteString = ss.substring(2 * i, 2 * i + 2);
-    int byteValue = Integer.parseInt(byteString, 16);
-    digest[i] = (byte)byteValue;
-    }
+    public static byte[] convertHexString(String ss) {
+        byte digest[] = new byte[ss.length() / 2];
+        for (int i = 0; i < digest.length; i++) {
+            String byteString = ss.substring(2 * i, 2 * i + 2);
+            int byteValue = Integer.parseInt(byteString, 16);
+            digest[i] = (byte) byteValue;
+        }
 
-    return digest;
+        return digest;
     }
 
     public static String toHexString(byte b[]) {
@@ -69,11 +67,11 @@ public class DesUtil {
 
     public static void main(String[] args) throws Exception {
 
-        String a=encrypt("a123456");
+        String a = encrypt("a123456");
 
-        System.out.println("加密后的数据为:"+a);
-        String b=java.net.URLDecoder.decode(decrypt(a), "utf-8") ;
-        System.out.println("解密后的数据:"+b);
+        System.out.println("加密后的数据为:" + a);
+        String b = java.net.URLDecoder.decode(decrypt(a), "utf-8");
+        System.out.println("解密后的数据:" + b);
 
     }
 

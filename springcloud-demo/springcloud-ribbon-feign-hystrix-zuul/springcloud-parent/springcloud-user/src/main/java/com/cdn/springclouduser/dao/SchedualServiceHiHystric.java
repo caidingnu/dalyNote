@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
-public class SchedualServiceHiHystric implements FeignTestDao{
+public class SchedualServiceHiHystric implements FeignTestDao {
 
     @Override
     public String hi(String message) {
-        return "Sorry,feign不通，"+message;
+        return "Sorry,feign不通，" + message;
     }
 }
