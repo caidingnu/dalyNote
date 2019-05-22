@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<fieldset>
+    <legend>权限练习</legend>
+    <div id="main">
+        账号：<input v-model="loginName"/><br/>
+        密码：<input v-model="password" type="password"/>
+        <button @click="login()">确定</button>
+        <!-- <div class="" style="overflow: auto; width:800px; border: 1px solid red;">
+
+        </div> -->
+    </div>
+</fieldset>
+
+</body>
+<script type="text/javascript">
+    var LOGIN = new Vue({
+        el: "#main",
+        data: {
+            loginName: 'admin',
+            password: '123',
+            menu: '',
+        },
+        methods: {
+            login: function (e) {
+                $.ajax({
+                    url: "http://127.0.0.1:80/login", //请求的action路径
+                    dataType: "json",
+                    data: {
+                        loginName: LOGIN.loginName,
+                        password: LOGIN.password
+                    },
+                    success: function (data) { //添加子节点到指定的父节点
+                        if (data.StateCode == 200) {
+                            location.href='menu.html?loginName='+LOGIN.loginName+"&password="+LOGIN.password
+                        } else if (data.StateCode == 1003) {
+                            alert("账号或密码错误")
+                        }
+                    },
+                    error: function () { //请求失败处理函数
+                        alert('请求失败');
+                    },
+                });
+            }
+        },
+        created() { //全局监听键盘事件
+            var _this = this;
+            document.onkeydown = function () {
+                let key = window.event.keyCode;
+                if (key == 13) {
+                    _this.login();
+                }
+            };
+        }
+    })
+</script>
+</html>

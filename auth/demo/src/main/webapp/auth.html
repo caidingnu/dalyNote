@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+		<script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	</head>
+	<style type="text/css">
+		.main {
+			width: 100%;
+			display: flex;
+		}
+
+		.main>div {
+			width: 50%;
+		}
+
+		div {
+			border: 1px solid red;
+		}
+	</style>
+	<body>
+		<div class="main" id="account">
+			<div class="" >
+				<p @click="load(i.id)" v-for="i in acc">
+					{{i.relName}}
+					
+					</p>
+			</div>
+			<div class="">
+				<p v-for="i in auth">
+				<span v-if="i.status==1" style="color: green;">{{i.menuName}}</span>
+				<span v-else="" style="color: red;">{{i.menuName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span @click="remove">取消</span>
+				<span>添加</span>
+				</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var account = new Vue({
+			el: "#account",
+			data: {
+				acc:'',
+				auth:''
+			},
+			methods: {
+				allAcc:function(){
+					$.ajax({
+						url: "http://127.0.0.1:80/acc", //请求的action路径
+						dataType: "json",
+						async:false,
+						data: {
+						},
+						success: function(data) { //添加子节点到指定的父节点
+							if (data.StateCode == 200) {
+								console.log(data)
+								account.acc=data.Data
+							} 
+						},
+						error: function() { //请求失败处理函数
+							alert('请求失败');
+						},
+					});
+				},
+			  load:function (id) {
+			  	$.ajax({
+			  		url: "http://127.0.0.1:80/auth", //请求的action路径
+			  		dataType: "json",
+			  		async:false,
+			  		data: {
+						id:id
+			  		},
+			  		success: function(data) { //添加子节点到指定的父节点
+			  			if (data.StateCode == 200) {
+			  				console.log(data)
+			  				account.auth=data.Data
+			  			} 
+			  		},
+			  		error: function() { //请求失败处理函数
+			  			alert('请求失败');
+			  		},
+			  	});
+			  }	,
+			  remove:function(){
+				  console.log(this)
+				  $(this).remove()
+			  }
+			
+			}
+		})
+		account.allAcc()
+	</script>
+</html>
