@@ -1,0 +1,1 @@
+springcloud整合feign，ribbon、断路器、网关、movie和movie2是两个相同的服务（集群的测试），
