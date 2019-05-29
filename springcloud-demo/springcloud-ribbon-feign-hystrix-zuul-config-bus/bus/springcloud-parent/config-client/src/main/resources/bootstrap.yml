@@ -1,0 +1,46 @@
+#客户端默认是30s发送一次心跳，90s服务端没有收到心跳就把服务剔除
+spring:
+  #-----------------本地-----------------
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      #      uri: http://localhost:8888/   #直接用ip调用配置中心服务端，用于没有将配置中心服务端注册到注册中心的时候
+      name: config-client
+      profile: pro
+      #dev开发环境配置文件
+      #test测试环境
+      #pro正式环境
+#------------  GItHub---------------
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: http://localhost:8888/
+#          search-paths: respo
+#          username:
+#          password:
+#      label: master
+#      profile: dev
+
+
+      ############################### 以下是消息总线配置 ###################################################
+      ## 开启消息跟踪
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: cdn
+    password: 123456
+# 刷新配置，在spring boot 2.x 之前1.x的management.security.enabled失效，新的配置为
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+
