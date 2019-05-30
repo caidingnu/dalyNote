@@ -1,0 +1,29 @@
+#-----------------本地-----------------
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      name: config-client #对应的是配置文件规则中的{application}部分
+      profile: dev  #对应的是配置文件规则中的{profile}部分，可以是多个，用逗号隔开。
+#     uri: http://localhost:8888/   #直接用ip调用配置中心服务端，用于没有将配置中心服务端注册到注册中心的时候
+#      dev开发环境配置文件
+#      test测试环境
+#      pro正式环境
+
+#------------  GItHub---------------
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: http://localhost:8888/
+#          search-paths: respo
+#          username:
+#          password:
+#          profile: dev    #指定的环境
+#          label: master   #指定分支
+
+
+
+
