@@ -1,1 +1,0 @@
-　　　Rabbit MQ 是建立在强大的Erlang OTP平台上，因此安装RabbitMQ之前要先安装Erlang。
