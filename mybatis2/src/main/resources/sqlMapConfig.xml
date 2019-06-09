@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 和spring整合之后 environments配置将废除,现在是单纯的mybatis，需要自己链接数据库 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用jdbc事务管理 -->
+            <transactionManager type="JDBC" />
+            <!-- 数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/caidingnu?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!--Mapper文件的文职-->
+    <mappers>
+        <mapper resource="sqlMap/User.xml"/>
+    </mappers>
+</configuration>
