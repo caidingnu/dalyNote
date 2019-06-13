@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   redis:
     ###Redis数据库索引（默认为0）
-    database: 0
+    database: 1
     host: 127.0.0.1
     port: 6379
     password:
@@ -30,9 +30,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.oceam.entity
-# Single file max size
-multipart:
-  maxFileSize:50Mb
-# All files max size
+
 
 
