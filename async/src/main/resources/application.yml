@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.oceam.entity
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/chenyun01
+    username: root
+    password: root
