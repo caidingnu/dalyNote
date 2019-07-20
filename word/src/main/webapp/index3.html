@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+<script src="config.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: server+"/html",
+            data: {},
+            dataType: "html",
+            //async:false,//需要同步时打开
+            //traditional: true, //直接传递数组时打开
+            //contentType:"application/json";//要求data必须是json串
+            success: function (res) {
+                console.log(res)
+                $("body").html(res)
+            }
+        });
+
+    })
+
+</script>
+</html>
