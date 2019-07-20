@@ -1,10 +1,9 @@
 package com.cdn.springaoplog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -32,6 +32,7 @@ public class LogAspect {
      */
     @Pointcut("execution(* com.cdn.springaoplog.controller..*.*(..))")
     public void controllerPointcut() {
+
     }
 
     /**
@@ -79,5 +80,47 @@ public class LogAspect {
         return result;
     }
 
+    /**
+     *     * 前置通知：目标方法执行之前执行以下方法体的内容      * @param jp    
+     */
+    @Before("execution(* com.cdn.springaoplog.dao.*.*(..))")
+    public void beforeMethod(JoinPoint jp) {
+        String methodName = jp.getSignature().getName();
+        System.out.println("【前置通知】the method 【" + methodName + "】 begins with " + Arrays.asList(jp.getArgs()));
+        System.out.println("===============================================");
+    }
+
+    /**
+     *     * 返回通知：目标方法正常执行完毕时执行以下代码     * @param jp     * @param result    
+     */
+    @AfterReturning(value = "execution(* com.cdn.springaoplog.dao.*.*(..))", returning = "result")
+    public void afterReturningMethod(JoinPoint jp, Object result) {
+        String methodName = jp.getSignature().getName();
+        System.out.println("【返回通知】the method 【" + methodName + "】 ends with 【" + result + "】");
+        System.out.println("===============================================");
+    }
+
+
+    /**
+     *     * 后置通知：目标方法执行之后执行以下方法体的内容，不管是否发生异常。     * @param jp    
+     */
+    @After("execution(* com.cdn.springaoplog.dao.*.*(..))")
+    public void afterMethod(JoinPoint jp) {
+        String methodName = jp.getSignature().getName();
+        System.out.println("【后置通知】this is a afterMethod advice...【"+methodName+"】");
+        System.out.println("===============================================");
+    }
+
+
+
+    /**
+     *     * 异常通知：目标方法发生异常的时候执行以下代码    
+     */
+    @AfterThrowing(value = "execution(* com.cdn.springaoplog.dao.*.*(..))", throwing = "e")
+    public void afterThorwingMethod(JoinPoint jp, NullPointerException e) {
+        String methodName = jp.getSignature().getName();
+        System.out.println("【异常通知】the method 【" + methodName + "】 occurs exception: " + e);
+        System.out.println("===============================================");
+    }
 
 }
