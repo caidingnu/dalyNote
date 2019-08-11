@@ -1,0 +1,26 @@
+server:
+    port: 8443
+    ssl:
+      key-store: classpath:www.ynntwl.com.jks
+      key-store-type: JKS
+      key-alias:  www.ynntwl.com
+      key-store-password: Admin@123
+      enabled: true
+
+# mysql
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://129.28.171.44:3306/erp?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+
+# 打印日志
+mybatis:
+    mapper-locations: classpath*:mybatis/*.xml
+    type-aliases-package: com.admin.boot.entity
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+        map-underscore-to-camel-case: true
+
+
