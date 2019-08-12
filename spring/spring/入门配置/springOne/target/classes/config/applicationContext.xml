@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by CodeX4J. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!--spring方式创建对象，传统方式用不到这些配置文件-->
+    <!--id和name通可以，唯一，id中不能出现特殊字符，name可以-->
+    <bean id="userDao" name="userDao2" class="com.demo.spring.UserDaoImpl">
+        <property name="username" value="蔡定努"/>  <!--第一种属性注入 >>>  set方法进行属性注入,该属性必须有set方法-->
+        <constructor-arg name="job" value="程序员"/>   <!--第二种属性注入 >>>构造方法进行属性注入,必须有构造方法-->
+    </bean>
+
+
+    <!--注意：属性注入的时候，value是用来注入普通类型的值  ref是注入复杂类型-->
+
+    <!--Spring的Bean的声明周期配置   bean单列创建，工厂关闭的时候才会执行销毁的方法-->
+    <!--第3种属性注入 >>>p 命名空间注入-->
+    <bean id="lifeDao" class="com.demo.LifeCycle.LifeDaoImpl" init-method="initMethod" destroy-method="distory"
+          p:age="25">
+        <property name="sex" value="#{'男'}"/>  <!--第4种属性注入 >>>SpEL 属性注入-->
+        <property name="car" ref="car"/>   <!-- 注入引用类型-->
+    </bean>
+
+
+    <bean id="car" class="com.demo.LifeCycle.Car">
+        <property name="name" value="奥迪"/>
+        <property name="price" value="80000000"/>
+    </bean>
+    <bean id="car2" class="com.demo.LifeCycle.Car">
+        <property name="name" value="宝马"/>
+        <property name="price" value="70000000"/>
+    </bean>
+
+
+    <!--复杂类型注入-->
+    <bean id="user" class="com.demo.entity.User">
+        <property name="name" value="周华健"/>
+        <property name="list">
+            <list>
+                <value>一</value>
+                <value>二</value>
+                <value>三</value>
+            </list>
+        </property>
+        <property name="carList">
+            <list>
+                <ref bean="car"/>
+                <ref bean="car2"/>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>66666</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="goods" value="烟草"/>
+            </map>
+        </property>
+        <property name="carMap">
+            <map>
+                <entry key="键" value-ref="car"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--多个配置文件-->
+    <import resource="applicationContext2.xml"/>
+</beans>
