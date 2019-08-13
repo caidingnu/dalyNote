@@ -16,8 +16,7 @@ import javax.annotation.Resource;
 
 /**
  * Poi写Excel
- *
- * @author jianggujin
+ * 第一种方式
  */
 @RestController
 public class JxlReadDemo {
