@@ -77,7 +77,6 @@ public class ReadExcelDemo2 {
      *
      * @param InputStream
      * @return Map 包含单元格数据内容的Map对象
-     * @author zengwendong
      */
     public Map<Integer, Map<Integer,Object>> readExcelContent() throws Exception{
         if(wb==null){
@@ -111,7 +110,6 @@ public class ReadExcelDemo2 {
      *
      * @param cell
      * @return
-     * @author zengwendong
      */
     private Object getCellFormatValue(Cell cell) {
         Object cellvalue = "";
