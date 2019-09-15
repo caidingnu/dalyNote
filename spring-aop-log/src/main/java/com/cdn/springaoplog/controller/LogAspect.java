@@ -18,7 +18,6 @@ import java.util.UUID;
 
 /**
  * @Description: 日志记录切点
- * @Author: junqiang.lu
  * @Date: 2018/11/1
  */
 @Aspect
@@ -86,8 +85,8 @@ public class LogAspect {
     @Before("execution(* com.cdn.springaoplog.dao.*.*(..))")
     public void beforeMethod(JoinPoint jp) {
         String methodName = jp.getSignature().getName();
-        System.out.println("【前置通知】the method 【" + methodName + "】 begins with " + Arrays.asList(jp.getArgs()));
-        System.out.println("===============================================");
+        logger.info("【前置通知】the method 【" + methodName + "】 begins with " + Arrays.asList(jp.getArgs()));
+        logger.info("===============================================");
     }
 
     /**
@@ -96,8 +95,8 @@ public class LogAspect {
     @AfterReturning(value = "execution(* com.cdn.springaoplog.dao.*.*(..))", returning = "result")
     public void afterReturningMethod(JoinPoint jp, Object result) {
         String methodName = jp.getSignature().getName();
-        System.out.println("【返回通知】the method 【" + methodName + "】 ends with 【" + result + "】");
-        System.out.println("===============================================");
+        logger.info("【返回通知】the method 【" + methodName + "】 ends with 【" + result + "】");
+        logger.info("===============================================");
     }
 
 
@@ -107,8 +106,8 @@ public class LogAspect {
     @After("execution(* com.cdn.springaoplog.dao.*.*(..))")
     public void afterMethod(JoinPoint jp) {
         String methodName = jp.getSignature().getName();
-        System.out.println("【后置通知】this is a afterMethod advice...【"+methodName+"】");
-        System.out.println("===============================================");
+        logger.info("【后置通知】this is a afterMethod advice...【"+methodName+"】");
+        logger.info("===============================================");
     }
 
 
@@ -119,8 +118,8 @@ public class LogAspect {
     @AfterThrowing(value = "execution(* com.cdn.springaoplog.dao.*.*(..))", throwing = "e")
     public void afterThorwingMethod(JoinPoint jp, NullPointerException e) {
         String methodName = jp.getSignature().getName();
-        System.out.println("【异常通知】the method 【" + methodName + "】 occurs exception: " + e);
-        System.out.println("===============================================");
+        logger.info("【异常通知】the method 【" + methodName + "】 occurs exception: " + e);
+        logger.info("===============================================");
     }
 
 }
