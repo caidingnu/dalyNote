@@ -132,10 +132,9 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
-
-
     </dependencies>
 
+	 <!--只是申明版本，不是jar包引入-->
     <dependencyManagement>
         <dependencies>
             <dependency>
