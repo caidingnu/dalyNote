@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
     <description>父项目</description>
 
-    <!--子模块聚合 Maven父模块是通过如下方式自动加载子模块的：-->
+    <!--子模块聚合 ，打包的时候才会一并打包，不然需要一个一个打包，聚合的之后在父pom打包即可：-->
     <modules>
         <module>springcloud-eurkar</module>
         <module>springcloud-user</module>
