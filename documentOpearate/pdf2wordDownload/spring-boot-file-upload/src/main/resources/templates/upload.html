@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+<fieldset>
+    <legend><h1>文件上传</h1></legend>
+    <form method="POST" id="on" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file"/><br/><br/>
+        <input type="submit" value="单文件上传"/>
+    </form>
+</fieldset>
+<fieldset style="color: brown;">
+    <legend><h1>多文件上传</h1></legend>
+    <form method="POST" action="/many" enctype="multipart/form-data">
+        <input type="file" multiple name="files"/><br/><br/>
+        <input type="submit" value="多文件上传"/>
+    </form>
+    <img>
+</fieldset>
+<marquee direction=left>需要移动的文字</marquee>
+</body>
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/layui/layui.js"></script>
+<script src="/js/system.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+        integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+        crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        //单文件上传
+        $("#on").ajaxForm(function (data, a, b) {
+            console.log(JSON.parse(b.responseText).Data)
+            var result = JSON.parse(b.responseText).Data
+            if (result.code == "200") {
+                var qustion = confirm("转换成功，确定下载吗？");
+                if (qustion) {
+                    window.location.href = "/download?fileName="+result.data
+                }
+            } else {
+                alert(result.data)
+            }
+
+
+        });
+
+        //多文件上传
+        $("#multipleUploadForm").ajaxForm(function (data) {
+            console.log(data)
+        });
+    })
+</script>
+</html>
