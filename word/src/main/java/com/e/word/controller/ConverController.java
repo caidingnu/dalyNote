@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConverController {
 
+
     @RequestMapping("html")
     public String a()  {
-//        String htmlPath= docxToHtml.docxToHtml("IDEA拉取码云上的项目配置.docx");
-        String htmlPath= docxToHtml.docxToHtml("test.doc");
-        return  Read.readfile(htmlPath);
+        return DocxToHtmlUtil.readHtml("C:\\Users\\cdn\\Desktop\\test.doc");
     }
+
 }
