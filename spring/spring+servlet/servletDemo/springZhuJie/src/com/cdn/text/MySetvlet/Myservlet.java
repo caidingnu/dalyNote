@@ -27,21 +27,21 @@ public class Myservlet extends HttpServlet {
         resp.setContentType("text/html");
         String url = req.getRequestURI();
         String action = url.substring(url.lastIndexOf("/"), url.lastIndexOf("."));
-            switch (action) {
-                case "/select":
-                    Jdbc1 jdbc1 = new Jdbc1();
-                    List list = jdbc1.one();
-                    for (Object o : list) {
-                        System.out.println(o);
-                    }
-                    resp.getWriter().println(list);
-                    break;
-                case "/toMain":   //页面跳转
-                    req.getRequestDispatcher("/WEB-INF/main.html").forward(req, resp);
-                    break;
-                default:
-                    break;
-            }
+        switch (action) {
+            case "/select":
+                Jdbc1 jdbc1 = new Jdbc1();
+                List list = jdbc1.one();
+                for (Object o : list) {
+                    System.out.println(o);
+                }
+                resp.getWriter().println(list);
+                break;
+            case "/toMain":   //页面跳转
+                req.getRequestDispatcher("/WEB-INF/main.html").forward(req, resp);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

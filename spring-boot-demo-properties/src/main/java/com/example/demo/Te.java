@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
  * create 2019-07-21 14:16
  * version 1.0.0
  */
-@PropertySource(value= {"classpath:config/jdbc.properties", "classpath:config/cdn.properties"})
+@PropertySource(value = {"classpath:config/jdbc.properties", "classpath:config/cdn.properties"})
 @Service
 public class Te {
 
-//    jdbc.properties
+    //    jdbc.properties
     @Value("${jdbc.url}")
     private String jdbcUrl;
 
-//    cdn.properties
+    //    cdn.properties
     @Value("${cdn.name}")
     private String cdnName;
 
-//    application.yml
+    //    application.yml
     @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 

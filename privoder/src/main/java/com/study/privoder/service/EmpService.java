@@ -16,6 +16,7 @@ import java.util.List;
 public interface EmpService {
 
     List<Emp> selectAllPage(String keyword);
+
     List<Emp> selectAll(String keyword);
 
     //    或者查询
@@ -27,7 +28,7 @@ public interface EmpService {
     //and查询
     List<Emp> and(Emp emp);
 
-//    条件查询
+    //    条件查询
     List<Emp> condition(String name);
 
 
@@ -38,6 +39,6 @@ public interface EmpService {
     int batchAdd();
 
 
-//    关联查查询
+    //    关联查查询
     List<ComAndEmp> select();
 }

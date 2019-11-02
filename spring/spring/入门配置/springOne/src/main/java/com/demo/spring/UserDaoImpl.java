@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(String text) {
-        System.out.println("UserServiceImpl的方法执行了,"+text+"----姓名："+username+",工作："+job);
+        System.out.println("UserServiceImpl的方法执行了," + text + "----姓名：" + username + ",工作：" + job);
     }
 
 

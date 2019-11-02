@@ -35,7 +35,7 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <bean id="serviceImpl" class="com.cdn.text.xml.ServiceImpl" >
+    <bean id="serviceImpl" class="com.cdn.text.xml.ServiceImpl">
         <property name="name" value="黄金三"/>
     </bean>
 </beans>

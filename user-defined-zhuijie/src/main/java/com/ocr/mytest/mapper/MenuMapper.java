@@ -18,5 +18,5 @@ import java.util.Map;
 public interface MenuMapper {
 
     @Select("select * from menu")
-    List<Map<String,Object>> selectAll();
+    List<Map<String, Object>> selectAll();
 }

@@ -18,8 +18,8 @@ public class ComAndEmpProvider {
      * author: CDN
      * date: 2019/6/30
      */
-    public String inner(){
-        return new SQL(){{
+    public String inner() {
+        return new SQL() {{
             SELECT("*");
             FROM("emp");
             INNER_JOIN("com_emp on emp.emp_id=com_emp.emp_id");

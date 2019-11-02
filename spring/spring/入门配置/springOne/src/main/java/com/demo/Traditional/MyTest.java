@@ -19,9 +19,9 @@ public class MyTest {
      */
 
     @Test
-    public void  testOne(){
-       UserDao userService=new UserDaoImpl();
-       userService.save();
+    public void testOne() {
+        UserDao userService = new UserDaoImpl();
+        userService.save();
 
     }
 

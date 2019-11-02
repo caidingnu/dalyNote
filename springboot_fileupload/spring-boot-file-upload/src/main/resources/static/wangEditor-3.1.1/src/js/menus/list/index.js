@@ -19,14 +19,14 @@ function List(editor) {
         $title: $('<p>设置列表</p>'),
         type: 'list', // droplist 以列表形式展示
         list: [
-            { $elem: $('<span><i class="w-e-icon-list-numbered"></i> 有序列表</span>'), value: 'insertOrderedList' },
-            { $elem: $('<span><i class="w-e-icon-list2"></i> 无序列表</span>'), value: 'insertUnorderedList' }
+            {$elem: $('<span><i class="w-e-icon-list-numbered"></i> 有序列表</span>'), value: 'insertOrderedList'},
+            {$elem: $('<span><i class="w-e-icon-list2"></i> 无序列表</span>'), value: 'insertUnorderedList'}
         ],
-        onClick: (value) => {
-            // 注意 this 是指向当前的 List 对象
-            this._command(value)
-        }
-    })
+        onClick: (value) = > {
+        // 注意 this 是指向当前的 List 对象
+        this._command(value)
+    }
+})
 }
 
 // 原型

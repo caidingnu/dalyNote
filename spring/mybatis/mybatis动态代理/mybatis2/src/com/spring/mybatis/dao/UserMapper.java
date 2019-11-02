@@ -14,5 +14,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserMapper {
 
-     Menu selectById(String uuid);
+    Menu selectById(String uuid);
 }

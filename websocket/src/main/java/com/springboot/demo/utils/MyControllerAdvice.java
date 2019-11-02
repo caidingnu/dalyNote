@@ -3,6 +3,7 @@ package com.springboot.demo.utils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.*;
 
 /**
@@ -21,16 +22,15 @@ public class MyControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Map errorHandler(Exception ex) {
-        Map<String ,Object> map = new HashMap();
+        Map<String, Object> map = new HashMap();
         if (ex instanceof RuntimeException) {
             map.put("code", 98);
-        }else {
+        } else {
             map.put("code", 500);
         }
         map.put("msg", ex.getMessage());
         return map;
     }
-
 
 
 }

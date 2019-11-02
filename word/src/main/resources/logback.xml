@@ -3,15 +3,15 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <!-- 属性定义 -->
     <!--日志保存路劲-->
-    <property name="LOG_HOME" value="./logs/日志" />
-    <property name="appName" value="springboot" />
-    <property name="maxHistory" value="90" />
+    <property name="LOG_HOME" value="./logs/日志"/>
+    <property name="appName" value="springboot"/>
+    <property name="maxHistory" value="90"/>
 
     <!-- ConsoleAppender 控制台输出日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- 对日志进行格式化 -->
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -32,7 +32,7 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -51,7 +51,7 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -70,7 +70,7 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -89,7 +89,7 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -97,19 +97,19 @@
     <!--<logger name="com.ljq.test" level="info" />-->
     <!-- eg: com.ljq.test1 类的日志不输出 -->
     <!--<logger name="com.ljq.test1" additivity="false" />-->
-    <logger name="org.apache.ibatis.io" level="info" />
-    <logger name="org.mybatis.spring" level="info" />
-    <logger name="org.springframework" level="info" />
+    <logger name="org.apache.ibatis.io" level="info"/>
+    <logger name="org.mybatis.spring" level="info"/>
+    <logger name="org.springframework" level="info"/>
     <logger name="io.lettuce" level="info"/>
-    <logger name="io.netty" level="info" />
-    <logger name="com.netflix.eureka" level="warn" />
+    <logger name="io.netty" level="info"/>
+    <logger name="com.netflix.eureka" level="warn"/>
 
     <!-- 根日志,所有日志appender都必须包含在root/logger中,否则不会起作用 -->
     <root level="debug">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="DEBUG" />
-        <appender-ref ref="INFO" />
-        <appender-ref ref="WARN" />
-        <appender-ref ref="ERROR" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEBUG"/>
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
     </root>
 </configuration>

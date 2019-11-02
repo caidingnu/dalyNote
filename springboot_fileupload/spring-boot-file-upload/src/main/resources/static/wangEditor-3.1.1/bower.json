@@ -11,7 +11,7 @@
     "web 富文本编辑器"
   ],
   "homepage": "https://github.com/wangfupeng1988/wangEditor",
-  "moduleType":  [
+  "moduleType": [
     "amd",
     "cmd",
     "node"

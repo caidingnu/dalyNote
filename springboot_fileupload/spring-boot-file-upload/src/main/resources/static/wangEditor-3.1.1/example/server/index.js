@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const formidable = require('formidable')
-const util  = require('./util.js')
+const util = require('./util.js')
 
 const koa = require('koa')
 const app = koa()
@@ -16,12 +16,14 @@ app.use(bodyParser())
 
 // 静态文件服务，针对 html js css fonts 文件
 const staticCache = require('koa-static-cache')
+
 function setStaticCache() {
     const exampleDir = path.join(__dirname, '..', '..', 'example')
     const releaseDir = path.join(__dirname, '..', '..', 'release')
     app.use(staticCache(exampleDir))
     app.use(staticCache(releaseDir))
 }
+
 setStaticCache()
 
 // 配置路由
@@ -29,7 +31,7 @@ const router = require('koa-router')()
 
 // 保存上传的文件
 function saveFiles(req) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) = > {
         const imgLinks = []
         const form = new formidable.IncomingForm()
         form.parse(req, function (err, fields, files) {
@@ -43,7 +45,7 @@ function saveFiles(req) {
             }
 
             // 遍历所有上传来的图片
-            util.objForEach(files, (name, file) => {
+            util.objForEach(files, (name, file) = > {
                 // 图片临时位置
                 const tempFilePath = file.path
                 // 图片名称和路径
@@ -53,7 +55,8 @@ function saveFiles(req) {
                 fs.renameSync(tempFilePath, fullFileName)
                 // 存储链接
                 imgLinks.push('/upload-files/' + fileName)
-            })
+            }
+        )
 
             // 重新设置静态文件缓存
             setStaticCache()
@@ -64,7 +67,8 @@ function saveFiles(req) {
                 data: imgLinks
             })
         })
-    })
+    }
+)
 }
 
 // 上传图片

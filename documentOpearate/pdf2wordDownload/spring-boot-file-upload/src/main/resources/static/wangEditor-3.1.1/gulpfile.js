@@ -17,13 +17,14 @@ const babel = require('rollup-plugin-babel')
 const gulpReplace = require('gulp-replace')
 
 // 拷贝 fonts 文件
-gulp.task('copy-fonts', () => {
+gulp.task('copy-fonts', () = > {
     gulp.src('./src/fonts/*')
         .pipe(gulp.dest('./release/fonts'))
-})
+}
+)
 
 // 处理 css
-gulp.task('css', () => {
+gulp.task('css', () = > {
     gulp.src('./src/less/**/*.less')
         .pipe(less())
         // 产出的未压缩的文件名
@@ -34,7 +35,7 @@ gulp.task('css', () => {
             cssgrace
         ]))
         // 将 css 引用的字体文件转换为 base64 格式
-        .pipe(gulpReplace( /'fonts\/w-e-icon\..+?'/gm, function (fontFile) {
+        .pipe(gulpReplace(/'fonts\/w-e-icon\..+?'/gm, function (fontFile) {
             // fontFile 例如 'fonts/w-e-icon.eot?paxlku'
             fontFile = fontFile.slice(0, -1).slice(1)
             fontFile = fontFile.split('?')[0]
@@ -52,10 +53,11 @@ gulp.task('css', () => {
         .pipe(rename('wangEditor.min.css'))
         .pipe(cssmin())
         .pipe(gulp.dest('./release'))
-})
+}
+)
 
 // 处理 JS
-gulp.task('script', () => {
+gulp.task('script', () = > {
     // rollup 打包 js 模块
     return rollup.rollup({
         // 入口文件
@@ -68,7 +70,7 @@ gulp.task('script', () => {
                 exclude: 'node_modules/**' // only transpile our source code
             })
         ]
-    }).then(bundle => {
+    }).then(bundle = > {
         bundle.write({
             // 产出文件使用 umd 规范（即兼容 amd cjs 和 iife）
             format: 'umd',
@@ -76,10 +78,10 @@ gulp.task('script', () => {
             moduleName: 'wangEditor',
             // 产出的未压缩的文件名
             dest: './release/wangEditor.js'
-        }).then(() => {
+        }).then(() = > {
             // 待 rollup 打包 js 完毕之后，再进行如下的处理：
             gulp.src('./release/wangEditor.js')
-                // inline css
+            // inline css
                 .pipe(gulpReplace(/__INLINE_CSS__/gm, function () {
                     // 读取 css 文件内容
                     var filePath = path.resolve(__dirname, 'release', 'wangEditor.css')
@@ -97,26 +99,30 @@ gulp.task('script', () => {
                 // 生成 sourcemap
                 .pipe(sourcemaps.write(''))
                 .pipe(gulp.dest('./release'))
-        })
-    })
+        }
+)
+})
 })
 
 
 // 默认任务配置
-gulp.task('default', () => {
+gulp.task('default', () = > {
     gulp.run('copy-fonts', 'css', 'script')
 
     // 监听 js 原始文件的变化
-    gulp.watch('./src/js/**/*.js', () => {
+    gulp.watch('./src/js/**/*.js', () = > {
         gulp.run('script')
-    })
-    // 监听 css 原始文件的变化
-    gulp.watch('./src/less/**/*.less', () => {
-        gulp.run('css', 'script')
-    })
-    // 监听 icon.less 的变化，变化时重新拷贝 fonts 文件
-    gulp.watch('./src/less/icon.less', () => {
-        gulp.run('copy-fonts')
-    })
+    }
+)
+// 监听 css 原始文件的变化
+gulp.watch('./src/less/**/*.less', () = > {
+    gulp.run('css', 'script')
+}
+)
+// 监听 icon.less 的变化，变化时重新拷贝 fonts 文件
+gulp.watch('./src/less/icon.less', () = > {
+    gulp.run('copy-fonts')
+}
+)
 })
 

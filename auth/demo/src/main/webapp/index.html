@@ -39,7 +39,7 @@
                     },
                     success: function (data) { //添加子节点到指定的父节点
                         if (data.StateCode == 200) {
-                            location.href='menu.html?loginName='+LOGIN.loginName+"&password="+LOGIN.password
+                            location.href = 'menu.html?loginName=' + LOGIN.loginName + "&password=" + LOGIN.password
                         } else if (data.StateCode == 1003) {
                             alert("账号或密码错误")
                         }

@@ -23,7 +23,7 @@ public class TestController {
     @Value("${spring.datasource.url}")
     private String dataUrl;
 
-//每个服务都是一个配置中心客户端
+    //每个服务都是一个配置中心客户端
     @RequestMapping("/hi")
     public String hi() {
         return "1";
@@ -31,7 +31,7 @@ public class TestController {
 
     @RequestMapping("/")
     public String hello() {
-        return port+"\n"+dataUrl;
+        return port + "\n" + dataUrl;
     }
 
 

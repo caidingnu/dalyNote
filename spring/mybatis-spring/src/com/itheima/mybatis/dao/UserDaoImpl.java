@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component;
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 
 
-
     @Override
     public User selectById(Integer id) {
 //        com.itheima.mybatis.mapper.UserMapper xml中的namespace
-        return this.getSqlSession().selectOne("com.itheima.mybatis.mapper.UserMapper.findUserById",id);
+        return this.getSqlSession().selectOne("com.itheima.mybatis.mapper.UserMapper.findUserById", id);
     }
 }

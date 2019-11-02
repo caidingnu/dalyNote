@@ -1,4 +1,4 @@
-  #-----------------本地-----------------
+#-----------------本地-----------------
 spring:
   cloud:
     config:
@@ -9,21 +9,21 @@ spring:
       name: zuul-application
       profile: pro
 
-#dev开发环境配置文件
-#test测试环境
-#pro正式环境
+      #dev开发环境配置文件
+      #test测试环境
+      #pro正式环境
 
-#------------  GItHub---------------
-#  cloud:
-#    config:
-#      server:
-#        git:
-#          uri: http://localhost:8888/
-#          search-paths: respo
-#          username:
-#          password:
-#      label: master
-#      profile: dev
+      #------------  GItHub---------------
+      #  cloud:
+      #    config:
+      #      server:
+      #        git:
+      #          uri: http://localhost:8888/
+      #          search-paths: respo
+      #          username:
+      #          password:
+      #      label: master
+      #      profile: dev
 
       ############################## 以下是消息总线配置 ###################################################
       # 开启消息跟踪

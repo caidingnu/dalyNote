@@ -12,55 +12,55 @@ import javax.persistence.Table;
 @Table(name = "t_user_role")
 public class UserRole {
 
-	@Id
-	@GeneratedValue
-	private Integer id; // 编号
+    @Id
+    @GeneratedValue
+    private Integer id; // 编号
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user; // 用户
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user; // 用户
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role; // 角色
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role; // 角色
 
-	@Column(length = 1000)
-	private String remarks; // 备注
-	
-	public String getRemarks() {
-		return remarks;
-	}
+    @Column(length = 1000)
+    private String remarks; // 备注
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public UserRole() {
-		super();
-	}
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public UserRole() {
+        super();
+    }
 
 }

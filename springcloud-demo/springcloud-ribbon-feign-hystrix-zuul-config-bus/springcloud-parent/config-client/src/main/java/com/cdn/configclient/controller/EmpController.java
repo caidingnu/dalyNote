@@ -20,15 +20,16 @@ public class EmpController {
 
     @Resource
     EmpMapper empMapper;
+
     /**
-     * @Description: 
-     * @Param: 
-     * @return: 
+     * @Description:
+     * @Param:
+     * @return:
      * @Author: CDN
      * @Date: 2019/5/30
      */
     @RequestMapping("list")
-    public List<Emp> list(){
+    public List<Emp> list() {
         return empMapper.selectList();
     }
 
@@ -40,8 +41,8 @@ public class EmpController {
      * @Date: 2019/5/30
      */
     @RequestMapping("one")
-    public Emp one(Integer id){
-        Emp one=empMapper.selectByPrimaryKey(id);
+    public Emp one(Integer id) {
+        Emp one = empMapper.selectByPrimaryKey(id);
         return one;
     }
 }

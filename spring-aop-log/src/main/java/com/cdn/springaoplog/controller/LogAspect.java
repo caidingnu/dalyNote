@@ -106,10 +106,9 @@ public class LogAspect {
     @After("execution(* com.cdn.springaoplog.dao.*.*(..))")
     public void afterMethod(JoinPoint jp) {
         String methodName = jp.getSignature().getName();
-        logger.info("【后置通知】this is a afterMethod advice...【"+methodName+"】");
+        logger.info("【后置通知】this is a afterMethod advice...【" + methodName + "】");
         logger.info("===============================================");
     }
-
 
 
     /**

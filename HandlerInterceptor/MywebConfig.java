@@ -20,8 +20,8 @@ public class MywebConfig extends WebMvcConfigurerAdapter {
 
 
         registry.addInterceptor(new TwoInterceptor()).addPathPatterns("/two/**") //把 /two下的全部拦截到OneInterceptor
-                                                     .addPathPatterns("/one/**")
-                                                     .addPathPatterns("/three/**");
+                .addPathPatterns("/one/**")
+                .addPathPatterns("/three/**");
 
 
         super.addInterceptors(registry);

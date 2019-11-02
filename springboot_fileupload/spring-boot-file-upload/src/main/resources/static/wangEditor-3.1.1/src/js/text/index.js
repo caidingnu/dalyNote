@@ -3,47 +3,49 @@
 */
 
 import $ from '../util/dom-core.js'
-import { getPasteText, getPasteHtml, getPasteImgs } from '../util/paste-handle.js'
-import { UA, isFunction, replaceHtmlSymbol } from '../util/util.js'
+import {getPasteText, getPasteHtml, getPasteImgs} from '../util/paste-handle.js'
+import {UA, isFunction, replaceHtmlSymbol} from '../util/util.js'
 
 // 获取一个 elem.childNodes 的 JSON 数据
 function getChildrenJSON($elem) {
     const result = []
     const $children = $elem.childNodes() || [] // 注意 childNodes() 可以获取文本节点
-    $children.forEach(curElem => {
+    $children.forEach(curElem = > {
         let elemResult
         const nodeType = curElem.nodeType
 
         // 文本节点
-        if (nodeType === 3) {
-            elemResult = curElem.textContent
-            elemResult = replaceHtmlSymbol(elemResult)
+        if(nodeType === 3
+)
+    {
+        elemResult = curElem.textContent
+        elemResult = replaceHtmlSymbol(elemResult)
+    }
+
+    // 普通 DOM 节点
+    if (nodeType === 1) {
+        elemResult = {}
+
+        // tag
+        elemResult.tag = curElem.nodeName.toLowerCase()
+        // attr
+        const attrData = []
+        const attrList = curElem.attributes || {}
+        const attrListLength = attrList.length || 0
+        for (let i = 0; i < attrListLength; i++) {
+            const attr = attrList[i]
+            attrData.push({
+                name: attr.name,
+                value: attr.value
+            })
         }
+        elemResult.attrs = attrData
+        // children（递归）
+        elemResult.children = getChildrenJSON($(curElem))
+    }
 
-        // 普通 DOM 节点
-        if (nodeType === 1) {
-            elemResult = {}
-
-            // tag
-            elemResult.tag = curElem.nodeName.toLowerCase()
-            // attr
-            const attrData = []
-            const attrList = curElem.attributes || {}
-            const attrListLength = attrList.length || 0
-            for (let i = 0; i < attrListLength; i++) {
-                const attr = attrList[i]
-                attrData.push({
-                    name: attr.name,
-                    value: attr.value
-                })
-            }
-            elemResult.attrs = attrData
-            // children（递归）
-            elemResult.children = getChildrenJSON($(curElem))
-        }
-
-        result.push(elemResult)
-    })
+    result.push(elemResult)
+})
     return result
 }
 
@@ -156,17 +158,20 @@ Text.prototype = {
             // 更新按钮 ative 状态
             editor.menus.changeActive()
         }
+
         // 按键后保存
         $textElem.on('keyup', saveRange)
-        $textElem.on('mousedown', e => {
+        $textElem.on('mousedown', e = > {
             // mousedown 状态下，鼠标滑动到编辑区域外面，也需要保存选区
             $textElem.on('mouseleave', saveRange)
-        })
-        $textElem.on('mouseup', e => {
+        }
+    )
+        $textElem.on('mouseup', e = > {
             saveRange()
             // 在编辑器区域之内完成点击，取消鼠标滑动到编辑区外面的事件
             $textElem.off('mouseleave', saveRange)
-        })
+        }
+    )
     },
 
     // 按回车键时的特殊处理
@@ -174,7 +179,7 @@ Text.prototype = {
         const editor = this.editor
         const $textElem = editor.$textElem
 
-        function insertEmptyP ($selectionElem) {
+        function insertEmptyP($selectionElem) {
             const $p = $('<p><br></p>')
             $p.insertBefore($selectionElem)
             editor.selection.createRangeByElem($p, true)
@@ -214,14 +219,16 @@ Text.prototype = {
             insertEmptyP($selectionElem)
         }
 
-        $textElem.on('keyup', e => {
-            if (e.keyCode !== 13) {
-                // 不是回车键
-                return
-            }
-            // 将回车之后生成的非 <p> 的顶级标签，改为 <p>
-            pHandle(e)
-        })
+        $textElem.on('keyup', e = > {
+            if(e.keyCode !== 13
+    )
+        {
+            // 不是回车键
+            return
+        }
+        // 将回车之后生成的非 <p> 的顶级标签，改为 <p>
+        pHandle(e)
+    })
 
         // <pre><code></code></pre> 回车时 特殊处理
         function codeHandle(e) {
@@ -280,16 +287,18 @@ Text.prototype = {
             e.preventDefault()
         }
 
-        $textElem.on('keydown', e => {
-            if (e.keyCode !== 13) {
-                // 不是回车键
-                // 取消即将跳转代码块的记录
-                editor._willBreakCode = false
-                return
-            }
-            // <pre><code></code></pre> 回车时 特殊处理
-            codeHandle(e)
-        })
+        $textElem.on('keydown', e = > {
+            if(e.keyCode !== 13
+    )
+        {
+            // 不是回车键
+            // 取消即将跳转代码块的记录
+            editor._willBreakCode = false
+            return
+        }
+        // <pre><code></code></pre> 回车时 特殊处理
+        codeHandle(e)
+    })
     },
 
     // 清空时保留 <p><br></p>
@@ -297,35 +306,39 @@ Text.prototype = {
         const editor = this.editor
         const $textElem = editor.$textElem
 
-        $textElem.on('keydown', e => {
-            if (e.keyCode !== 8) {
-                return
-            }
-            const txtHtml = $textElem.html().toLowerCase().trim()
-            if (txtHtml === '<p><br></p>') {
-                // 最后剩下一个空行，就不再删除了
-                e.preventDefault()
-                return
-            }
-        })
+        $textElem.on('keydown', e = > {
+            if(e.keyCode !== 8
+    )
+        {
+            return
+        }
+        const txtHtml = $textElem.html().toLowerCase().trim()
+        if (txtHtml === '<p><br></p>') {
+            // 最后剩下一个空行，就不再删除了
+            e.preventDefault()
+            return
+        }
+    })
 
-        $textElem.on('keyup', e => {
-            if (e.keyCode !== 8) {
-                return
-            }
-            let $p
-            const txtHtml = $textElem.html().toLowerCase().trim()
+        $textElem.on('keyup', e = > {
+            if(e.keyCode !== 8
+    )
+        {
+            return
+        }
+        let $p
+        const txtHtml = $textElem.html().toLowerCase().trim()
 
-            // firefox 时用 txtHtml === '<br>' 判断，其他用 !txtHtml 判断
-            if (!txtHtml || txtHtml === '<br>') {
-                // 内容空了
-                $p = $('<p><br/></p>')
-                $textElem.html('') // 一定要先清空，否则在 firefox 下有问题
-                $textElem.append($p)
-                editor.selection.createRangeByElem($p, false, true)
-                editor.selection.restoreSelection()
-            }
-        })
+        // firefox 时用 txtHtml === '<br>' 判断，其他用 !txtHtml 判断
+        if (!txtHtml || txtHtml === '<br>') {
+            // 内容空了
+            $p = $('<p><br/></p>')
+            $textElem.html('') // 一定要先清空，否则在 firefox 下有问题
+            $textElem.append($p)
+            editor.selection.createRangeByElem($p, false, true)
+            editor.selection.restoreSelection()
+        }
+    })
 
     },
 
@@ -341,6 +354,7 @@ Text.prototype = {
         // 粘贴图片、文本的事件，每次只能执行一个
         // 判断该次粘贴事件是否可以执行
         let pasteTime = 0
+
         function canDo() {
             var now = Date.now()
             var flag = false
@@ -351,109 +365,118 @@ Text.prototype = {
             pasteTime = now
             return flag
         }
+
         function resetTime() {
             pasteTime = 0
         }
 
         // 粘贴文字
-        $textElem.on('paste', e => {
-            if (UA.isIE()) {
-                return
-            } else {
-                // 阻止默认行为，使用 execCommand 的粘贴命令
-                e.preventDefault()
-            }
+        $textElem.on('paste', e = > {
+            if(UA.isIE()
+    )
+        {
+            return
+        }
+    else
+        {
+            // 阻止默认行为，使用 execCommand 的粘贴命令
+            e.preventDefault()
+        }
 
-            // 粘贴图片和文本，只能同时使用一个
-            if (!canDo()) {
-                return
-            }
+        // 粘贴图片和文本，只能同时使用一个
+        if (!canDo()) {
+            return
+        }
 
-            // 获取粘贴的文字
-            let pasteHtml = getPasteHtml(e, pasteFilterStyle, ignoreImg)
-            let pasteText = getPasteText(e)
-            pasteText = pasteText.replace(/\n/gm, '<br>')
+        // 获取粘贴的文字
+        let pasteHtml = getPasteHtml(e, pasteFilterStyle, ignoreImg)
+        let pasteText = getPasteText(e)
+        pasteText = pasteText.replace(/\n/gm, '<br>')
 
-            const $selectionElem = editor.selection.getSelectionContainerElem()
-            if (!$selectionElem) {
-                return
-            }
-            const nodeName = $selectionElem.getNodeName()
+        const $selectionElem = editor.selection.getSelectionContainerElem()
+        if (!$selectionElem) {
+            return
+        }
+        const nodeName = $selectionElem.getNodeName()
 
-            // code 中只能粘贴纯文本
-            if (nodeName === 'CODE' || nodeName === 'PRE') {
-                if (pasteTextHandle && isFunction(pasteTextHandle)) {
-                    // 用户自定义过滤处理粘贴内容
-                    pasteText = '' + (pasteTextHandle(pasteText) || '')
-                }
-                editor.cmd.do('insertHTML', `<p>${pasteText}</p>`)
-                return
+        // code 中只能粘贴纯文本
+        if (nodeName === 'CODE' || nodeName === 'PRE') {
+            if (pasteTextHandle && isFunction(pasteTextHandle)) {
+                // 用户自定义过滤处理粘贴内容
+                pasteText = '' + (pasteTextHandle(pasteText) || '')
             }
+            editor.cmd.do('insertHTML', `<p>${pasteText}</p>`)
+            return
+        }
 
-            // 先放开注释，有问题再追查 ————
-            // // 表格中忽略，可能会出现异常问题
-            // if (nodeName === 'TD' || nodeName === 'TH') {
-            //     return
-            // }
+        // 先放开注释，有问题再追查 ————
+        // // 表格中忽略，可能会出现异常问题
+        // if (nodeName === 'TD' || nodeName === 'TH') {
+        //     return
+        // }
 
-            if (!pasteHtml) {
-                // 没有内容，可继续执行下面的图片粘贴
-                resetTime()
-                return
+        if (!pasteHtml) {
+            // 没有内容，可继续执行下面的图片粘贴
+            resetTime()
+            return
+        }
+        try {
+            // firefox 中，获取的 pasteHtml 可能是没有 <ul> 包裹的 <li>
+            // 因此执行 insertHTML 会报错
+            if (pasteTextHandle && isFunction(pasteTextHandle)) {
+                // 用户自定义过滤处理粘贴内容
+                pasteHtml = '' + (pasteTextHandle(pasteHtml) || '')
             }
-            try {
-                // firefox 中，获取的 pasteHtml 可能是没有 <ul> 包裹的 <li>
-                // 因此执行 insertHTML 会报错
-                if (pasteTextHandle && isFunction(pasteTextHandle)) {
-                    // 用户自定义过滤处理粘贴内容
-                    pasteHtml = '' + (pasteTextHandle(pasteHtml) || '')
-                }
-                editor.cmd.do('insertHTML', pasteHtml)
-            } catch (ex) {
-                // 此时使用 pasteText 来兼容一下
-                if (pasteTextHandle && isFunction(pasteTextHandle)) {
-                    // 用户自定义过滤处理粘贴内容
-                    pasteText = '' + (pasteTextHandle(pasteText) || '')
-                }
-                editor.cmd.do('insertHTML', `<p>${pasteText}</p>`)
+            editor.cmd.do('insertHTML', pasteHtml)
+        } catch (ex) {
+            // 此时使用 pasteText 来兼容一下
+            if (pasteTextHandle && isFunction(pasteTextHandle)) {
+                // 用户自定义过滤处理粘贴内容
+                pasteText = '' + (pasteTextHandle(pasteText) || '')
             }
-        })
+            editor.cmd.do('insertHTML', `<p>${pasteText}</p>`)
+        }
+    })
 
         // 粘贴图片
-        $textElem.on('paste', e => {
-            if (UA.isIE()) {
-                return
-            } else {
-                e.preventDefault()
-            }
+        $textElem.on('paste', e = > {
+            if(UA.isIE()
+    )
+        {
+            return
+        }
+    else
+        {
+            e.preventDefault()
+        }
 
-            // 粘贴图片和文本，只能同时使用一个
-            if (!canDo()) {
-                return
-            }
+        // 粘贴图片和文本，只能同时使用一个
+        if (!canDo()) {
+            return
+        }
 
-            // 获取粘贴的图片
-            const pasteFiles = getPasteImgs(e)
-            if (!pasteFiles || !pasteFiles.length) {
-                return
-            }
+        // 获取粘贴的图片
+        const pasteFiles = getPasteImgs(e)
+        if (!pasteFiles || !pasteFiles.length) {
+            return
+        }
 
-            // 获取当前的元素
-            const $selectionElem = editor.selection.getSelectionContainerElem()
-            if (!$selectionElem) {
-                return
-            }
-            const nodeName = $selectionElem.getNodeName()
+        // 获取当前的元素
+        const $selectionElem = editor.selection.getSelectionContainerElem()
+        if (!$selectionElem) {
+            return
+        }
+        const nodeName = $selectionElem.getNodeName()
 
-            // code 中粘贴忽略
-            if (nodeName === 'CODE' || nodeName === 'PRE') {
-                return
-            }
+        // code 中粘贴忽略
+        if (nodeName === 'CODE' || nodeName === 'PRE') {
+            return
+        }
 
-            // 上传图片
-            const uploadImg = editor.uploadImg
-            uploadImg.uploadImg(pasteFiles)
-        })
+        // 上传图片
+        const uploadImg = editor.uploadImg
+        uploadImg.uploadImg(pasteFiles)
+    })
     },
 
     // tab 特殊处理
@@ -461,32 +484,34 @@ Text.prototype = {
         const editor = this.editor
         const $textElem = editor.$textElem
 
-        $textElem.on('keydown', e => {
-            if (e.keyCode !== 9) {
-                return
-            }
-            if (!editor.cmd.queryCommandSupported('insertHTML')) {
-                // 必须原生支持 insertHTML 命令
-                return
-            }
-            const $selectionElem = editor.selection.getSelectionContainerElem()
-            if (!$selectionElem) {
-                return
-            }
-            const $parentElem = $selectionElem.parent()
-            const selectionNodeName = $selectionElem.getNodeName()
-            const parentNodeName = $parentElem.getNodeName()
+        $textElem.on('keydown', e = > {
+            if(e.keyCode !== 9
+    )
+        {
+            return
+        }
+        if (!editor.cmd.queryCommandSupported('insertHTML')) {
+            // 必须原生支持 insertHTML 命令
+            return
+        }
+        const $selectionElem = editor.selection.getSelectionContainerElem()
+        if (!$selectionElem) {
+            return
+        }
+        const $parentElem = $selectionElem.parent()
+        const selectionNodeName = $selectionElem.getNodeName()
+        const parentNodeName = $parentElem.getNodeName()
 
-            if (selectionNodeName === 'CODE' && parentNodeName === 'PRE') {
-                // <pre><code> 里面
-                editor.cmd.do('insertHTML', '    ')
-            } else {
-                // 普通文字
-                editor.cmd.do('insertHTML', '&nbsp;&nbsp;&nbsp;&nbsp;')
-            }
+        if (selectionNodeName === 'CODE' && parentNodeName === 'PRE') {
+            // <pre><code> 里面
+            editor.cmd.do('insertHTML', '    ')
+        } else {
+            // 普通文字
+            editor.cmd.do('insertHTML', '&nbsp;&nbsp;&nbsp;&nbsp;')
+        }
 
-            e.preventDefault()
-        })
+        e.preventDefault()
+    })
 
     },
 
@@ -514,14 +539,16 @@ Text.prototype = {
         })
 
         // 去掉图片的 selected 样式
-        $textElem.on('click  keyup', e => {
-            if (e.target.matches('img')) {
-                // 点击的是图片，忽略
-                return
-            }
-            // 删除记录
-            editor._selectedImg = null
-        })
+        $textElem.on('click  keyup', e = > {
+            if(e.target.matches('img')
+    )
+        {
+            // 点击的是图片，忽略
+            return
+        }
+        // 删除记录
+        editor._selectedImg = null
+    })
     },
 
     // 拖拽事件

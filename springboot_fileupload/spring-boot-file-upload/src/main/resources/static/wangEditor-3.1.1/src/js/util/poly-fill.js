@@ -6,7 +6,7 @@ export default function () {
 
     // Object.assign
     if (typeof Object.assign != 'function') {
-        Object.assign = function(target, varArgs) { // .length of function is 2
+        Object.assign = function (target, varArgs) { // .length of function is 2
             if (target == null) { // TypeError if undefined or null
                 throw new TypeError('Cannot convert undefined or null to object')
             }
@@ -31,17 +31,18 @@ export default function () {
 
     // IE 中兼容 Element.prototype.matches
     if (!Element.prototype.matches) {
-        Element.prototype.matches = 
-            Element.prototype.matchesSelector || 
+        Element.prototype.matches =
+            Element.prototype.matchesSelector ||
             Element.prototype.mozMatchesSelector ||
-            Element.prototype.msMatchesSelector || 
-            Element.prototype.oMatchesSelector || 
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.oMatchesSelector ||
             Element.prototype.webkitMatchesSelector ||
-            function(s) {
+            function (s) {
                 var matches = (this.document || this.ownerDocument).querySelectorAll(s),
                     i = matches.length;
-                while (--i >= 0 && matches.item(i) !== this) {}
-                return i > -1;            
+                while (--i >= 0 && matches.item(i) !== this) {
+                }
+                return i > -1;
             };
     }
 

@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserinfoController {
     @Autowired
     private UserinfoService userinfoService;
-    
+
     @RequestMapping("add")
     public int add(Userinfo userinfo) {
         return userinfoService.add(userinfo);
     }
-    
+
     @RequestMapping("find")
     public Userinfo find(int id) {
         return userinfoService.find(id);
     }
-    
+
     @RequestMapping("update")
     public int update(Userinfo userinfo) {
         return userinfoService.update(userinfo);
     }
-    
+
     @RequestMapping("delete")
     public int delete(int id) {
         return userinfoService.delete(id);

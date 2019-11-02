@@ -21,7 +21,7 @@
         <module>springcloud-eurkar</module>
         <module>springcloud-user</module>
         <module>springcloud-movie</module>
-       <!--<module>springcloud-movie-2</module>-->
+        <!--<module>springcloud-movie-2</module>-->
         <module>config-server</module>
         <module>config-client</module>
         <module>springcloud-zuul</module>
@@ -134,7 +134,7 @@
         </dependency>
     </dependencies>
 
-	 <!--只是申明版本，不是jar包引入-->
+    <!--只是申明版本，不是jar包引入-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -165,29 +165,29 @@
             </plugin>
             <!--生成实体插件-->
             <!--<plugin>-->
-                <!--<groupId>org.mybatis.generator</groupId>-->
-                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
-                <!--<version>1.3.2</version>-->
-                <!--<configuration>-->
-                    <!--<configurationFile>src/main/resources/generator/generatorConfig.xml</configurationFile>-->
-                    <!--<verbose>true</verbose>-->
-                    <!--<overwrite>true</overwrite>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>Generate MyBatis Artifacts</id>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.mybatis.generator</groupId>-->
-                        <!--<artifactId>mybatis-generator-core</artifactId>-->
-                        <!--<version>${mybatis.generator.version}</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
+            <!--<groupId>org.mybatis.generator</groupId>-->
+            <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+            <!--<version>1.3.2</version>-->
+            <!--<configuration>-->
+            <!--<configurationFile>src/main/resources/generator/generatorConfig.xml</configurationFile>-->
+            <!--<verbose>true</verbose>-->
+            <!--<overwrite>true</overwrite>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>Generate MyBatis Artifacts</id>-->
+            <!--<goals>-->
+            <!--<goal>generate</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>org.mybatis.generator</groupId>-->
+            <!--<artifactId>mybatis-generator-core</artifactId>-->
+            <!--<version>${mybatis.generator.version}</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
             <!--</plugin>-->
         </plugins>
     </build>

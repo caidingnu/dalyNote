@@ -20,9 +20,9 @@ public class ShuTest {
      * date: 2019/7/26
      */
     @Test
-    public void  tt(){
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("config/applicationContext.xml");
+    public void tt() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("config/applicationContext.xml");
         User user = (User) applicationContext.getBean("user");
-      System.out.println(user.toString());
+        System.out.println(user.toString());
     }
 }

@@ -12,7 +12,7 @@ public class LifeDaoImpl implements LifeDao {
 
     private int age;
     private String sex;
-    private  Car car;
+    private Car car;
 
     public void setCar(Car car) {
         this.car = car;
@@ -49,7 +49,7 @@ public class LifeDaoImpl implements LifeDao {
         if (StringUtils.isEmpty(text)) {
             text = "实现接口的方法";
         }
-        System.out.println(text + age + "---" + sex+"--"+car);
+        System.out.println(text + age + "---" + sex + "--" + car);
     }
 
     /**

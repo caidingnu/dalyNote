@@ -105,9 +105,10 @@ DomElement.prototype = {
     // clone
     clone: function (deep) {
         const cloneList = []
-        this.forEach(elem => {
+        this.forEach(elem = > {
             cloneList.push(elem.cloneNode(!!deep))
-        })
+        }
+    )
         return $(cloneList)
     },
 
@@ -143,41 +144,47 @@ DomElement.prototype = {
         let types = []
         types = type.split(/\s+/)
 
-        return this.forEach(elem => {
-            types.forEach(type => {
-                if (!type) {
-                    return
-                }
+        return this.forEach(elem = > {
+            types.forEach(type = > {
+                if(
+        !type
+    )
+        {
+            return
+        }
 
-                // 记录下，方便后面解绑
-                eventList.push({
-                    elem: elem,
-                    type: type,
-                    fn: fn
-                })
-
-                if (!selector) {
-                    // 无代理
-                    elem.addEventListener(type, fn)
-                    return
-                }
-
-                // 有代理
-                elem.addEventListener(type, e => {
-                    const target = e.target
-                    if (target.matches(selector)) {
-                        fn.call(target, e)
-                    }
-                })
-            })
+        // 记录下，方便后面解绑
+        eventList.push({
+            elem: elem,
+            type: type,
+            fn: fn
         })
+
+        if (!selector) {
+            // 无代理
+            elem.addEventListener(type, fn)
+            return
+        }
+
+        // 有代理
+        elem.addEventListener(type, e = > {
+            const target = e.target
+            if(target.matches(selector)
+    )
+        {
+            fn.call(target, e)
+        }
+    })
+    })
+    })
     },
 
     // 取消事件绑定
     off: function (type, fn) {
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             elem.removeEventListener(type, fn)
-        })
+        }
+    )
     },
 
     // 获取/设置 属性
@@ -187,35 +194,41 @@ DomElement.prototype = {
             return this[0].getAttribute(key)
         } else {
             // 设置值
-            return this.forEach(elem => {
+            return this.forEach(elem = > {
                 elem.setAttribute(key, val)
-            })
+            }
+        )
         }
     },
 
     // 添加 class
-    addClass: function(className) {
+    addClass: function (className) {
         if (!className) {
             return this
         }
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             let arr
-            if (elem.className) {
-                // 解析当前 className 转换为数组
-                arr = elem.className.split(/\s/)
-                arr = arr.filter(item => {
-                    return !!item.trim()
-                })
-                // 添加 class
-                if (arr.indexOf(className) < 0) {
-                    arr.push(className)
-                }
-                // 修改 elem.class
-                elem.className = arr.join(' ')
-            } else {
-                elem.className = className
+            if(elem.className
+    )
+        {
+            // 解析当前 className 转换为数组
+            arr = elem.className.split(/\s/)
+            arr = arr.filter(item = > {
+                return !!item.trim()
             }
-        })
+        )
+            // 添加 class
+            if (arr.indexOf(className) < 0) {
+                arr.push(className)
+            }
+            // 修改 elem.class
+            elem.className = arr.join(' ')
+        }
+    else
+        {
+            elem.className = className
+        }
+    })
     },
 
     // 删除 class
@@ -223,51 +236,61 @@ DomElement.prototype = {
         if (!className) {
             return this
         }
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             let arr
-            if (elem.className) {
-                // 解析当前 className 转换为数组
-                arr = elem.className.split(/\s/)
-                arr = arr.filter(item => {
-                    item = item.trim()
-                    // 删除 class
-                    if (!item || item === className) {
-                        return false
-                    }
-                    return true
-                })
-                // 修改 elem.class
-                elem.className = arr.join(' ')
+            if(elem.className
+    )
+        {
+            // 解析当前 className 转换为数组
+            arr = elem.className.split(/\s/)
+            arr = arr.filter(item = > {
+                item = item.trim()
+                // 删除 class
+                if(
+            !item || item === className
+        )
+            {
+                return false
             }
+            return true
         })
+            // 修改 elem.class
+            elem.className = arr.join(' ')
+        }
+    })
     },
 
     // 修改 css
     css: function (key, val) {
         const currentStyle = `${key}:${val};`
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             const style = (elem.getAttribute('style') || '').trim()
             let styleArr, resultArr = []
-            if (style) {
+            if(style) {
                 // 将 style 按照 ; 拆分为数组
                 styleArr = style.split(';')
-                styleArr.forEach(item => {
+                styleArr.forEach(item = > {
                     // 对每项样式，按照 : 拆分为 key 和 value
-                    let arr = item.split(':').map(i => {
+                    let arr = item.split(':').map(i = > {
                         return i.trim()
-                    })
-                    if (arr.length === 2) {
-                        resultArr.push(arr[0] + ':' + arr[1])
                     }
-                })
+            )
+                if (arr.length === 2) {
+                    resultArr.push(arr[0] + ':' + arr[1])
+                }
+            })
                 // 替换或者新增
-                resultArr = resultArr.map(item => {
-                    if (item.indexOf(key) === 0) {
-                        return currentStyle
-                    } else {
-                        return item
-                    }
-                })
+                resultArr = resultArr.map(item = > {
+                    if(item.indexOf(key) === 0
+            )
+                {
+                    return currentStyle
+                }
+            else
+                {
+                    return item
+                }
+            })
                 if (resultArr.indexOf(currentStyle) < 0) {
                     resultArr.push(currentStyle)
                 }
@@ -277,7 +300,8 @@ DomElement.prototype = {
                 // style 无值
                 elem.setAttribute('style', currentStyle)
             }
-        })
+        }
+    )
     },
 
     // 显示
@@ -311,24 +335,29 @@ DomElement.prototype = {
     },
 
     // 增加子节点
-    append: function($children) {
-        return this.forEach(elem => {
-            $children.forEach(child => {
+    append: function ($children) {
+        return this.forEach(elem = > {
+            $children.forEach(child = > {
                 elem.appendChild(child)
-            })
-        })
+            }
+    )
+    })
     },
 
     // 移除当前节点
     remove: function () {
-        return this.forEach(elem => {
-            if (elem.remove) {
-                elem.remove()
-            } else {
-                const parent = elem.parentElement
-                parent && parent.removeChild(elem)
-            }
-        })
+        return this.forEach(elem = > {
+            if(elem.remove
+    )
+        {
+            elem.remove()
+        }
+    else
+        {
+            const parent = elem.parentElement
+            parent && parent.removeChild(elem)
+        }
+    })
     },
 
     // 是否包含某个子节点
@@ -361,12 +390,14 @@ DomElement.prototype = {
         if (!val) {
             // 获取 text
             const elem = this[0]
-            return elem.innerHTML.replace(/<.*?>/g, () => '')
+            return elem.innerHTML.replace(/<.*?>/g, () = > ''
+        )
         } else {
             // 设置 text
-            return this.forEach(elem => {
+            return this.forEach(elem = > {
                 elem.innerHTML = val
-            })
+            }
+        )
         }
     },
 
@@ -389,9 +420,10 @@ DomElement.prototype = {
 
     // focus
     focus: function () {
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             elem.focus()
-        })
+        }
+    )
     },
 
     // parent
@@ -443,10 +475,11 @@ DomElement.prototype = {
         if (!referenceNode) {
             return this
         }
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             const parent = referenceNode.parentNode
             parent.insertBefore(elem, referenceNode)
-        })
+        }
+    )
     },
 
     // 将该元素插入到某个元素后面
@@ -456,16 +489,20 @@ DomElement.prototype = {
         if (!referenceNode) {
             return this
         }
-        return this.forEach(elem => {
+        return this.forEach(elem = > {
             const parent = referenceNode.parentNode
-            if (parent.lastChild === referenceNode) {
-                // 最后一个元素
-                parent.appendChild(elem)
-            } else {
-                // 不是最后一个元素
-                parent.insertBefore(elem, referenceNode.nextSibling)
-            }
-        })
+            if(parent.lastChild === referenceNode
+    )
+        {
+            // 最后一个元素
+            parent.appendChild(elem)
+        }
+    else
+        {
+            // 不是最后一个元素
+            parent.insertBefore(elem, referenceNode.nextSibling)
+        }
+    })
     }
 }
 
@@ -476,13 +513,14 @@ function $(selector) {
 
 // 解绑所有事件，用于销毁编辑器
 $.offAll = function () {
-    eventList.forEach(item => {
+    eventList.forEach(item = > {
         const elem = item.elem
         const type = item.type
         const fn = item.fn
         // 解绑
         elem.removeEventListener(type, fn)
-    })
+    }
+)
 }
 
 export default $

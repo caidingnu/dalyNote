@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ public class MenuController {
      */
     @RequestMapping("insert")
     @Transactional
-    public JsonResult insert(@RequestBody  Map<String, Object> map) {
+    public JsonResult insert(@RequestBody Map<String, Object> map) {
         return JsonResult.buildSuccess(menuService.insert(map));
     }
 
@@ -47,7 +48,7 @@ public class MenuController {
      */
     @RequestMapping("deleteByCondition")
     @Transactional
-    public JsonResult deleteByCondition(@RequestBody  Map<String, Object> map) {
+    public JsonResult deleteByCondition(@RequestBody Map<String, Object> map) {
         return JsonResult.buildSuccess(menuService.deleteByCondition(map));
     }
 
@@ -73,7 +74,7 @@ public class MenuController {
      * date: 2019-10-16
      */
     @RequestMapping("getPageList")
-    public JsonResult getPageList(@RequestParam  Map<String, Object> map) {
+    public JsonResult getPageList(@RequestParam Map<String, Object> map) {
         PageInfo<Menu> pageInfo = menuService.find(map);
         return JsonResult.buildSuccess(pageInfo);
     }
@@ -86,7 +87,7 @@ public class MenuController {
      * date: 2019-10-16
      */
     @RequestMapping("findSingle")
-    public JsonResult findSingle(@RequestBody  Map<String, Object> map) {
+    public JsonResult findSingle(@RequestBody Map<String, Object> map) {
         return JsonResult.buildSuccess(menuService.findSingle(map));
     }
 
@@ -98,7 +99,7 @@ public class MenuController {
      * date: 2019/10/16
      */
     @RequestMapping("count")
-    public int count(){
+    public int count() {
         return menuService.count();
     }
 

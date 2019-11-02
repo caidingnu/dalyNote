@@ -15,7 +15,6 @@ public class Car {
     private int price;
 
 
-
     public String getName() {
         return name;
     }

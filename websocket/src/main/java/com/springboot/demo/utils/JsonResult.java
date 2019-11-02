@@ -35,16 +35,18 @@ public class JsonResult implements Serializable {
     /**
      * 成功00/执行中-1/01-99 失败  返回[自定义消息]，[自定义状态码]，[自定义数据]
      * 如果msg为空，msg=“成功”，如果code为空，code=1
+     *
      * @return
      */
     public static JsonResult build(String msg, String code, Object data) throws MyException {
-        if(msg==null||msg.trim().length()<1) throw  new MyException("消息为空");
-        if(code==null) throw  new MyException("code为空");
+        if (msg == null || msg.trim().length() < 1) throw new MyException("消息为空");
+        if (code == null) throw new MyException("code为空");
         return new JsonResult(code, data, msg);
     }
 
     /**
      * 成功  返回【自定义数据】，msg=“成功”，code=00
+     *
      * @return
      */
     public static JsonResult buildSuccess(Object data) {
@@ -53,6 +55,7 @@ public class JsonResult implements Serializable {
 
     /**
      * 成功  返回【自定义消息】，data=null，code=1
+     *
      * @return
      */
     public static JsonResult buildSuccess(String msg) {
@@ -61,15 +64,17 @@ public class JsonResult implements Serializable {
 
     /**
      * 成功  返回【自定义数据】，【自定义msg】，code=1
+     *
      * @return
      */
     public static JsonResult buildSuccess(Object data, String msg) throws MyException {
-        if(msg==null||msg.trim().length()<1) throw  new MyException("消息为空");
+        if (msg == null || msg.trim().length() < 1) throw new MyException("消息为空");
         return new JsonResult("00", data, msg);
     }
 
     /**
      * 失败  返回【自定义数据】，msg=“失败”，code=98
+     *
      * @return
      */
     public static JsonResult buildError(Object data) {
@@ -78,6 +83,7 @@ public class JsonResult implements Serializable {
 
     /**
      * 失败  返回【自定义消息】，data=null，code=99
+     *
      * @return
      */
     public static JsonResult buildError(String msg) {
@@ -86,15 +92,17 @@ public class JsonResult implements Serializable {
 
     /**
      * 失败  返回【自定义数据】，【自定义msg】，code=0
+     *
      * @return
      */
     public static JsonResult buildError(Object data, String msg) throws Exception {
-        if(msg==null||msg.trim().length()<1) throw  new Exception("消息为空");
+        if (msg == null || msg.trim().length() < 1) throw new Exception("消息为空");
         return new JsonResult("99", data, msg);
     }
 
     /**
      * 业务失败  返回【自定义数据】，【自定义msg】，code=0
+     *
      * @return
      */
     public static JsonResult buildFail(String msg) {
@@ -103,6 +111,7 @@ public class JsonResult implements Serializable {
 
     /**
      * 执行中  返回【自定义数据】，msg=“执行中...”，code=-1
+     *
      * @return
      */
     public static JsonResult buildWorking(Object data) {
@@ -111,6 +120,7 @@ public class JsonResult implements Serializable {
 
     /**
      * 执行中  返回【自定义消息】，data=null，code=0
+     *
      * @return
      */
     public static JsonResult buildWorking(String msg) {
@@ -119,10 +129,11 @@ public class JsonResult implements Serializable {
 
     /**
      * 执行中  返回【自定义数据】，【自定义msg】，code=0
+     *
      * @return
      */
     public static JsonResult buildWorking(Object data, String msg) throws Exception {
-        if(msg==null||msg.trim().length()<1) throw  new Exception("消息为空");
+        if (msg == null || msg.trim().length() < 1) throw new Exception("消息为空");
         return new JsonResult("-1", data, msg);
     }
 
@@ -152,6 +163,7 @@ public class JsonResult implements Serializable {
 
     /**
      * 结果返回字符串
+     *
      * @return
      */
     @Override

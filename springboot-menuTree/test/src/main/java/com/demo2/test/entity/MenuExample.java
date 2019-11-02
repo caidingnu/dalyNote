@@ -316,6 +316,7 @@ public class MenuExample {
     }
 
     /**
+     *
      */
     public static class Criteria extends GeneratedCriteria {
 

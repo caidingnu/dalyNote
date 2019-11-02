@@ -8,17 +8,17 @@ package com.ocr.mytest.aop;
  */
 public class A {
 
-    
+
     /**
-     * desc: 
-     * param: 
-     * return: 
+     * desc:
+     * param:
+     * return:
      * author: CDN
      * date: 2019/10/21
      */
-    public String aa(){
+    public String aa() {
         System.out.println("++++++++++++++++++++");
         return "";
     }
-    
+
 }

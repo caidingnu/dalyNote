@@ -4,7 +4,10 @@
 import $ from '../util/dom-core.js'
 import replaceLang from '../util/replace-lang.js'
 
-const _emptyFn = () => {}
+const _emptyFn = () =
+>
+{
+}
 
 // 构造函数
 function DropList(menu, opt) {
@@ -35,7 +38,7 @@ function DropList(menu, opt) {
     // 加入 DOM 并绑定事件
     const $list = $('<ul class="' + (type === 'list' ? 'w-e-list' : 'w-e-block') + '"></ul>')
     $container.append($list)
-    list.forEach(item => {
+    list.forEach(item = > {
         const $elem = item.$elem
 
         // 替换多语言
@@ -45,26 +48,29 @@ function DropList(menu, opt) {
 
         const value = item.value
         const $li = $('<li class="w-e-item"></li>')
-        if ($elem) {
+        if($elem) {
             $li.append($elem)
             $list.append($li)
-            $li.on('click', e => {
+            $li.on('click', e = > {
                 onClick(value)
 
                 // 隐藏
-                this.hideTimeoutId = setTimeout(() => {
+                this.hideTimeoutId = setTimeout(() = > {
                     this.hide()
-                }, 0)
-            })
+                }, 0
+        )
+        })
         }
-    })
+    }
+)
 
     // 绑定隐藏事件
-    $container.on('mouseleave', e => {
-        this.hideTimeoutId = setTimeout(() => {
+    $container.on('mouseleave', e = > {
+        this.hideTimeoutId = setTimeout(() = > {
             this.hide()
-        }, 0)
-    })
+        }, 0
+)
+})
 
     // 记录属性
     this.$container = $container
@@ -99,7 +105,7 @@ DropList.prototype = {
             const menuHeight = $menuELem.getSizeData().height || 0
             const width = this.opt.width || 100  // 默认为 100
             $container.css('margin-top', menuHeight + 'px')
-                    .css('width', width + 'px')
+                .css('width', width + 'px')
 
             // 加入到 DOM
             $menuELem.append($container)

@@ -21,9 +21,9 @@ public class User {
 
     Set<String> set;
 
-    Map<String,String> map;
+    Map<String, String> map;
 
-   Map<String,Car> carMap;
+    Map<String, Car> carMap;
 
     public void setCarMap(Map<String, Car> carMap) {
         this.carMap = carMap;

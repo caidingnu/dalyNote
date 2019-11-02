@@ -33,7 +33,7 @@ public class IoController {
             outputStream.flush();
         } catch (IOException e) {
             System.out.println("取消下载");
-                e.printStackTrace();
+            e.printStackTrace();
         } finally {
             if (outputStream != null) {
                 try {

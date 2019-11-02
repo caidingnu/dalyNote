@@ -107,7 +107,7 @@ public class EmpController {
      * date: 2019/6/29
      */
     @RequestMapping("bath")
-    public int bathAdd(){
+    public int bathAdd() {
 
         return empService.batchAdd();
     }
@@ -121,7 +121,7 @@ public class EmpController {
      * date: 2019/6/30
      */
     @RequestMapping("inner")
-    public Object selectInner(){
+    public Object selectInner() {
 
         return empService.select();
     }

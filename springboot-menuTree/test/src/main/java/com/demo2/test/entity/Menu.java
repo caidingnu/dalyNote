@@ -5,7 +5,8 @@ import java.util.List;
 
 /**
  * menu
- * @author 
+ *
+ * @author
  */
 public class Menu implements Serializable {
     private Integer id;
@@ -16,8 +17,8 @@ public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-   //存放子菜单
-   private Object children;
+    //存放子菜单
+    private Object children;
 
     public Object getChildren() {
         return children;
@@ -64,8 +65,8 @@ public class Menu implements Serializable {
         }
         Menu other = (Menu) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()));
     }
 
     @Override

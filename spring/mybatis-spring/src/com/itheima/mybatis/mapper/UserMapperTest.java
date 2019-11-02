@@ -10,12 +10,12 @@ import com.itheima.mybatis.pojo.User;
 public class UserMapperTest {
 
 
-	@Test
-	public void testMapper() throws Exception {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("resources/applicationContext.xml");
-		UserMapper mapper = ac.getBean(UserMapper.class);
+    @Test
+    public void testMapper() throws Exception {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("resources/applicationContext.xml");
+        UserMapper mapper = ac.getBean(UserMapper.class);
 //		UserMapper mapper = (UserMapper) ac.getBean("userMapper");
-		User user = mapper.findUserById(32);
-		System.out.println(user);
-	}
+        User user = mapper.findUserById(32);
+        System.out.println(user);
+    }
 }

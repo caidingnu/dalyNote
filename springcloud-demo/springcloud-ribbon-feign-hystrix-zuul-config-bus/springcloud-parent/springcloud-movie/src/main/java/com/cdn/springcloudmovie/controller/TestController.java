@@ -22,7 +22,7 @@ public class TestController {
      * @Date: 2019/5/30
      */
     @RequestMapping("/")
-    public String admin(){
+    public String admin() {
 
         return "我是movie服务";
     }

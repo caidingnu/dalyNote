@@ -12,55 +12,55 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "t_user")
 public class User {
 
-	@Id
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
-	@Column(length = 100)
-	@NotEmpty(message = "用户名不能为空")
-	private String userName;  //用户名
+    @Column(length = 100)
+    @NotEmpty(message = "用户名不能为空")
+    private String userName;  //用户名
 
-	@Column(length = 100)
-	@NotEmpty(message = "密码不能为空")
-	private String password;  //密码
-	
-	@Column(length = 1000)
-	private String remarks; // 备注
-	
-	public String getRemarks() {
-		return remarks;
-	}
+    @Column(length = 100)
+    @NotEmpty(message = "密码不能为空")
+    private String password;  //密码
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+    @Column(length = 1000)
+    private String remarks; // 备注
 
-	public Integer getId() {
-		return id;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public User() {
-		super();
-	}
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User() {
+        super();
+    }
 
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test {
 
 
-
     /**
      * @Description: 提供给user利用ribbon调用
      * @Param:

@@ -2,6 +2,7 @@ package com.springboot.demo.dao.test2;
 
 import com.springboot.demo.entity.test2.Teacher;
 import com.springboot.demo.entity.test2.TeacherExample;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

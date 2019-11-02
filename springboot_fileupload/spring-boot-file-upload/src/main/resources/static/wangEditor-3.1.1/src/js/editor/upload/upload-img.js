@@ -2,9 +2,9 @@
     上传图片
 */
 
-import { objForEach, arrForEach, percentFormat } from '../../util/util.js'
+import {objForEach, arrForEach, percentFormat} from '../../util/util.js'
 import Progress from './progress.js'
-import { UA } from '../../util/util.js'
+import {UA} from '../../util/util.js'
 
 // 构造函数
 function UploadImg(editor) {
@@ -56,7 +56,9 @@ UploadImg.prototype = {
 
         // 验证图片 url 是否有效，无效的话给出提示
         let img = document.createElement('img')
-        img.onload = () => {
+        img.onload = () =
+    >
+        {
             const callback = config.linkImgCallback
             if (callback && typeof callback === 'function') {
                 callback(link)
@@ -64,13 +66,17 @@ UploadImg.prototype = {
 
             img = null
         }
-        img.onerror = () => {
+        img.onerror = () =
+    >
+        {
             img = null
             // 无法成功下载图片
             this._alert('插入图片错误', `wangEditor: 插入图片出错，图片链接是 "${link}"，下载该链接失败`)
             return
         }
-        img.onabort = () => {
+        img.onabort = () =
+    >
+        {
             img = null
         }
         img.src = link
@@ -113,29 +119,32 @@ UploadImg.prototype = {
         // ------------------------------ 验证文件信息 ------------------------------
         const resultFiles = []
         let errInfo = []
-        arrForEach(files, file => {
+        arrForEach(files, file = > {
             var name = file.name
             var size = file.size
 
             // chrome 低版本 name === undefined
-            if (!name || !size) {
-                return
-            }
+            if(
+        !name || !size
+    )
+        {
+            return
+        }
 
-            if (/\.(jpg|jpeg|png|bmp|gif|webp)$/i.test(name) === false) {
-                // 后缀名不合法，不是图片
-                errInfo.push(`【${name}】不是图片`)
-                return
-            }
-            if (maxSize < size) {
-                // 上传图片过大
-                errInfo.push(`【${name}】大于 ${maxSizeM}M`)
-                return
-            }
+        if (/\.(jpg|jpeg|png|bmp|gif|webp)$/i.test(name) === false) {
+            // 后缀名不合法，不是图片
+            errInfo.push(`【${name}】不是图片`)
+            return
+        }
+        if (maxSize < size) {
+            // 上传图片过大
+            errInfo.push(`【${name}】大于 ${maxSizeM}M`)
+            return
+        }
 
-            // 验证通过的加入结果列表
-            resultFiles.push(file)
-        })
+        // 验证通过的加入结果列表
+        resultFiles.push(file)
+    })
         // 抛出验证信息
         if (errInfo.length) {
             this._alert('图片验证未通过: \n' + errInfo.join('\n'))
@@ -156,10 +165,11 @@ UploadImg.prototype = {
 
         // 添加图片数据
         const formdata = new FormData()
-        arrForEach(resultFiles, file => {
+        arrForEach(resultFiles, file = > {
             const name = uploadFileName || file.name
             formdata.append(name, file)
-        })
+        }
+    )
 
         // ------------------------------ 上传图片 ------------------------------
         if (uploadImgServer && typeof uploadImgServer === 'string') {
@@ -167,12 +177,12 @@ UploadImg.prototype = {
             const uploadImgServerArr = uploadImgServer.split('#')
             uploadImgServer = uploadImgServerArr[0]
             const uploadImgServerHash = uploadImgServerArr[1] || ''
-            objForEach(uploadImgParams, (key, val) => {
+            objForEach(uploadImgParams, (key, val) = > {
                 // 因使用者反应，自定义参数不能默认 encode ，由 v3.1.1 版本开始注释掉
                 // val = encodeURIComponent(val)
 
                 // 第一，将参数拼接到 url 中
-                if (uploadImgParamsWithUrl) {
+                if(uploadImgParamsWithUrl) {
                     if (uploadImgServer.indexOf('?') > 0) {
                         uploadImgServer += '&'
                     } else {
@@ -183,7 +193,8 @@ UploadImg.prototype = {
 
                 // 第二，将参数添加到 formdata 中
                 formdata.append(key, val)
-            })
+            }
+        )
             if (uploadImgServerHash) {
                 uploadImgServer += '#' + uploadImgServerHash
             }
@@ -194,7 +205,9 @@ UploadImg.prototype = {
 
             // 设置超时
             xhr.timeout = timeout
-            xhr.ontimeout = () => {
+            xhr.ontimeout = () =
+        >
+            {
                 // hook - timeout
                 if (hooks.timeout && typeof hooks.timeout === 'function') {
                     hooks.timeout(xhr, editor)
@@ -205,7 +218,9 @@ UploadImg.prototype = {
 
             // 监控 progress
             if (xhr.upload) {
-                xhr.upload.onprogress = e => {
+                xhr.upload.onprogress = e =
+            >
+                {
                     let percent
                     // 进度条
                     const progressBar = new Progress(editor)
@@ -217,7 +232,9 @@ UploadImg.prototype = {
             }
 
             // 返回数据
-            xhr.onreadystatechange = () => {
+            xhr.onreadystatechange = () =
+        >
+            {
                 let result
                 if (xhr.readyState === 4) {
                     if (xhr.status < 200 || xhr.status >= 300) {
@@ -260,9 +277,10 @@ UploadImg.prototype = {
                         } else {
                             // 将图片插入编辑器
                             const data = result.data || []
-                            data.forEach(link => {
+                            data.forEach(link = > {
                                 this.insertLinkImg(link)
-                            })
+                            }
+                        )
                         }
 
                         // hook - success
@@ -286,9 +304,10 @@ UploadImg.prototype = {
             }
 
             // 自定义 headers
-            objForEach(uploadImgHeaders, (key, val) => {
+            objForEach(uploadImgHeaders, (key, val) = > {
                 xhr.setRequestHeader(key, val)
-            })
+            }
+        )
 
             // 跨域传 cookie
             xhr.withCredentials = withCredentials
@@ -302,14 +321,15 @@ UploadImg.prototype = {
 
         // ------------------------------ 显示 base64 格式 ------------------------------
         if (uploadImgShowBase64) {
-            arrForEach(files, file => {
+            arrForEach(files, file = > {
                 const _this = this
                 const reader = new FileReader()
                 reader.readAsDataURL(file)
                 reader.onload = function () {
                     _this.insertLinkImg(this.result)
                 }
-            })
+            }
+        )
         }
     }
 }

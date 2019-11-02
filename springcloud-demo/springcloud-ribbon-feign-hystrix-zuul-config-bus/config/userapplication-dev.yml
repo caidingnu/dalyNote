@@ -27,10 +27,10 @@ spring:
     password: root
 
 
-# # feign:
+  # # feign:
   hystrix:
     enabled: true   #打开Feign自带的断路器
-    
+
     #dev开发环境配置文件
 #test测试环境
 #pro正式环境

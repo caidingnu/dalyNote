@@ -10,42 +10,42 @@ import javax.persistence.Table;
 @Table(name = "t_role")
 public class Role {
 
-	@Id
-	@GeneratedValue
-	private Integer id; // 编号
+    @Id
+    @GeneratedValue
+    private Integer id; // 编号
 
-	@Column(length = 100)
-	private String roleName; // 角色名称
+    @Column(length = 100)
+    private String roleName; // 角色名称
 
-	@Column(length = 1000)
-	private String remarks; // 备注
-	
-	public Integer getId() {
-		return id;
-	}
+    @Column(length = 1000)
+    private String remarks; // 备注
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getRoleName() {
-		return roleName;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public String getRemarks() {
-		return remarks;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public Role() {
-		super();
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Role() {
+        super();
+    }
 
 }

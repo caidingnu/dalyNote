@@ -240,7 +240,7 @@ const config = {
     // customAlert: function (info) {
     //     // 自定义上传提示
     // },
-    
+
     // // 自定义上传图片
     // customUploadImg: function (files, insert) {
     //     // files 是 input 中选中的文件列表

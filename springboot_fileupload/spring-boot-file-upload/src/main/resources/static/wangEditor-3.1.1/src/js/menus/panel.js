@@ -4,7 +4,11 @@
 
 import $ from '../util/dom-core.js'
 import replaceLang from '../util/replace-lang.js'
-const emptyFn = () => {}
+
+const emptyFn = () =
+>
+{
+}
 
 // 记录已经显示 panel 的菜单
 let _isCreatedPanelMenus = []
@@ -36,14 +40,15 @@ Panel.prototype = {
         const $container = $('<div class="w-e-panel-container"></div>')
         const width = opt.width || 300 // 默认 300px
         $container.css('width', width + 'px')
-                .css('margin-left', (0 - width)/2 + 'px')
+            .css('margin-left', (0 - width) / 2 + 'px')
 
         // 添加关闭按钮
         const $closeBtn = $('<i class="w-e-icon-close w-e-panel-close"></i>')
         $container.append($closeBtn)
-        $closeBtn.on('click', () => {
+        $closeBtn.on('click', () = > {
             this.hide()
-        })
+        }
+    )
 
         // 准备 tabs 容器
         const $tabTitleContainer = $('<ul class="w-e-panel-tab-title"></ul>')
@@ -55,95 +60,108 @@ Panel.prototype = {
         if (height) {
             $tabContentContainer.css('height', height + 'px').css('overflow-y', 'auto')
         }
-        
+
         // tabs
         const tabs = opt.tabs || []
         const tabTitleArr = []
         const tabContentArr = []
-        tabs.forEach((tab, tabIndex) => {
-            if (!tab) {
-                return
-            }
-            let title = tab.title || ''
-            let tpl = tab.tpl || ''
+        tabs.forEach((tab, tabIndex) = > {
+            if(
+        !tab
+    )
+        {
+            return
+        }
+        let title = tab.title || ''
+        let tpl = tab.tpl || ''
 
-            // 替换多语言
-            title = replaceLang(editor, title)
-            tpl = replaceLang(editor, tpl)
+        // 替换多语言
+        title = replaceLang(editor, title)
+        tpl = replaceLang(editor, tpl)
 
-            // 添加到 DOM
-            const $title = $(`<li class="w-e-item">${title}</li>`)
-            $tabTitleContainer.append($title)
-            const $content = $(tpl)
-            $tabContentContainer.append($content)
+        // 添加到 DOM
+        const $title = $(`<li class="w-e-item">${title}</li>`)
+        $tabTitleContainer.append($title)
+        const $content = $(tpl)
+        $tabContentContainer.append($content)
 
-            // 记录到内存
-            $title._index = tabIndex
-            tabTitleArr.push($title)
-            tabContentArr.push($content)
+        // 记录到内存
+        $title._index = tabIndex
+        tabTitleArr.push($title)
+        tabContentArr.push($content)
 
-            // 设置 active 项
-            if (tabIndex === 0) {
-                $title._active = true
-                $title.addClass('w-e-active')
-            } else {
-                $content.hide()
-            }
+        // 设置 active 项
+        if (tabIndex === 0) {
+            $title._active = true
+            $title.addClass('w-e-active')
+        } else {
+            $content.hide()
+        }
 
-            // 绑定 tab 的事件
-            $title.on('click', e => {
-                if ($title._active) {
-                    return
-                }
-                // 隐藏所有的 tab
-                tabTitleArr.forEach($title => {
-                    $title._active = false
-                    $title.removeClass('w-e-active')
-                })
-                tabContentArr.forEach($content => {
-                    $content.hide()
-                })
+        // 绑定 tab 的事件
+        $title.on('click', e = > {
+            if($title._active
+    )
+        {
+            return
+        }
+        // 隐藏所有的 tab
+        tabTitleArr.forEach($title = > {
+            $title._active = false
+            $title.removeClass('w-e-active')
+        }
+    )
+        tabContentArr.forEach($content = > {
+            $content.hide()
+        }
+    )
 
-                // 显示当前的 tab
-                $title._active = true
-                $title.addClass('w-e-active')
-                $content.show()
-            })
-        })
+        // 显示当前的 tab
+        $title._active = true
+        $title.addClass('w-e-active')
+        $content.show()
+    })
+    })
 
         // 绑定关闭事件
-        $container.on('click', e => {
+        $container.on('click', e = > {
             // 点击时阻止冒泡
             e.stopPropagation()
-        })
-        $body.on('click', e => {
+        }
+    )
+        $body.on('click', e = > {
             this.hide()
-        })
+        }
+    )
 
         // 添加到 DOM
         $textContainerElem.append($container)
 
         // 绑定 opt 的事件，只有添加到 DOM 之后才能绑定成功
-        tabs.forEach((tab, index) => {
-            if (!tab) {
-                return
+        tabs.forEach((tab, index) = > {
+            if(
+        !tab
+    )
+        {
+            return
+        }
+        const events = tab.events || []
+        events.forEach(event = > {
+            const selector = event.selector
+            const type = event.type
+            const fn = event.fn || emptyFn
+            const $content = tabContentArr[index]
+            $content.find(selector).on(type, (e) = > {
+                e.stopPropagation()
+                const needToHide = fn(e)
+                // 执行完事件之后，是否要关闭 panel
+                if(needToHide) {
+                    this.hide()
+                }
             }
-            const events = tab.events || []
-            events.forEach(event => {
-                const selector = event.selector
-                const type = event.type
-                const fn = event.fn || emptyFn
-                const $content = tabContentArr[index]
-                $content.find(selector).on(type, (e) => {
-                    e.stopPropagation()
-                    const needToHide = fn(e)
-                    // 执行完事件之后，是否要关闭 panel
-                    if (needToHide) {
-                        this.hide()
-                    }
-                })
-            })
-        })
+    )
+    })
+    })
 
         // focus 第一个 elem
         let $inputs = $container.find('input[type=text],textarea')
@@ -169,13 +187,17 @@ Panel.prototype = {
         }
 
         // 将该 menu 记录中移除
-        _isCreatedPanelMenus = _isCreatedPanelMenus.filter(item => {
-            if (item === menu) {
-                return false
-            } else {
-                return true
-            }
-        })
+        _isCreatedPanelMenus = _isCreatedPanelMenus.filter(item = > {
+            if(item === menu
+    )
+        {
+            return false
+        }
+    else
+        {
+            return true
+        }
+    })
     },
 
     // 一个 panel 展示时，隐藏其他 panel
@@ -183,12 +205,14 @@ Panel.prototype = {
         if (!_isCreatedPanelMenus.length) {
             return
         }
-        _isCreatedPanelMenus.forEach(menu => {
+        _isCreatedPanelMenus.forEach(menu = > {
             const panel = menu.panel || {}
-            if (panel.hide) {
-                panel.hide()
-            }
-        })
+            if(panel.hide
+    )
+        {
+            panel.hide()
+        }
+    })
     }
 }
 

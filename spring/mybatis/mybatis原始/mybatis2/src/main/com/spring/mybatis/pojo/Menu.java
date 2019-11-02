@@ -12,10 +12,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Menu {
-private String uuid;
-private String menun_name;
-private String id;
-private String pid;
-private String create_time;
-private String update_time;
+    private String uuid;
+    private String menun_name;
+    private String id;
+    private String pid;
+    private String create_time;
+    private String update_time;
 }

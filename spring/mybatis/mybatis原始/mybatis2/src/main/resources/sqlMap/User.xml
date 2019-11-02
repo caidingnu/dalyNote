@@ -5,16 +5,16 @@
 <!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
 <mapper namespace="user">
     <select id="selectById" parameterType="string" resultType="spring.mybatis.pojo.Menu">
-		SELECT * FROM `menu` WHERE uuid = #{uuid}
-	</select>
+        SELECT * FROM `menu` WHERE uuid = #{uuid}
+    </select>
 
-	<select id="selectByIdMoHu" parameterType="string" resultType="spring.mybatis.pojo.Menu" >
-		SELECT * FROM `menu` WHERE id like #{id}"%"
-	</select>
+    <select id="selectByIdMoHu" parameterType="string" resultType="spring.mybatis.pojo.Menu">
+        SELECT * FROM `menu` WHERE id like #{id}"%"
+    </select>
 
-	<insert id="insertItem" parameterType="spring.mybatis.pojo.Menu">
-		insert into menu (uuid,menun_name,id,pid,create_time,update_time)
-		values (#{uuid},#{menun_name},#{id},#{pid},#{create_time},#{update_time})
-	</insert>
+    <insert id="insertItem" parameterType="spring.mybatis.pojo.Menu">
+        insert into menu (uuid,menun_name,id,pid,create_time,update_time)
+        values (#{uuid},#{menun_name},#{id},#{pid},#{create_time},#{update_time})
+    </insert>
 
 </mapper>

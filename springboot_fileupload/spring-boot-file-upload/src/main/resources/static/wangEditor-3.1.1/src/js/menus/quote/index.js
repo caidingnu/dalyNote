@@ -2,7 +2,7 @@
     menu - quote
 */
 import $ from '../../util/dom-core.js'
-import { UA } from '../../util/util.js'
+import {UA} from '../../util/util.js'
 
 // 构造函数
 function Quote(editor) {
@@ -37,7 +37,7 @@ Quote.prototype = {
             }
             return
         }
-        
+
         // IE 中不支持 formatBlock <BLOCKQUOTE> ，要用其他方式兼容
         let content, $targetELem
         if (nodeName === 'P') {

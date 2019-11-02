@@ -3,7 +3,7 @@
 */
 
 import $ from '../util/dom-core.js'
-import { UA } from '../util/util.js'
+import {UA} from '../util/util.js'
 
 // 构造函数
 function Command(editor) {
@@ -68,7 +68,7 @@ Command.prototype = {
         } else if (range.pasteHTML) {
             // IE <= 10
             range.pasteHTML(html)
-        } 
+        }
     },
 
     // 插入 elem

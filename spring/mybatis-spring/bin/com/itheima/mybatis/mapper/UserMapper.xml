@@ -9,13 +9,13 @@
 
     <!-- 通过ID查询一个用户 -->
     <select id="findUserById" parameterType="Integer" resultType="com.itheima.mybatis.pojo.User">
-		select * from user where id = #{v}
-	</select>
+        select * from user where id = #{v}
+    </select>
 
     <!-- 根据用户名模糊查询用户 -->
     <select id="queryUserByUsername" parameterType="string"
             resultType="com.itheima.mybatis.pojo.User">
-		select * from user where username like '%#{username}%'
-	</select>
+        select * from user where username like '%#{username}%'
+    </select>
 
 </mapper>

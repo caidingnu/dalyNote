@@ -44,10 +44,10 @@ Welcome<br/>
 
     //接收到消息的回调方法
     websocket.onmessage = function (event) {
-      var resolt=  JSON.parse(event.data);
-            console.log(resolt)
+        var resolt = JSON.parse(event.data);
+        console.log(resolt)
         if (resolt.code === 200) {
-            document.getElementById("count").innerText=resolt.count;
+            document.getElementById("count").innerText = resolt.count;
         } else {
 
             setMessageInnerHTML(resolt.msg);

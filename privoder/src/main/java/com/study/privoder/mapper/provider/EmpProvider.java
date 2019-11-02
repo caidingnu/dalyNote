@@ -96,7 +96,7 @@ public class EmpProvider {
             SELECT("*");
             FROM(tableName);
 //            WHERE("emp_name=#{name}");
-            WHERE(emp_name+"=#{name}");
+            WHERE(emp_name + "=#{name}");
         }}.toString();
     }
 

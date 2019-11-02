@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
- * @Description:  websocket消息发送类。服务端主动发送
+ * @Description: websocket消息发送类。服务端主动发送
  * @Author: Gentle
  * @date 2018/9/5  19:30
  */
@@ -20,7 +20,7 @@ public class SocketController {
     @RequestMapping("many")
     public String helloManyWebSocket() throws IOException {
         //向所有人发送消息
-        LayuiData layuiData=new LayuiData();
+        LayuiData layuiData = new LayuiData();
         layuiData.setCount(0);
         layuiData.setCode(400);
         layuiData.setMsg("\"你好~！\"");
@@ -31,7 +31,7 @@ public class SocketController {
     @RequestMapping("one")
     public String helloOneWebSocket(String sessionId) throws IOException {
         //向某个人发送消息
-        myWebSocket.sendMessage(sessionId,"你好~！，单个用户");
+        myWebSocket.sendMessage(sessionId, "你好~！，单个用户");
 
         return "发送成功";
     }

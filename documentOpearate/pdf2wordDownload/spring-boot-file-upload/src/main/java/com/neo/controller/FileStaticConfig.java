@@ -22,10 +22,10 @@ public class FileStaticConfig implements WebMvcConfigurer {
         if (os.toLowerCase().startsWith("win")) {  //如果是Windows系统
             registry.addResourceHandler("/app/**") //虚拟路劲
                     // /apple/**表示在磁盘apple目录下的所有资源会被解析为以下的路径
-                    .addResourceLocations("file:"+savePath); //媒体资源
+                    .addResourceLocations("file:" + savePath); //媒体资源
         } else {  //linux 和mac
             registry.addResourceHandler("/app/**") //虚拟路劲
-                    .addResourceLocations("file:/resources/upload/") ;  //媒体资源
+                    .addResourceLocations("file:/resources/upload/");  //媒体资源
         }
     }
 }

@@ -8,6 +8,6 @@ package com.demo.LifeCycle;
  */
 public interface LifeDao {
 
-//    方法名随便
+    //    方法名随便
     public void my(String text);
 }

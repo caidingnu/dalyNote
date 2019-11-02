@@ -1,5 +1,5 @@
 server:
-    port: 80
+  port: 80
 
 # mysql 属性配置
 spring:
@@ -19,14 +19,14 @@ spring:
 
 # 打印日志
 mybatis:
-    mapper-locations: classpath*:mybatis/*.xml
-    type-aliases-package: com.springboot.demo
-    configuration:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.springboot.demo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # 分页配置
 pagehelper:
-    helper-dialect: mysql
-    reasonable: false
-    support-methods-arguments: true
-    params: count=countSql
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql

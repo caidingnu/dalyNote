@@ -15,6 +15,7 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer id);
+
     List<LoginReturn> selectByid(Integer id);
 
     int updateByPrimaryKeySelective(User record);

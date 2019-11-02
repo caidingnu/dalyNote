@@ -28,8 +28,8 @@ public class MenuServiceImpl implements MenuService {
         if (StrUtils.isNullOrEmpty(map)) {
             throw new MyException("插入数据不能为空！");
         }
-         map.put("uuid", UUID.randomUUID());
-         map.put("pid", 1);        
+        map.put("uuid", UUID.randomUUID());
+        map.put("pid", 1);
         return menuMapper.insert(map);
     }
 
@@ -50,7 +50,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public  PageInfo<Menu> find(Map<String, Object> map) {
+    public PageInfo<Menu> find(Map<String, Object> map) {
 
         int pageIndex = 0;
         int pageSize = 10;
@@ -85,7 +85,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public int count() {
-        int a=menuMapper.count();
+        int a = menuMapper.count();
         return a;
     }
 }

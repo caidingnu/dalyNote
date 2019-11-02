@@ -2,7 +2,7 @@
     menu - link
 */
 import $ from '../../util/dom-core.js'
-import { getRandom } from '../../util/util.js'
+import {getRandom} from '../../util/util.js'
 import Panel from '../panel.js'
 
 // 构造函数
@@ -81,34 +81,34 @@ Link.prototype = {
                         {
                             selector: '#' + btnOkId,
                             type: 'click',
-                            fn: () => {
-                                // 执行插入链接
-                                const $link = $('#' + inputLinkId)
-                                const $text = $('#' + inputTextId)
-                                const link = $link.val()
-                                const text = $text.val()
-                                this._insertLink(text, link)
+                            fn: () = > {
+                            // 执行插入链接
+                            const $link = $('#' + inputLinkId)
+                            const $text = $('#' + inputTextId)
+                            const link = $link.val()
+                            const text = $text.val()
+                            this._insertLink(text, link)
 
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        },
-                        // 删除链接
-                        {
-                            selector: '#' + btnDelId,
-                            type: 'click',
-                            fn: () => {
-                                // 执行删除链接
-                                this._delLink()
-
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
+                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                            return true
                         }
-                    ]
-                } // tab end
-            ] // tabs end
-        })
+                },
+                // 删除链接
+                {
+                    selector: '#' + btnDelId,
+                    type: 'click',
+                    fn: () = > {
+                    // 执行删除链接
+                    this._delLink()
+
+                    // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                    return true
+                }
+        }
+    ]
+    } // tab end
+    ] // tabs end
+    })
 
         // 显示 panel
         panel.show()

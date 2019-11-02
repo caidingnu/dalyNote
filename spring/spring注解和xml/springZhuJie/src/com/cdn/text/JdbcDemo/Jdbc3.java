@@ -26,7 +26,7 @@ public class Jdbc3 {
 
 
     public List<Map<String, Object>> select() {
-        List<Map<String, Object>> list= jdbcTemplate.queryForList("select menun_name ,id from menu");
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select menun_name ,id from menu");
         System.out.println(list);
         for (Map<String, Object> stringObjectMap : list) {
             System.out.println(stringObjectMap.get("menun_name"));
@@ -37,23 +37,23 @@ public class Jdbc3 {
 
     @Test
     public void update() {
-        String sql="update menu set menun_name=? where uuid=? ";
-        int result= jdbcTemplate.update(sql,"蔡定努","wwww");
+        String sql = "update menu set menun_name=? where uuid=? ";
+        int result = jdbcTemplate.update(sql, "蔡定努", "wwww");
         System.out.println(result);
     }
 
 
     @Test
     public void insert() {
-        String sql="INSERT into menu (uuid,menun_name,id) VALUES(?,?,?)";
-        int result= jdbcTemplate.update(sql,"wwww2","蔡定努",33);
+        String sql = "INSERT into menu (uuid,menun_name,id) VALUES(?,?,?)";
+        int result = jdbcTemplate.update(sql, "wwww2", "蔡定努", 33);
         System.out.println(result);
     }
 
     @Test
     public void delete() {
-        String sql="delete from menu where uuid=?";
-        int result= jdbcTemplate.update(sql,"wwww2");
+        String sql = "delete from menu where uuid=?";
+        int result = jdbcTemplate.update(sql, "wwww2");
         System.out.println(result);
     }
 }

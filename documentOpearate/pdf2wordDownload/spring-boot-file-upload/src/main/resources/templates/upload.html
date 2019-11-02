@@ -33,7 +33,7 @@
             if (result.code == "200") {
                 var qustion = confirm("转换成功，确定下载吗？");
                 if (qustion) {
-                    window.location.href = "/download?fileName="+result.data
+                    window.location.href = "/download?fileName=" + result.data
                 }
             } else {
                 alert(result.data)

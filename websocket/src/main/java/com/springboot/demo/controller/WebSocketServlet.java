@@ -14,14 +14,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 //在相对路径中发布端点websocket
 @Component
-@ServerEndpoint(value = "/websocket", decoders = { LayuiDataDecoder.class }, encoders = { LayuiDataEncoder.class })
+@ServerEndpoint(value = "/websocket", decoders = {LayuiDataDecoder.class}, encoders = {LayuiDataEncoder.class})
 public class WebSocketServlet {
-//    MyThread thread1=new MyThread();
+    //    MyThread thread1=new MyThread();
 //
 //    Thread thread=new Thread(thread1);
     //用来存放每个客户端对应的MyWebSocket对象。
     private static CopyOnWriteArraySet<WebSocketServlet> webSocketSet = new CopyOnWriteArraySet<>();
-    private  javax.websocket.Session session=null;
+    private javax.websocket.Session session = null;
 
     /**
      * @ClassName: onOpen
@@ -29,12 +29,12 @@ public class WebSocketServlet {
      */
     @OnOpen
     public void onOpen(Session session) {
-        this.session=session;
+        this.session = session;
         webSocketSet.add(this);
-        System.out.println("目前在线人数："+ webSocketSet.size());
+        System.out.println("目前在线人数：" + webSocketSet.size());
         System.out.println(session.getId());
         try {
-            LayuiData layuiData=new LayuiData();
+            LayuiData layuiData = new LayuiData();
             layuiData.setCount(webSocketSet.size());
             layuiData.setCode(200);
             layuiData.setMsg("在线人数");
@@ -52,21 +52,21 @@ public class WebSocketServlet {
      * @Description: 连接关闭的操作
      */
     @OnClose
-    public void onClose(){
+    public void onClose() {
 //        thread1.stopMe();
         webSocketSet.remove(this);
     }
 
     /**
      * @ClassName: onMessage
-     *      哪里需要推送就调用onMessage
-     *  都有消息的时候调用
+     * 哪里需要推送就调用onMessage
+     * 都有消息的时候调用
      * @Description: 给服务器发送消息告知数据库发生变化
      */
     @OnMessage
     public void onMessage(String message) {
-        System.out.println("发生变化"+message);
-        LayuiData layuiData=new LayuiData();
+        System.out.println("发生变化" + message);
+        LayuiData layuiData = new LayuiData();
         layuiData.setCount(webSocketSet.size());
         layuiData.setCode(300);
         layuiData.setMsg(message);
@@ -82,20 +82,19 @@ public class WebSocketServlet {
      * @Description: 出错的操作
      */
     @OnError
-    public void onError(Throwable error){
+    public void onError(Throwable error) {
         System.out.println(error);
         error.printStackTrace();
     }
 
     /**
      * 这个方法与上面几个方法不一样。没有用注解，是根据自己需要添加的方法。
-     * @throws IOException
-     * 发送自定义信号
      *
+     * @throws IOException 发送自定义信号
      */
-    public void sendMessage(LayuiData layuiData) throws IOException{
+    public void sendMessage(LayuiData layuiData) throws IOException {
         //群发消息,遍历客户端
-        for(WebSocketServlet item: webSocketSet){
+        for (WebSocketServlet item : webSocketSet) {
             try {
 //                item.session.getBasicRemote().sendText("sss");
                 item.session.getBasicRemote().sendObject(layuiData);
@@ -104,6 +103,7 @@ public class WebSocketServlet {
             }
         }
     }
+
     /**
      * 用于发送给指定客户端消息
      *
@@ -122,13 +122,14 @@ public class WebSocketServlet {
         if (session != null) {
             tempWebSocket.session.getBasicRemote().sendText(message);
         } else {
-           System.out.println("没有找到你指定ID的会话：{}"+ sessionId);
+            System.out.println("没有找到你指定ID的会话：{}" + sessionId);
         }
     }
 
     /**
      * springboot内置tomcat的话，需要配一下这个。。如果没有这个对象，无法连接到websocket
      * 别问为什么。。很坑。。。
+     *
      * @return
      */
     @Bean

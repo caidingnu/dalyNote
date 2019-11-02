@@ -34,7 +34,7 @@ Emoticon.prototype = {
 
         // 创建表情 dropPanel 的配置
         const tabConfig = []
-        emotions.forEach(emotData => {
+        emotions.forEach(emotData = > {
             const emotType = emotData.type
             const content = emotData.content || []
 
@@ -42,54 +42,61 @@ Emoticon.prototype = {
             let faceHtml = ''
 
             // emoji 表情
-            if (emotType === 'emoji') {
-                content.forEach(item => {
-                    if (item) {
-                        faceHtml += '<span class="w-e-item">' + item + '</span>'
-                    }
-                })
+            if(emotType === 'emoji'
+    )
+        {
+            content.forEach(item = > {
+                if(item) {
+                    faceHtml += '<span class="w-e-item">' + item + '</span>'
+                }
             }
-            // 图片表情
-            if (emotType === 'image') {
-                content.forEach(item => {
-                    const src = item.src
-                    const alt = item.alt
-                    if (src) {
-                        // 加一个 data-w-e 属性，点击图片的时候不再提示编辑图片
-                        faceHtml += '<span class="w-e-item"><img src="' + src + '" alt="' + alt + '" data-w-e="1"/></span>'
-                    }
-                })
+        )
+        }
+        // 图片表情
+        if (emotType === 'image') {
+            content.forEach(item = > {
+                const src = item.src
+                const alt = item.alt
+                if(src) {
+                    // 加一个 data-w-e 属性，点击图片的时候不再提示编辑图片
+                    faceHtml += '<span class="w-e-item"><img src="' + src + '" alt="' + alt + '" data-w-e="1"/></span>'
+                }
             }
+        )
+        }
 
-            tabConfig.push({
-                title: emotData.title,
-                tpl: `<div class="w-e-emoticon-container">${faceHtml}</div>`,
-                events: [
-                    {
-                        selector: 'span.w-e-item',
-                        type: 'click',
-                        fn: (e) => {
-                            const target = e.target
-                            const $target = $(target)
-                            const nodeName = $target.getNodeName()
+        tabConfig.push({
+            title: emotData.title,
+            tpl: `<div class="w-e-emoticon-container">${faceHtml}</div>`,
+            events: [
+                {
+                    selector: 'span.w-e-item',
+                    type: 'click',
+                    fn: (e) = > {
+                    const target = e.target
+                    const $target = $(target)
+                    const nodeName = $target.getNodeName()
 
-                            let insertHtml
-                            if (nodeName === 'IMG') {
-                                // 插入图片
-                                insertHtml = $target.parent().html()
-                            } else {
-                                // 插入 emoji
-                                insertHtml = '<span>' + $target.html() + '</span>'
-                            }
+                    let insertHtml
+                    if(nodeName === 'IMG')
+        {
+            // 插入图片
+            insertHtml = $target.parent().html()
+        }
+    else
+        {
+            // 插入 emoji
+            insertHtml = '<span>' + $target.html() + '</span>'
+        }
 
-                            this._insert(insertHtml)
-                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                            return true
-                        }
-                    }
-                ]
-            })
-        })
+        this._insert(insertHtml)
+        // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+        return true
+    }
+    }
+    ]
+    })
+    })
 
         const panel = new Panel(this, {
             width: 300,

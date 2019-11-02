@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Company {
 
-  private long companyId;
-  private String companyName;
+    private long companyId;
+    private String companyName;
 
 
 }

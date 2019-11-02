@@ -46,9 +46,10 @@ Progress.prototype = {
         if (timeoutId) {
             clearTimeout(timeoutId)
         }
-        timeoutId = setTimeout(() => {
+        timeoutId = setTimeout(() = > {
             this._hide()
-        }, 500)
+        }, 500
+    )
     },
 
     _hide: function () {

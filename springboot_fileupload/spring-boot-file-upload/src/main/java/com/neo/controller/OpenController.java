@@ -17,10 +17,12 @@ public class OpenController {
     public String index() {
         return "upload";
     }
+
     @GetMapping("/one")
     public String one() {
         return "editOnePicUp";
     }
+
     @GetMapping("/many")
     public String many() {
         return "editManyPicUp";

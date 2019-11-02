@@ -47,6 +47,7 @@ website:    http://code.google.com/p/jquerytree/
   padding: 5px;
   color: @color-normal;
   background-color: @color-bg;
+
   li {
     padding: 0;
     margin: 0;
@@ -55,12 +56,15 @@ website:    http://code.google.com/p/jquerytree/
     text-align: left;
     white-space: nowrap;
     outline: 0;
+
     ul {
       margin: 0px;
       padding: 0 0 0 18px;
     }
+
     ul.line {
     }
+
     a {
       padding-right: 3px;
       margin: 0;
@@ -71,6 +75,7 @@ website:    http://code.google.com/p/jquerytree/
       text-decoration: none;
       vertical-align: top;
       display: inline-block;
+
       input.rename {
         height: 14px;
         width: 80px;
@@ -83,9 +88,11 @@ website:    http://code.google.com/p/jquerytree/
         *border: 0px
       }
     }
+
     a:hover {
       text-decoration: underline
     }
+
     a.curSelectedNode {
       padding-top: 0px;
       background-color: #af4040;
@@ -93,6 +100,7 @@ website:    http://code.google.com/p/jquerytree/
       height: @h;
       opacity: 0.8;
     }
+
     a.curSelectedNode_Edit {
       padding-top: 0px;
       background-color: transparent;
@@ -101,6 +109,7 @@ website:    http://code.google.com/p/jquerytree/
       border: 1px #666 solid;
       opacity: 0.8;
     }
+
     a.tmpTargetNode_inner {
       padding-top: 0px;
       background-color: #aaa;
@@ -110,15 +119,19 @@ website:    http://code.google.com/p/jquerytree/
       opacity: 0.8;
       filter: alpha(opacity=80)
     }
+
     a.tmpTargetNode_prev {
     }
+
     a.tmpTargetNode_next {
     }
+
     span {
       line-height: @h;
       margin-right: 2px;
       background-color: transparent;
     }
+
     span.button {
       line-height: 0;
       margin: 0;
@@ -139,6 +152,7 @@ website:    http://code.google.com/p/jquerytree/
         font-family: FontAwesome;
         padding-top: @pad-top;
       }
+
       &.chk {
         margin: 0px;
         cursor: auto;
@@ -150,47 +164,59 @@ website:    http://code.google.com/p/jquerytree/
         &.checkbox_false_full::before {
           content: @fa-square-o;
         }
+
         &.checkbox_false_full_focus::before {
           content: @fa-square-o;
           color: @color-highlight;
         }
+
         &.checkbox_false_part::before {
           content: @fa-square-o;
           color: @color-partial;
         }
+
         &.checkbox_false_part_focus::before {
           content: @fa-square-o;
           color: @color-partfocus;
         }
+
         &.checkbox_false_disable::before {
           content: @fa-square-o;
           color: @color-disabled;
         }
+
         &.checkbox_true_full::before {
           content: @fa-check-square-o;
         }
+
         &.checkbox_true_full_focus::before {
           content: @fa-check-square-o;
         }
+
         &.checkbox_true_part::before {
           content: @fa-check-square;
         }
+
         &.checkbox_true_part_focus::before {
           content: @fa-check-square;
           color: @color-highlight
         }
+
         &.checkbox_true_full_focus::before {
           content: @fa-check-square-o;
           color: @color-highlight
         }
+
         &.checkbox_true_part::before {
           content: @fa-check-square-o;
           color: @color-partial
         }
+
         &.checkbox_true_part_focus::before {
           content: @fa-check-square-o;
           color: @color-partfocus;
         }
+
         &.checkbox_true_disable::before {
           content: @fa-check-square-o;
           color: @color-disabled
@@ -199,120 +225,145 @@ website:    http://code.google.com/p/jquerytree/
         &.radio_false_full::before {
           content: @fa-circle-o;
         }
+
         &.radio_false_full_focus::before {
           content: @fa-circle-o;
           color: @color-highlight
         }
+
         &.radio_false_part::before {
           content: @fa-circle-o;
           color: @color-partial
         }
+
         &.radio_false_part_focus::before {
           content: @fa-circle-o;
           color: @color-highlight
         }
+
         &.radio_false_disable::before {
           content: @fa-circle-thin;
           color: @color-disabled
         }
+
         &.radio_true_full::before {
           content: @fa-dot-circle-o;
         }
+
         &.radio_true_full_focus::before {
           content: @fa-dot-circle-o;
           color: @color-highlight
         }
+
         &.radio_true_part::before {
           content: @fa-dot-circle-o;
           color: @color-partial
         }
+
         &.radio_true_part_focus::before {
           content: @fa-dot-circle-o;
           color: @color-partial;
         }
+
         &.radio_true_disable::before {
           content: @fa-circle-thin;
           color: @color-disabled
         }
 
       }
+
       &.switch {
         width: @w;
         height: @h
       }
+
       &.root_open::before {
         content: @fa-chevron-down;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.root_close::before {
         content: @fa-folder-open-o;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.roots_open::before {
         content: @fa-chevron-down;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.roots_close::before {
         content: @fa-chevron-right;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.center_open::before {
         content: @fa-chevron-down;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.center_close::before {
         content: @fa-chevron-right;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.bottom_open::before {
         content: @fa-chevron-down;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.bottom_close::before {
         content: @fa-chevron-right;
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
       }
+
       &.noline_open {
       }
+
       &.noline_close {
       }
+
       &.root_docu {
         background: none;
       }
+
       &.roots_docu::before {
         content: @fa-list-alt;
         padding-left: @pad-left;
         display: inline-block;
         color: @color-normal;
       }
+
       &.center_docu::before {
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
         color: @color-normal;
       }
+
       &.bottom_docu::before {
         padding-top: @pad-top;
         padding-left: @pad-left;
         display: inline-block;
         color: @color-normal;
       }
+
       &.noline_docu {
         background: none;
       }
@@ -325,6 +376,7 @@ website:    http://code.google.com/p/jquerytree/
         display: inline-block;
         color: @color-normal;
       }
+
       &.ico_close::before {
         content: @fa-folder-o;
         font-family: FontAwesome;
@@ -333,6 +385,7 @@ website:    http://code.google.com/p/jquerytree/
         display: inline-block;
         color: @color-normal;
       }
+
       &.ico_docu::before {
         content: @fa-list-alt;
         font-family: FontAwesome;
@@ -349,6 +402,7 @@ website:    http://code.google.com/p/jquerytree/
         *vertical-align: middle;
         padding-top: @pad-top;
       }
+
       &.edit::before {
         content: @fa-pencil-square-o;
         font-family: FontAwesome;
@@ -361,6 +415,7 @@ website:    http://code.google.com/p/jquerytree/
         *vertical-align: middle;
         padding-top: @pad-top;
       }
+
       &.remove::before {
         content: @fa-trash;
         font-family: FontAwesome;
@@ -373,6 +428,7 @@ website:    http://code.google.com/p/jquerytree/
         *vertical-align: middle;
         padding-top: @pad-top;
       }
+
       &.add::before {
         content: @fa-plus;
         font-family: FontAwesome;

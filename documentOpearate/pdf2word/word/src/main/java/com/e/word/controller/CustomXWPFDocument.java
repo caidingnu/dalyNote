@@ -27,12 +27,9 @@ public class CustomXWPFDocument extends XWPFDocument {
 
     /**
      * @param id
-     * @param width
-     *            宽
-     * @param height
-     *            高
-     * @param paragraph
-     *            段落
+     * @param width     宽
+     * @param height    高
+     * @param paragraph 段落
      */
     public void createPicture(int id, int width, int height,
                               XWPFParagraph paragraph) {

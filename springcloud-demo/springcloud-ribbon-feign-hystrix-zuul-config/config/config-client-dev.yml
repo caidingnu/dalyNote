@@ -7,7 +7,7 @@ eureka:
   instance:
     #  instanc中的配置是让该服务使用IP注册到注册中心，而不是hostname
     #  instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    preferIpAddress : true
+    preferIpAddress: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
     #Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则），默认30
     lease-renewal-interval-in-seconds: 15
@@ -23,7 +23,7 @@ spring:
     username: root
     password: root
   application:
-   name: config-client
+    name: config-client
 
 #####################################################################################################
 

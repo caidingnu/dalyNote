@@ -32,7 +32,7 @@ public class AopAspect {
 
     private static final ThreadLocal<Date> beginTimeThreadLocal = new NamedThreadLocal<Date>("ThreadLocal beginTime");
 
-   Logger logger=  LoggerFactory.getLogger(AopAspect.class);
+    Logger logger = LoggerFactory.getLogger(AopAspect.class);
 
 
 //    @Autowired
@@ -134,7 +134,7 @@ public class AopAspect {
             log.setCostTime(logElapsedTime.intValue());
 
 //            请求日期
-            log.setRequestTime(timeFormat( beginTime));
+            log.setRequestTime(timeFormat(beginTime));
             System.out.println(log);
 
 //            警告形式保存
@@ -174,8 +174,8 @@ public class AopAspect {
      * author: CDN
      * date: 2019/10/21
      */
-    public String timeFormat(long time){
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public String timeFormat(long time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return simpleDateFormat.format(time);
     }
 

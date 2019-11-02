@@ -14,7 +14,7 @@ public class ConverController {
 
 
     @RequestMapping("html")
-    public String a()  {
+    public String a() {
         return DocxToHtmlUtil.readHtml("C:\\Users\\cdn\\Desktop\\test.doc");
     }
 

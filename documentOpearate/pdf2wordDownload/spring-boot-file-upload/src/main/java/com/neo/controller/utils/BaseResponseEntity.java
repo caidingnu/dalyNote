@@ -106,7 +106,7 @@ public class BaseResponseEntity implements Serializable {
     public BaseResponseEntity(boolean isSec) {
         super();
         this.stateInfo = isSec ? Constant.CODE_OK_MSG : Constant.CODE_SYSTEM_ERROR_MSG;
-        this.stateCode = isSec ? Constant.CODE_OK :Constant.CODE_SYSTEM_ERROR ;
+        this.stateCode = isSec ? Constant.CODE_OK : Constant.CODE_SYSTEM_ERROR;
         this.data = "";
         this.dataCount = 0;
     }

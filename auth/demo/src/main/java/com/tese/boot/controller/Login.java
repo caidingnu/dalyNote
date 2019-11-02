@@ -40,7 +40,7 @@ public class Login {
         } else {
             HttpSession session = request.getSession();
             loginReturn = userMapper.selectlogin(user);
-            session.setAttribute(user.getLoginName(),loginReturn);
+            session.setAttribute(user.getLoginName(), loginReturn);
         }
         if (loginReturn == null) {
             return JsonUtil.toJSon(new BaseResponseEntity(Constant.CODE_EMPTY));
@@ -57,21 +57,21 @@ public class Login {
      * @Date: 2019/5/20
      */
     @RequestMapping("acc")
-    public String addAcc(HttpServletRequest request){
-        List<User> u=userMapper. selectAcc();
-        return JsonUtil.toJSon(new BaseResponseEntity(u,u.size()));
+    public String addAcc(HttpServletRequest request) {
+        List<User> u = userMapper.selectAcc();
+        return JsonUtil.toJSon(new BaseResponseEntity(u, u.size()));
     }
 
-/**
- * @Description:
- * @Param:
- * @return:
- * @Author: CDN
- * @Date: 2019/5/20
- */
-@RequestMapping("auth")
-public String auth(Integer id){
-    List<LoginReturn> loginReturn = userMapper.selectByid(id);
-    return JsonUtil.toJSon(new BaseResponseEntity(loginReturn, loginReturn.size()));
-}
+    /**
+     * @Description:
+     * @Param:
+     * @return:
+     * @Author: CDN
+     * @Date: 2019/5/20
+     */
+    @RequestMapping("auth")
+    public String auth(Integer id) {
+        List<LoginReturn> loginReturn = userMapper.selectByid(id);
+        return JsonUtil.toJSon(new BaseResponseEntity(loginReturn, loginReturn.size()));
+    }
 }

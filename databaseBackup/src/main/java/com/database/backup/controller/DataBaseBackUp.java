@@ -50,9 +50,9 @@ public class DataBaseBackUp {
         System.out.println("现在时间是" + new Date());
 //        String filepath = "d:\\time_" + sdfDate + ".sql"; // 备份的路径地址
 //        String filepath = file.toString()+File.separator+ databaseName + "_" + sdfDate + ".sql"; // 备份的路径地址
-        String filepath = "./back"+File.separator+ databaseName + "_" + sdfDate + ".sql"; // 备份的路径地址
-        File file=new File("./back");
-        if (!file.exists()){
+        String filepath = "./back" + File.separator + databaseName + "_" + sdfDate + ".sql"; // 备份的路径地址
+        File file = new File("./back");
+        if (!file.exists()) {
             file.mkdirs();
         }
         //执行命令
@@ -84,8 +84,8 @@ public class DataBaseBackUp {
     @Scheduled(cron = "0 0 2 * * ?")
     public String start() {
         try {
-            Connection conn  = getConnection(databaseName);
-            if (conn !=null) {
+            Connection conn = getConnection(databaseName);
+            if (conn != null) {
                 back();
             } else {
                 LOGGER.error("数据库连接失败或数据库不存在！");

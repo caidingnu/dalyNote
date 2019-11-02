@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 读取Excel【第二种方式,数据解析为map】
- *
  */
 public class ReadExcelMap {
     private Logger logger = LoggerFactory.getLogger(ReadExcelMap.class);
@@ -29,18 +28,18 @@ public class ReadExcelMap {
     private Row row;
 
     public ReadExcelMap(String filepath) {
-        if(filepath==null){
+        if (filepath == null) {
             return;
         }
         String ext = filepath.substring(filepath.lastIndexOf("."));
         try {
             InputStream is = new FileInputStream(filepath);
-            if(".xls".equals(ext)){
+            if (".xls".equals(ext)) {
                 wb = new HSSFWorkbook(is);
-            }else if(".xlsx".equals(ext)){
+            } else if (".xlsx".equals(ext)) {
                 wb = new XSSFWorkbook(is);
-            }else{
-                wb=null;
+            } else {
+                wb = null;
             }
         } catch (FileNotFoundException e) {
             logger.error("FileNotFoundException", e);
@@ -55,8 +54,8 @@ public class ReadExcelMap {
      * @param InputStream
      * @return String 表头内容的数组
      */
-    public String[] readExcelTitle() throws Exception{
-        if(wb==null){
+    public String[] readExcelTitle() throws Exception {
+        if (wb == null) {
             throw new Exception("Workbook对象为空！");
         }
         sheet = wb.getSheetAt(0);
@@ -78,11 +77,11 @@ public class ReadExcelMap {
      * @param InputStream
      * @return Map 包含单元格数据内容的Map对象
      */
-    public Map<Integer, Map<Integer,Object>> readExcelContent() throws Exception{
-        if(wb==null){
+    public Map<Integer, Map<Integer, Object>> readExcelContent() throws Exception {
+        if (wb == null) {
             throw new Exception("Workbook对象为空！");
         }
-        Map<Integer, Map<Integer,Object>> content = new HashMap<Integer, Map<Integer,Object>>();
+        Map<Integer, Map<Integer, Object>> content = new HashMap<Integer, Map<Integer, Object>>();
 
         sheet = wb.getSheetAt(0);
         // 得到总行数
@@ -93,7 +92,7 @@ public class ReadExcelMap {
         for (int i = 1; i <= rowNum; i++) {
             row = sheet.getRow(i);
             int j = 0;
-            Map<Integer,Object> cellValue = new HashMap<Integer, Object>();
+            Map<Integer, Object> cellValue = new HashMap<Integer, Object>();
             while (j < colNum) {
                 Object obj = getCellFormatValue(row.getCell(j));
                 cellValue.put(j, obj);
@@ -105,7 +104,6 @@ public class ReadExcelMap {
     }
 
     /**
-     *
      * 根据Cell类型设置数据
      *
      * @param cell
@@ -158,7 +156,7 @@ public class ReadExcelMap {
 //			}
 
             // 对读取Excel表格内容测试
-            Map<Integer, Map<Integer,Object>> map = excelReader.readExcelContent();
+            Map<Integer, Map<Integer, Object>> map = excelReader.readExcelContent();
             System.out.println("获得Excel表格的内容:");
             for (int i = 1; i <= map.size(); i++) {
                 System.out.println(map.get(i));
@@ -166,7 +164,7 @@ public class ReadExcelMap {
         } catch (FileNotFoundException e) {
             System.out.println("未找到指定路径的文件!");
             e.printStackTrace();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

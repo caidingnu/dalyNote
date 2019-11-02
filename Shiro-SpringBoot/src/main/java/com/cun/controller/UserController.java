@@ -32,7 +32,7 @@ public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/login")
-    public Map<String, Object> login(@Valid User user,boolean rememberMe) {
+    public Map<String, Object> login(@Valid User user, boolean rememberMe) {
         Map<String, Object> map = new HashMap<String, Object>();
 
 
@@ -91,7 +91,6 @@ public class UserController {
         map.put("msg", "当前角色有查看的权力");
         return map;
     }
-
 
 
     @RequiresPermissions({"user:insert"}) //没有的话 AuthorizationException

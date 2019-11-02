@@ -21,7 +21,7 @@ public class Te {
     //测试task1.
     @RequestMapping("ca")
     @ResponseBody
-    public void task1() throws Exception{
+    public void task1() throws Exception {
         task2.doTaskOne();
         task2.doTaskTwo();
         task2.doTaskThree();

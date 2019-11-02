@@ -19,7 +19,7 @@ public class NoAuthorityException {
 
 
     @ExceptionHandler(value = AuthorizationException.class)//处理访问方法时权限不足问题
-    public  Map<String, Object> defaultErrorHandler(HttpServletRequest req, Exception e) {
+    public Map<String, Object> defaultErrorHandler(HttpServletRequest req, Exception e) {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("success", false);

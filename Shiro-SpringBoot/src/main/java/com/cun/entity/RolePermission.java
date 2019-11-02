@@ -12,55 +12,55 @@ import javax.persistence.Table;
 @Table(name = "t_role_permission")
 public class RolePermission {
 
-	@Id
-	@GeneratedValue
-	private Integer id; // 编号
+    @Id
+    @GeneratedValue
+    private Integer id; // 编号
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role; // 角色
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role; // 角色
 
-	@ManyToOne
-	@JoinColumn(name = "permission_id")
-	private Permission menu; // 菜单
+    @ManyToOne
+    @JoinColumn(name = "permission_id")
+    private Permission menu; // 菜单
 
-	@Column(length = 1000)
-	private String remarks; // 备注
-	
-	public String getRemarks() {
-		return remarks;
-	}
+    @Column(length = 1000)
+    private String remarks; // 备注
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-	
-	public Integer getId() {
-		return id;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Permission getMenu() {
-		return menu;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setMenu(Permission menu) {
-		this.menu = menu;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public RolePermission() {
-		super();
-	}
+    public Permission getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Permission menu) {
+        this.menu = menu;
+    }
+
+    public RolePermission() {
+        super();
+    }
 
 }

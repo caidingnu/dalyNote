@@ -16,7 +16,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestXml {
 
 
-
     /**
      * desc: 传统方式
      * param:
@@ -39,9 +38,6 @@ public class TestXml {
         ServiceImpl serviceImpl = (ServiceImpl) applicationContext.getBean("serviceImpl");
         serviceImpl.save();
     }
-
-
-
 
 
 }

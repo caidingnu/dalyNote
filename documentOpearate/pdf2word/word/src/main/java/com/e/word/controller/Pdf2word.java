@@ -91,7 +91,6 @@ public class Pdf2word {
 //                    System.out.println(text+"---");
 
 
-
                 String[] strings = text.split("\r");
                 for (String string : strings) {
                     XWPFParagraph textParagraph = document.createParagraph();
@@ -103,8 +102,6 @@ public class Pdf2word {
                     textRun.setText(string);
 //                        System.out.println(string+"------------");
                 }
-
-
 
 
             }

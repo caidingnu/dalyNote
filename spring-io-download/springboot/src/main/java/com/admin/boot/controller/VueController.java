@@ -14,16 +14,16 @@ import java.util.HashMap;
 @CrossOrigin
 public class VueController {
 
-    
+
     /**
-     * desc: 
-     * param: 
-     * return: 
+     * desc:
+     * param:
+     * return:
      * author: CDN
      * date: 2019/8/12
      */
     @RequestMapping("aa")
-    public Object aa( HashMap map){
+    public Object aa(HashMap map) {
         return "ssss";
     }
 }

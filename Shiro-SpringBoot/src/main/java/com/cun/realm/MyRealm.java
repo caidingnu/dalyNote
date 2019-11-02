@@ -41,35 +41,30 @@ public class MyRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(MyRealm.class);
 
 
-
-	/**
-	 * 登录认证
-	 */
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("token.getPrincipal:" + token.getPrincipal());
-		System.out.println("token.getCredentials:" + token.getCredentials());
-
-
-		//清空权限缓存,避免重新设置权限不生效( 实际开发中在 在修改用户权限的逻辑执行完之后使用下面代码)
-		clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
-
-		String userName = token.getPrincipal().toString();
-		User user = userDao.getUserByUserName(userName);
+    /**
+     * 登录认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("token.getPrincipal:" + token.getPrincipal());
+        System.out.println("token.getCredentials:" + token.getCredentials());
 
 
-		if (user != null) {
-			// Object principal, Object credentials, String realmName
-			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
-			return authcInfo;
-		} else {
-			return null;
-		}
-	}
+        //清空权限缓存,避免重新设置权限不生效( 实际开发中在 在修改用户权限的逻辑执行完之后使用下面代码)
+        clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
+
+        String userName = token.getPrincipal().toString();
+        User user = userDao.getUserByUserName(userName);
 
 
-
-
+        if (user != null) {
+            // Object principal, Object credentials, String realmName
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
+            return authcInfo;
+        } else {
+            return null;
+        }
+    }
 
 
     /**
@@ -79,7 +74,7 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
 
-		logger.info("##################执行Shiro权限认证##################");
+        logger.info("##################执行Shiro权限认证##################");
         String userName = (String) SecurityUtils.getSubject().getPrincipal();
 
 
@@ -96,10 +91,6 @@ public class MyRealm extends AuthorizingRealm {
         info.setRoles(roles);
         return info;
     }
-
-
-
-
 
 
 }

@@ -42,7 +42,7 @@ public class DynamicScheduledTask implements SchedulingConfigurer {
 
 
 //                String cron = "0 " + minute + " " + hour + " * * " + day + "";
-            String cron ="0/"+ScheduleJob.a+" * *  * * ? ";   //1秒1次
+            String cron = "0/" + ScheduleJob.a + " * *  * * ? ";   //1秒1次
 
             System.out.println(cron);
 

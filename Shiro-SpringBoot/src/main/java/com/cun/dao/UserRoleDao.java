@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cun.entity.UserRole;
 
-public interface UserRoleDao extends JpaRepository<UserRole, Integer>{
+public interface UserRoleDao extends JpaRepository<UserRole, Integer> {
 
 }

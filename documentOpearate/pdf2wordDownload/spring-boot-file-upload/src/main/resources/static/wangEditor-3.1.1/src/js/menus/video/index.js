@@ -2,7 +2,7 @@
     menu - video
 */
 import $ from '../../util/dom-core.js'
-import { getRandom } from '../../util/util.js'
+import {getRandom} from '../../util/util.js'
 import Panel from '../panel.js'
 
 // 构造函数
@@ -48,26 +48,26 @@ Video.prototype = {
                         {
                             selector: '#' + btnId,
                             type: 'click',
-                            fn: () => {
-                                const $text = $('#' + textValId)
-                                const val = $text.val().trim()
+                            fn: () = > {
+                            const $text = $('#' + textValId)
+                            const val = $text.val().trim()
 
-                                // 测试用视频地址
-                                // <iframe height=498 width=510 src='http://player.youku.com/embed/XMjcwMzc3MzM3Mg==' frameborder=0 'allowfullscreen'></iframe>
+                            // 测试用视频地址
+                            // <iframe height=498 width=510 src='http://player.youku.com/embed/XMjcwMzc3MzM3Mg==' frameborder=0 'allowfullscreen'></iframe>
 
-                                if (val) {
-                                    // 插入视频
-                                    this._insert(val)
-                                }
-
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
+                            if(val) {
+                                // 插入视频
+                                this._insert(val)
                             }
+
+                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                            return true
                         }
-                    ]
-                } // first tab end
-            ] // tabs end
-        }) // panel end
+                }
+            ]
+        } // first tab end
+    ] // tabs end
+    }) // panel end
 
         // 显示 panel
         panel.show()

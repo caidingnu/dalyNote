@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  * version 1.0.0
  */
 @Configuration
-@MapperScan(basePackages = "com.springboot.demo.dao.test2", sqlSessionTemplateRef  = "test2SqlSessionTemplate")
+@MapperScan(basePackages = "com.springboot.demo.dao.test2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
 public class DataSource2Config {
 
     @Bean(name = "test2DataSource")

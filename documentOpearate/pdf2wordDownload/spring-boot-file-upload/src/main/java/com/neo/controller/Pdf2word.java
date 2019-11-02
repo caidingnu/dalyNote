@@ -31,12 +31,12 @@ public class Pdf2word {
     private String UPLOADED_FOLDER;
 
     public static String pdf2word(String pdfFileName) throws InvalidFormatException {
-        String docFileName="";
+        String docFileName = "";
         try {
 //             pdfFileName = "C:\\Users\\cdn\\Desktop\\aa.pdf";
             PDDocument pdf = PDDocument.load(new File(pdfFileName));
             int pageNumber = pdf.getNumberOfPages();
-             docFileName = pdfFileName.substring(0, pdfFileName.lastIndexOf(".")) + ".doc";
+            docFileName = pdfFileName.substring(0, pdfFileName.lastIndexOf(".")) + ".doc";
             File file = new File(docFileName);
             if (!file.exists()) {
                 file.createNewFile();
@@ -122,11 +122,11 @@ public class Pdf2word {
     }
 
     @RequestMapping("download")
-    public  String responseIo(HttpServletResponse response, String fileName) {
+    public String responseIo(HttpServletResponse response, String fileName) {
         FileInputStream fileInputStream = null;
         ServletOutputStream outputStream = null;
         try {
-            File file = new File(UPLOADED_FOLDER+fileName);
+            File file = new File(UPLOADED_FOLDER + fileName);
             if (!file.exists()) {
                 return "文件不存在";
             }
@@ -164,7 +164,6 @@ public class Pdf2word {
 
         return "下载成功";
     }
-
 
 
     /**

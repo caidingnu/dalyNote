@@ -23,7 +23,7 @@ public class YuanShiTest {
      */
     @Test
     public void get() {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("resources/applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("resources/applicationContext.xml");
         UserDao userDao = (UserDao) applicationContext.getBean("userDao");
         User user = userDao.selectById(32);
         System.out.println(user);

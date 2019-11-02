@@ -14,8 +14,9 @@ public class ServiceImpl implements UserDao {
     public void setName(String name) {
         this.name = name;
     }
+
     @Override
     public void save() {
-        System.out.println("ServiceImpl方法执行"+"---"+name);
+        System.out.println("ServiceImpl方法执行" + "---" + name);
     }
 }

@@ -3,8 +3,8 @@
 */
 
 import $ from './dom-core.js'
-import { replaceHtmlSymbol } from './util.js'
-import { objForEach } from './util.js'
+import {replaceHtmlSymbol} from './util.js'
+import {objForEach} from './util.js'
 
 // 获取粘贴的纯文本
 export function getPasteText(e) {
@@ -80,12 +80,15 @@ export function getPasteImgs(e) {
         return result
     }
 
-    objForEach(items, (key, value) => {
+    objForEach(items, (key, value) = > {
         const type = value.type
-        if (/image/i.test(type)) {
-            result.push(value.getAsFile())
-        }
-    })
+        if(
+    /image/i.test(type)
+)
+    {
+        result.push(value.getAsFile())
+    }
+})
 
     return result
 }

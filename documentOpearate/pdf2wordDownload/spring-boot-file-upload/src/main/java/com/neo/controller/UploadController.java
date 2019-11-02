@@ -23,7 +23,6 @@ public class UploadController {
     private String UPLOADED_FOLDER;
 
 
-
     //    单文件上传
     @PostMapping(value = "/upload")
     @ResponseBody
@@ -44,17 +43,17 @@ public class UploadController {
             // 获取文件的后缀名
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
 
-            if (!".pdf".equals(suffixName) && !".PDF".equals(suffixName) ){
+            if (!".pdf".equals(suffixName) && !".PDF".equals(suffixName)) {
                 map.put("code", "111");
                 map.put("data", "不支持的文件格式");
-                return  JsonUtil.toJSon(new BaseResponseEntity(map));
+                return JsonUtil.toJSon(new BaseResponseEntity(map));
             }
 
-            String uuid=UUID.randomUUID().toString();
+            String uuid = UUID.randomUUID().toString();
             Path path = Paths.get(upPath + uuid + suffixName);
             Files.write(path, bytes);
             map.put("code", "200");
-            map.put("data", getNowDate()+"/"+ uuid + suffixName);
+            map.put("data", getNowDate() + "/" + uuid + suffixName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +69,6 @@ public class UploadController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         return formatter.format(new Date());
     }
-
 
 
     //多文件上传
@@ -119,8 +117,6 @@ public class UploadController {
         }
         return pathDate;
     }
-
-
 
 
     //文件下载相关代码

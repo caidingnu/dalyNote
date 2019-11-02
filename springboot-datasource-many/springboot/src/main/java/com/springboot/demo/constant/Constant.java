@@ -3,7 +3,7 @@ package com.springboot.demo.constant;
 import org.springframework.http.HttpStatus;
 
 /**
- *@Date 2019-09-01 01:20:27
+ * @Date 2019-09-01 01:20:27
  */
 @SuppressWarnings("ALL")
 public class Constant {

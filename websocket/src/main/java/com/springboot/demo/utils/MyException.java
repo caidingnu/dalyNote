@@ -15,19 +15,19 @@ public class MyException extends RuntimeException {
      */
     private String msg;
 
-    public MyException(String msg, String code){
+    public MyException(String msg, String code) {
         super(msg);
         this.code = code;
         this.msg = msg;
     }
 
-    public MyException(String msg){
+    public MyException(String msg) {
         super(msg);
         this.code = "98";
         this.msg = msg;
     }
 
-    public MyException(String message, Throwable cause){
+    public MyException(String message, Throwable cause) {
         super(message, cause);
         this.code = "98";
         this.msg = message;

@@ -24,7 +24,7 @@ StrikeThrough.prototype = {
     // 点击事件
     onClick: function (e) {
         // 点击菜单将触发这里
-        
+
         const editor = this.editor
         const isSeleEmpty = editor.selection.isSelectionEmpty()
 

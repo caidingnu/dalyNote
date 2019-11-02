@@ -2,7 +2,7 @@
     menu - img
 */
 import $ from '../../util/dom-core.js'
-import { getRandom, arrForEach } from '../../util/util.js'
+import {getRandom, arrForEach} from '../../util/util.js'
 import Panel from '../panel.js'
 
 // 构造函数
@@ -62,54 +62,67 @@ Image.prototype = {
                     {
                         selector: '#' + width30,
                         type: 'click',
-                        fn: () => {
-                            const $img = editor._selectedImg
-                            if ($img) {
-                                $img.css('max-width', '30%')
-                            }
-                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                            return true
+                        fn: () = > {
+                        const $img = editor._selectedImg
+                        if($img) {
+                            $img.css('max-width', '30%')
                         }
-                    },
-                    {
-                        selector: '#' + width50,
-                        type: 'click',
-                        fn: () => {
-                            const $img = editor._selectedImg
-                            if ($img) {
-                                $img.css('max-width', '50%')
-                            }
-                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                            return true
-                        }
-                    },
-                    {
-                        selector: '#' + width100,
-                        type: 'click',
-                        fn: () => {
-                            const $img = editor._selectedImg
-                            if ($img) {
-                                $img.css('max-width', '100%')
-                            }
-                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                            return true
-                        }
-                    },
-                    {
-                        selector: '#' + delBtn,
-                        type: 'click',
-                        fn: () => {
-                            const $img = editor._selectedImg
-                            if ($img) {
-                                $img.remove()
-                            }
-                            // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                            return true
-                        }
+                        // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                        return true
                     }
-                ]
+            },
+            {
+                selector: '#' + width50,
+                type: 'click',
+                fn: () = > {
+                const $img = editor._selectedImg
+                if($img) {
+                    $img.css('max-width', '50%')
+                }
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
             }
-        ]
+    },
+        {
+            selector: '#' + width100,
+                type
+        :
+            'click',
+                fn
+        :
+            () =
+        >
+            {
+                const $img = editor._selectedImg
+                if ($img) {
+                    $img.css('max-width', '100%')
+                }
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
+            }
+        }
+    ,
+        {
+            selector: '#' + delBtn,
+                type
+        :
+            'click',
+                fn
+        :
+            () =
+        >
+            {
+                const $img = editor._selectedImg
+                if ($img) {
+                    $img.remove()
+                }
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
+            }
+        }
+    ]
+    }
+    ]
 
         // 创建 panel 并显示
         const panel = new Panel(this, {
@@ -150,68 +163,74 @@ Image.prototype = {
                         // 触发选择图片
                         selector: '#' + upTriggerId,
                         type: 'click',
-                        fn: () => {
-                            const $file = $('#' + upFileId)
-                            const fileElem = $file[0]
-                            if (fileElem) {
-                                fileElem.click()
-                            } else {
-                                // 返回 true 可关闭 panel
-                                return true
-                            }
-                        }
-                    },
-                    {
-                        // 选择图片完毕
-                        selector: '#' + upFileId,
-                        type: 'change',
-                        fn: () => {
-                            const $file = $('#' + upFileId)
-                            const fileElem = $file[0]
-                            if (!fileElem) {
-                                // 返回 true 可关闭 panel
-                                return true
-                            }
-
-                            // 获取选中的 file 对象列表
-                            const fileList = fileElem.files
-                            if (fileList.length) {
-                                uploadImg.uploadImg(fileList)
-                            }
-
+                        fn: () = > {
+                        const $file = $('#' + upFileId)
+                        const fileElem = $file[0]
+                        if(fileElem) {
+                            fileElem.click()
+                        } else {
                             // 返回 true 可关闭 panel
                             return true
                         }
                     }
-                ]
-            }, // first tab end
+            },
             {
-                title: '网络图片',
-                tpl: `<div>
+                // 选择图片完毕
+                selector: '#' + upFileId,
+                type: 'change',
+                fn: () = > {
+                const $file = $('#' + upFileId)
+                const fileElem = $file[0]
+                if(!fileElem
+    )
+        {
+            // 返回 true 可关闭 panel
+            return true
+        }
+
+        // 获取选中的 file 对象列表
+        const fileList = fileElem.files
+        if (fileList.length) {
+            uploadImg.uploadImg(fileList)
+        }
+
+        // 返回 true 可关闭 panel
+        return true
+    }
+    }
+    ]
+    }, // first tab end
+        {
+            title: '网络图片',
+                tpl
+        :
+            `<div>
                     <input id="${linkUrlId}" type="text" class="block" placeholder="图片链接"/></td>
                     <div class="w-e-button-container">
                         <button id="${linkBtnId}" class="right">插入</button>
                     </div>
                 </div>`,
-                events: [
-                    {
-                        selector: '#' + linkBtnId,
-                        type: 'click',
-                        fn: () => {
-                            const $linkUrl = $('#' + linkUrlId)
-                            const url = $linkUrl.val().trim()
+                events
+        :
+            [
+                {
+                    selector: '#' + linkBtnId,
+                    type: 'click',
+                    fn: () = > {
+                    const $linkUrl = $('#' + linkUrlId)
+                    const url = $linkUrl.val().trim()
 
-                            if (url) {
-                                uploadImg.insertLinkImg(url)
-                            }
-
-                            // 返回 true 表示函数执行结束之后关闭 panel
-                            return true
-                        }
+                    if(url) {
+                        uploadImg.insertLinkImg(url)
                     }
-                ]
-            } // second tab end
-        ] // tabs end
+
+                    // 返回 true 表示函数执行结束之后关闭 panel
+                    return true
+                }
+        }
+        ]
+        } // second tab end
+    ] // tabs end
 
         // 判断 tabs 的显示
         const tabsConfigResult = []

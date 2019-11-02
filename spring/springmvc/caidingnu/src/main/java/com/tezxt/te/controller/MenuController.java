@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MenuController {
     @Autowired
     private MenuService menuService;
-    
+
     @RequestMapping("add")
     public int add(Menu menu) {
         return menuService.add(menu);
     }
-    
+
     @RequestMapping("find")
     public Menu find(String id) {
         return menuService.find(id);
     }
-    
+
     @RequestMapping("update")
     public int update(Menu menu) {
         return menuService.update(menu);
     }
-    
+
     @RequestMapping("delete")
     public int delete(String id) {
         return menuService.delete(id);

@@ -3,9 +3,9 @@ server:
 
 mybatis:
   configuration:
-#    驼峰和下换线转换
+    #    驼峰和下换线转换
     map-underscore-to-camel-case: true
-#    sql日志
+    #    sql日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 spring:

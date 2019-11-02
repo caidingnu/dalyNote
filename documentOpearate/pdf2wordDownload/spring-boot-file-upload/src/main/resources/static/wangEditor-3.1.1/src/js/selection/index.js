@@ -3,7 +3,7 @@
 */
 
 import $ from '../util/dom-core.js'
-import { UA } from '../util/util.js'
+import {UA} from '../util/util.js'
 
 // 构造函数
 function API(editor) {

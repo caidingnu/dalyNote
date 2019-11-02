@@ -9,8 +9,8 @@
         <result column="status" property="status" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, login_name, rel_name, password, status
-  </sql>
+        id, login_name, rel_name, password, status
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -18,15 +18,15 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from t_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.tese.boot.entity.User">
-    insert into t_user (id, login_name, rel_name,
-      password, status)
-    values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{relName,jdbcType=VARCHAR},
-      #{password,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
-  </insert>
+        insert into t_user (id, login_name, rel_name,
+        password, status)
+        values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{relName,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.tese.boot.entity.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,63 +83,63 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.tese.boot.entity.User">
-    update t_user
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      rel_name = #{relName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update t_user
+        set login_name = #{loginName,jdbcType=VARCHAR},
+        rel_name = #{relName,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
     <select id="selectByid" resultType="com.tese.boot.entity.pojo.LoginReturn">
- SELECT
-     t_user.id as userId,
-     t_user.login_name as loginName,
-     t_user.rel_name as relName,
-      t_menu.pid as menuPid,
-      t_menu.menu_name as menuName,
-      t_menu.url,
-      t_menu.status,
-      role_user.role_id as roleId
-      FROM t_user
-      inner join role_user
-      on t_user.id=role_user.role_id
-      inner join role_menu
-      on role_user.role_id=role_menu.role_id
-      inner join t_menu
-      on role_menu.menu_id=t_menu.id
-      WHERE
-	t_user.id= #{id}
-  </select>
+        SELECT
+        t_user.id as userId,
+        t_user.login_name as loginName,
+        t_user.rel_name as relName,
+        t_menu.pid as menuPid,
+        t_menu.menu_name as menuName,
+        t_menu.url,
+        t_menu.status,
+        role_user.role_id as roleId
+        FROM t_user
+        inner join role_user
+        on t_user.id=role_user.role_id
+        inner join role_menu
+        on role_user.role_id=role_menu.role_id
+        inner join t_menu
+        on role_menu.menu_id=t_menu.id
+        WHERE
+        t_user.id= #{id}
+    </select>
 
 
     <select id="selectlogin" resultType="com.tese.boot.entity.pojo.LoginReturn">
-     SELECT
-     t_user.id as userId,
-     t_user.login_name as loginName,
-     t_user.rel_name as relName,
-      t_menu.pid as menuPid,
-      t_menu.menu_name as menuName,
-      t_menu.url,
-      role_user.role_id as roleId
-      FROM t_user
-      inner join role_user
-      on t_user.id=role_user.role_id
-      inner join role_menu
-      on role_user.role_id=role_menu.role_id
-      inner join t_menu
-      on role_menu.menu_id=t_menu.id
-      WHERE
-	t_user.login_name = #{loginName}
-	AND t_user.password = #{password}
-  </select>
+        SELECT
+        t_user.id as userId,
+        t_user.login_name as loginName,
+        t_user.rel_name as relName,
+        t_menu.pid as menuPid,
+        t_menu.menu_name as menuName,
+        t_menu.url,
+        role_user.role_id as roleId
+        FROM t_user
+        inner join role_user
+        on t_user.id=role_user.role_id
+        inner join role_menu
+        on role_user.role_id=role_menu.role_id
+        inner join t_menu
+        on role_menu.menu_id=t_menu.id
+        WHERE
+        t_user.login_name = #{loginName}
+        AND t_user.password = #{password}
+    </select>
 
     <select id="selectId" resultType="string">
-    select id from t_user where login_name = #{loginName} and password = #{password}
-  </select>
+        select id from t_user where login_name = #{loginName} and password = #{password}
+    </select>
 
 
     <select id="selectAcc" resultMap="BaseResultMap">
-    select * from t_user
-  </select>
+        select * from t_user
+    </select>
 </mapper>

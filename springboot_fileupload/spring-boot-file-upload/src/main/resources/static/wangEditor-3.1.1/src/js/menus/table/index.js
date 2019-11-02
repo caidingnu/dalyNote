@@ -2,7 +2,7 @@
     menu - table
 */
 import $ from '../../util/dom-core.js'
-import { getRandom } from '../../util/util.js'
+import {getRandom} from '../../util/util.js'
 import Panel from '../panel.js'
 
 // 构造函数
@@ -62,23 +62,24 @@ Table.prototype = {
                             // 点击按钮，插入表格
                             selector: '#' + btnInsertId,
                             type: 'click',
-                            fn: () => {
-                                const rowNum = parseInt($('#' + textRowNum).val())
-                                const colNum = parseInt($('#' + textColNum).val())
+                            fn: () = > {
+                            const rowNum = parseInt($('#' + textRowNum).val())
+                            const colNum = parseInt($('#' + textColNum).val())
 
-                                if (rowNum && colNum && rowNum > 0 && colNum > 0) {
-                                    // form 数据有效
-                                    this._insert(rowNum, colNum)
-                                }
+                            if(rowNum && colNum && rowNum > 0 && colNum > 0)
+        {
+            // form 数据有效
+            this._insert(rowNum, colNum)
+        }
 
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        }
-                    ]
-                } // first tab end
-            ]  // tabs end
-        }) // panel end
+        // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+        return true
+    }
+    }
+    ]
+    } // first tab end
+    ]  // tabs end
+    }) // panel end
 
         // 展示 panel
         panel.show()
@@ -127,14 +128,14 @@ Table.prototype = {
 
         // 创建 panel 对象
         const panel = new Panel(this, {
-            width: 320,
-            // panel 包含多个 tab
-            tabs: [
-                {
-                    // 标题
-                    title: '编辑表格',
-                    // 模板
-                    tpl: `<div>
+                width: 320,
+                // panel 包含多个 tab
+                tabs: [
+                    {
+                        // 标题
+                        title: '编辑表格',
+                        // 模板
+                        tpl: `<div>
                         <div class="w-e-button-container" style="border-bottom:1px solid #f1f1f1;padding-bottom:5px;margin-bottom:5px;">
                             <button id="${addRowBtnId}" class="left">增加行</button>
                             <button id="${delRowBtnId}" class="red left">删除行</button>
@@ -145,62 +146,75 @@ Table.prototype = {
                             <button id="${delTableBtnId}" class="gray left">删除表格</button>
                         </dv>
                     </div>`,
-                    // 事件绑定
-                    events: [
-                        {
-                            // 增加行
-                            selector: '#' + addRowBtnId,
-                            type: 'click',
-                            fn: () => {
+                        // 事件绑定
+                        events: [
+                            {
+                                // 增加行
+                                selector: '#' + addRowBtnId,
+                                type: 'click',
+                                fn: () = > {
                                 this._addRow()
                                 // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
                                 return true
                             }
-                        },
-                        {
-                            // 增加列
-                            selector: '#' + addColBtnId,
-                            type: 'click',
-                            fn: () => {
-                                this._addCol()
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        },
-                        {
-                            // 删除行
-                            selector: '#' + delRowBtnId,
-                            type: 'click',
-                            fn: () => {
-                                this._delRow()
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        },
-                        {
-                            // 删除列
-                            selector: '#' + delColBtnId,
-                            type: 'click',
-                            fn: () => {
-                                this._delCol()
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        },
-                        {
-                            // 删除表格
-                            selector: '#' + delTableBtnId,
-                            type: 'click',
-                            fn: () => {
-                                this._delTable()
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        }
-                    ]
-                }
-            ]
-        })
+                    },
+                    {
+                        // 增加列
+                        selector: '#' + addColBtnId,
+                        type: 'click',
+                        fn: () = > {
+                        this._addCol()
+                        // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                        return true
+                    }
+            },
+            {
+                // 删除行
+                selector: '#' + delRowBtnId,
+                type: 'click',
+                fn: () = > {
+                this._delRow()
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
+            }
+    },
+        {
+            // 删除列
+            selector: '#' + delColBtnId,
+                type
+        :
+            'click',
+                fn
+        :
+            () =
+        >
+            {
+                this._delCol()
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
+            }
+        }
+    ,
+        {
+            // 删除表格
+            selector: '#' + delTableBtnId,
+                type
+        :
+            'click',
+                fn
+        :
+            () =
+        >
+            {
+                this._delTable()
+                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+                return true
+            }
+        }
+    ]
+    }
+    ]
+    })
         // 显示 panel
         panel.show()
     },
@@ -222,33 +236,37 @@ Table.prototype = {
         const $tr = $selectionELem.parent()
         const $tds = $tr.children()
         const tdLength = $tds.length
-        $tds.forEach((td, index) => {
-            if (td === $selectionELem[0]) {
-                // 记录并跳出循环
-                result.td = {
-                    index: index,
-                    elem: td,
-                    length: tdLength
-                }
-                return false
+        $tds.forEach((td, index) = > {
+            if(td === $selectionELem[0]
+    )
+        {
+            // 记录并跳出循环
+            result.td = {
+                index: index,
+                elem: td,
+                length: tdLength
             }
-        })
+            return false
+        }
+    })
 
         // 获取 tr index
         const $tbody = $tr.parent()
         const $trs = $tbody.children()
         const trLength = $trs.length
-        $trs.forEach((tr, index) => {
-            if (tr === $tr[0]) {
-                // 记录并跳出循环
-                result.tr = {
-                    index: index,
-                    elem: tr,
-                    length: trLength
-                }
-                return false
+        $trs.forEach((tr, index) = > {
+            if(tr === $tr[0]
+    )
+        {
+            // 记录并跳出循环
+            result.tr = {
+                index: index,
+                elem: tr,
+                length: trLength
             }
-        })
+            return false
+        }
+    })
 
         // 返回结果
         return result
@@ -292,7 +310,7 @@ Table.prototype = {
         const $trs = $trParent.children()
 
         // 遍历所有行
-        $trs.forEach(tr => {
+        $trs.forEach(tr = > {
             const $tr = $(tr)
             const $tds = $tr.children()
             const $currentTd = $tds.get(tdIndex)
@@ -301,7 +319,8 @@ Table.prototype = {
             // new 一个 td，并插入
             const newTd = document.createElement(name)
             $(newTd).insertAfter($currentTd)
-        })
+        }
+    )
     },
 
     // 删除行
@@ -331,13 +350,14 @@ Table.prototype = {
         const $trs = $trParent.children()
 
         // 遍历所有行
-        $trs.forEach(tr => {
+        $trs.forEach(tr = > {
             const $tr = $(tr)
             const $tds = $tr.children()
             const $currentTd = $tds.get(tdIndex)
             // 删除
             $currentTd.remove()
-        })
+        }
+    )
     },
 
     // 删除表格

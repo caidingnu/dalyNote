@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
-		<script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
-		<div id="main">
-			<div id="" v-for="item,index in menu">
-				<p @click="go(item.url)" style="border-bottom: 2px solid #00FFFF;cursor: pointer;">{{index}}{{item.menuName}}
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</p>
-			</div>
-			<a href="javaScript:history.back()">返回</a>
-		</div>
-	</body>
-	<script type="text/javascript">
-		var LOGIN = new Vue({
-			el: "#main",
-			data: {
-				loginName: 'admin',
-				password: '123',
-				menu: '',
-			},
-			methods: {
-				login: function(e) {
-					console.log(request.getParam("loginName"))
-					$.ajax({
-						url: "http://127.0.0.1:80/login", //请求的action路径
-						dataType: "json",
-						data: {
-							loginName:request.getParam("loginName"),
-							password:request.getParam("password")
-						},
-						success: function(data) { //添加子节点到指定的父节点
-							if (data.StateCode == 200) {
-								LOGIN.menu=data.Data
-							} else if (data.StateCode == 1003) {
-								alert("账号或密码错误")
-							}
-						},
-						error: function() { //请求失败处理函数
-							alert('请求失败');
-						},
-					});
-				},
-				go(url){
-					location.href=url
-				}
-			}
-		})
-			LOGIN.login()
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="../js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="main">
+    <div id="" v-for="item,index in menu">
+        <p @click="go(item.url)" style="border-bottom: 2px solid #00FFFF;cursor: pointer;">{{index}}{{item.menuName}}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+    </div>
+    <a href="javaScript:history.back()">返回</a>
+</div>
+</body>
+<script type="text/javascript">
+    var LOGIN = new Vue({
+        el: "#main",
+        data: {
+            loginName: 'admin',
+            password: '123',
+            menu: '',
+        },
+        methods: {
+            login: function (e) {
+                console.log(request.getParam("loginName"))
+                $.ajax({
+                    url: "http://127.0.0.1:80/login", //请求的action路径
+                    dataType: "json",
+                    data: {
+                        loginName: request.getParam("loginName"),
+                        password: request.getParam("password")
+                    },
+                    success: function (data) { //添加子节点到指定的父节点
+                        if (data.StateCode == 200) {
+                            LOGIN.menu = data.Data
+                        } else if (data.StateCode == 1003) {
+                            alert("账号或密码错误")
+                        }
+                    },
+                    error: function () { //请求失败处理函数
+                        alert('请求失败');
+                    },
+                });
+            },
+            go(url) {
+                location.href = url
+            }
+        }
+    })
+    LOGIN.login()
 
-		//paraName 等找参数的名称
-	</script>
+    //paraName 等找参数的名称
+</script>
 </html>

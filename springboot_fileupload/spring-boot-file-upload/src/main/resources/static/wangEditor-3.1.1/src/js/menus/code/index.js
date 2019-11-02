@@ -2,9 +2,9 @@
     menu - code
 */
 import $ from '../../util/dom-core.js'
-import { getRandom, replaceHtmlSymbol } from '../../util/util.js'
+import {getRandom, replaceHtmlSymbol} from '../../util/util.js'
 import Panel from '../panel.js'
-import { UA } from '../../util/util.js'
+import {UA} from '../../util/util.js'
 
 // 构造函数
 function Code(editor) {
@@ -83,26 +83,29 @@ Code.prototype = {
                         {
                             selector: '#' + btnId,
                             type: 'click',
-                            fn: () => {
-                                const $text = $('#' + textId)
-                                let text = $text.val() || $text.html()
-                                text = replaceHtmlSymbol(text)
-                                if (type === 'new') {
-                                    // 新插入
-                                    this._insertCode(text)
-                                } else {
-                                    // 编辑更新
-                                    this._updateCode(text)
-                                }
+                            fn: () = > {
+                            const $text = $('#' + textId)
+                            let text = $text.val() || $text.html()
+                            text = replaceHtmlSymbol(text)
+                            if(type === 'new')
+        {
+            // 新插入
+            this._insertCode(text)
+        }
+    else
+        {
+            // 编辑更新
+            this._updateCode(text)
+        }
 
-                                // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
-                                return true
-                            }
-                        }
-                    ]
-                } // first tab end
-            ] // tabs end
-        }) // new Panel end
+        // 返回 true，表示该事件执行完之后，panel 要关闭。否则 panel 不会关闭
+        return true
+    }
+    }
+    ]
+    } // first tab end
+    ] // tabs end
+    }) // new Panel end
 
         // 显示 panel
         panel.show()

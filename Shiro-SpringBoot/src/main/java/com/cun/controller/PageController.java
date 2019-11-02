@@ -23,7 +23,6 @@ public class PageController {
     }
 
 
-
     //跳转到登录表单页面
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
