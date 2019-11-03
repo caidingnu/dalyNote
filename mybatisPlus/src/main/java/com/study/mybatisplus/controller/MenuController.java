@@ -4,11 +4,9 @@ package com.study.mybatisplus.controller;
 import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.study.mybatisplus.MybatisplusApplication;
 import com.study.mybatisplus.entity.Menu;
 import com.study.mybatisplus.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,7 +46,7 @@ public class MenuController {
      * date: 2019/10/31
      */
     @RequestMapping("page")
-    public Object page( Integer startPage,Integer pageSize ) {
+    public Object page(Integer startPage, Integer pageSize) {
         EntityWrapper<Menu> entityWrapper = new EntityWrapper<>();
 //        分页条件
         entityWrapper.lt("id", 2);
@@ -218,5 +216,7 @@ public class MenuController {
 //        更新方法很多
         return iMenuService.insertOrUpdate(menu);
     }
+
+
 
 }

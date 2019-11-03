@@ -1,0 +1,23 @@
+person:
+  lastName:  张三    #属性
+  age: 27    #属性
+  boss: false   #属性
+  birth: 2011/12/15  #属性
+#  maps: {job: 医生,gender: 男}
+  maps:  #map
+    job: 医生
+    gender: 男
+  lists: #list
+    - 李四
+    - 赵六
+  dog:  #object
+    name: 阿拉斯加
+    age: 2
+  array: 1,2,3,4   #数组
+
+
+server:
+  port: 80
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true

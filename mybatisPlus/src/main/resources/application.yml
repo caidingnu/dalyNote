@@ -8,10 +8,14 @@ spring:
     password: root
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-mybatis:
+
+mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
 
 # ########################################## springboot 2.0 中默认连接池是Hikari ##########################################
 #  # jdbc_config   datasource
@@ -28,4 +32,5 @@ mybatis:
 #  spring.datasource.hikari.pool-name=DatebookHikariCP
 #  spring.datasource.hikari.max-lifetime=1800000
 #  spring.datasource.hikari.connection-timeout=30000
+
 #  spring.datasource.hikari.connection-test-query=SELECT 1
