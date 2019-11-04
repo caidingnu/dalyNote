@@ -1,7 +1,7 @@
 package com.study.mybatisplus.service;
 
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.mybatisplus.entity.Menu;
 
 import java.util.List;

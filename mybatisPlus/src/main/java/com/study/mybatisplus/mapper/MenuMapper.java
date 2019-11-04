@@ -1,6 +1,6 @@
 package com.study.mybatisplus.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.study.mybatisplus.entity.Menu;
 import org.apache.ibatis.annotations.Select;
 

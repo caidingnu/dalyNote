@@ -1,9 +1,8 @@
 package com.study.mybatisplus.controller;
 
 
-import com.baomidou.mybatisplus.enums.SqlLike;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.study.mybatisplus.entity.Menu;
 import com.study.mybatisplus.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,41 @@ public class MenuController {
 
     @RequestMapping("all")
     public Object test() {
-        EntityWrapper<Menu> entityWrapper = new EntityWrapper<>();
-        return iMenuService.selectList(null);
+        Menu menu = new Menu();
+        menu.selectList(null);
+        menu.selectAll();
+        return iMenuService.list();
+    }
+
+
+    /**
+     * desc: lambad 的and   or
+     * param:
+     * return:
+     * author: CDN
+     * date: 2019/11/4
+     */
+    @RequestMapping("lambad")
+    public Object lambad() {
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(p -> p.like(true, "name", "金浔"));
+        queryWrapper.or(p -> p.eq("id", 2));
+        return iMenuService.list(queryWrapper);
+    }
+
+    /**
+     * desc: 子查询
+     * param:
+     * return:
+     * author: CDN
+     * date: 2019/11/4
+     */
+    @RequestMapping("selectChild")
+    public Object selectChild() {
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.in(true, "id", "select id from menu");
+        queryWrapper.inSql("id", "select id from menu where id in (1,2,3)");
+        return iMenuService.list(queryWrapper);
     }
 
 
@@ -47,16 +79,15 @@ public class MenuController {
      */
     @RequestMapping("page")
     public Object page(Integer startPage, Integer pageSize) {
-        EntityWrapper<Menu> entityWrapper = new EntityWrapper<>();
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
 //        分页条件
-        entityWrapper.lt("id", 2);
+        queryWrapper.lt("id", 2);
         Page<Menu> page = new Page<>(startPage == null ? 0 : pageSize, 10);
-
-        return iMenuService.selectPage(page, entityWrapper);
+        return iMenuService.page(page, queryWrapper);
     }
 
     /**
-     * desc: 自定义sql
+     * desc: 自定义sql  【and】
      * param:
      * return:
      * author: CDN
@@ -64,9 +95,16 @@ public class MenuController {
      */
     @RequestMapping("sql")
     public Object tiaojian() {
-        EntityWrapper<Menu> entityWrapper = new EntityWrapper<>();
-        entityWrapper.setSqlSelect(" menu.* ").eq("id", 1).and("pid", 33);
-        return iMenuService.selectMaps(entityWrapper);
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+//
+        queryWrapper.select("*").eq("id", 1).and(p -> p.like("name", "金浔"));
+
+//        或者 and
+        queryWrapper.eq("pid", 33);
+
+//        或者 or
+        queryWrapper.or().like("name", "金浔");
+        return iMenuService.list(queryWrapper);
     }
 
 
@@ -83,7 +121,7 @@ public class MenuController {
         list.add(1);
         list.add(2);
         list.add(3);
-        return iMenuService.selectBatchIds(list);
+        return iMenuService.listByIds(list);
     }
 
 
@@ -96,6 +134,7 @@ public class MenuController {
      */
     @RequestMapping("join")
     public Object join() {
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
         return iMenuService.inner();
     }
 
@@ -109,18 +148,13 @@ public class MenuController {
      */
     @RequestMapping("like")
     public Object like() {
-
-        EntityWrapper<Menu> wrapper = new EntityWrapper<>();
-//        wrapper.like("name", "部",);
-//                LEFT("left", "左边%"),
-//                RIGHT("right", "右边%"),
-//                CUSTOM("custom", "定制"),
-//                DEFAULT("default", "两边%");
-        wrapper.like("name", "部", SqlLike.RIGHT);
-        wrapper.like("name", "部", SqlLike.LEFT);
-        wrapper.like("name", "部", SqlLike.DEFAULT);
-        wrapper.like("name", "_务%", SqlLike.CUSTOM);
-        return iMenuService.selectList(wrapper);
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name", "部");
+        queryWrapper.likeRight("name", "部");
+        queryWrapper.likeLeft("name", "部");
+        queryWrapper.like("name", "_务%");
+        queryWrapper.like("name", "_务");
+        return iMenuService.list(queryWrapper);
     }
 
 
@@ -138,12 +172,12 @@ public class MenuController {
         menu.setName("测试");
 
 //        第一种
-//        boolean b = menu.insertOrUpdate();
+        boolean b = menu.insertOrUpdate();
 
 //        第二种
-        EntityWrapper<Menu> wrapper = new EntityWrapper<>();
-        wrapper.setEntity(menu);
-        return iMenuService.insertOrUpdate(menu);
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.setEntity(menu);
+        return iMenuService.saveOrUpdate(menu);
     }
 
     /**
@@ -161,28 +195,29 @@ public class MenuController {
         menu.deleteById();
 //     二
         menu.deleteById(1);
-//  三
-        menu.delete("id", 1);
+
 //        四
-        EntityWrapper<Menu> wrapper = new EntityWrapper<>();
-        wrapper.where("id", 1);
+        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
+        wrapper.eq("id", 1);
         menu.delete(wrapper);
 
 //        五
-        iMenuService.delete(wrapper);
+        iMenuService.remove(wrapper);
+
 //        6 批量删除
         List<Integer> idList = new ArrayList<Integer>() {{
             add(1);
         }};
-        iMenuService.deleteBatchIds(idList);
+        iMenuService.removeByIds(idList);
 
 //        7
-        iMenuService.deleteById(1);
+        iMenuService.removeById(1);
 //        8
         Map<String, Object> map = new HashMap<String, Object>() {{
             put("id", 1);
         }};
-        iMenuService.deleteByMap(map);
+        iMenuService.removeByMap(map);
+
         return null;
     }
 
@@ -203,20 +238,18 @@ public class MenuController {
 //        boolean b = menu.insertOrUpdate();
 
 //        第二种
-        EntityWrapper<Menu> wrapper1 = new EntityWrapper<>();
+        QueryWrapper<Menu> wrapper1 = new QueryWrapper<>();
         wrapper1.setEntity(menu);
-        wrapper1.where("id", 1);
+        wrapper1.eq("id", 1);
         menu.update(wrapper1);
 
-
 //        第三种
-        EntityWrapper<Menu> wrapper = new EntityWrapper<>();
+        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.setEntity(menu);
 
 //        更新方法很多
-        return iMenuService.insertOrUpdate(menu);
+        return iMenuService.saveOrUpdate(menu);
     }
-
 
 
 }

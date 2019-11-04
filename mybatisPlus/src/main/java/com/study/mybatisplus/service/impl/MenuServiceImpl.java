@@ -1,6 +1,6 @@
 package com.study.mybatisplus.service.impl;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.mybatisplus.entity.Menu;
 import com.study.mybatisplus.mapper.MenuMapper;
 import com.study.mybatisplus.service.IMenuService;
