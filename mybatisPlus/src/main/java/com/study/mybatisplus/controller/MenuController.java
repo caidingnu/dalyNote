@@ -71,6 +71,23 @@ public class MenuController {
 
 
     /**
+     * desc: 查询制定字段
+     * param:
+     * return:
+     * author: CDN
+     * date: 2019/11/5
+     */
+    @RequestMapping("find")
+    public Object find(){
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id,name").eq("id", 1);
+
+        return  iMenuService.list(queryWrapper);
+    }
+
+
+
+    /**
      * desc: 分页查询
      * param:
      * return:
@@ -156,6 +173,8 @@ public class MenuController {
         queryWrapper.like("name", "_务");
         return iMenuService.list(queryWrapper);
     }
+
+
 
 
     /**
