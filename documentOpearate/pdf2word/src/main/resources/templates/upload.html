@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
+</head>
+<body>
+<!--<fieldset>-->
+<!--    <legend><h1>文件上传</h1></legend>-->
+<!--    <form method="POST" id="on" action="/upload" enctype="multipart/form-data">-->
+<!--        <input type="file" name="file"/><br/><br/>-->
+<!--        <input type="submit" class="layui-btn layui-btn-danger layui-icon-share" value="上传"/>-->
+<!--    </form>-->
+<!--</fieldset>-->
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>PDF转word</legend>
+</fieldset>
+<div style="text-align: center">
+    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>选择文件</button>
+</div>
+<!--<fieldset style="color: brown;">-->
+<!--    <legend><h1>多文件上传</h1></legend>-->
+<!--    <form method="POST" action="/many" enctype="multipart/form-data">-->
+<!--        <input type="file" multiple name="files"/><br/><br/>-->
+<!--        <input type="submit" value="多文件上传"/>-->
+<!--    </form>-->
+<!--    <img>-->
+<!--</fieldset>-->
+<!--<marquee direction=left>需要移动的文字</marquee>-->
+</body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/layui/layui.js"></script>
+<!--<script src="js/layer/layer.js"></script>-->
+<script src="js/system.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+        integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+        crossorigin="anonymous"></script>
+<script>
+    layui.use(['upload', 'layer'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , layer = layui.layer;
+        //指定允许上传的文件类型
+        upload.render({
+            elem: '#test3'
+            , url: '/upload'
+            , accept: 'file' //普通文件
+            , field: "file"
+            // , size: 10 //最大允许上传的文件大小
+            , done: function (resp) {
+                if (resp.code === "200") {
+                    layer.closeAll();
+                    //询问框
+                    var con = layer.confirm('文件转换完成，下载吗？', {
+                        btn: ['确定', '取消'], //按钮
+                        title: "下载提醒"
+                    }, function () {
+                        layer.close(con);
+                        location.href = resp.data;
+                    }, function () {
+                        layer.close(con);
+                    });
+                } else {
+                    layer.closeAll();
+                    layer.msg(resp.data, {
+                        icon: 5
+                    })
+                }
+
+            }, choose: function () {
+                index = layer.msg('正在解析pdf文件，请稍后', {
+                    icon: 16,
+                    time: -1,
+                    shade: 0.5
+                });
+            }
+        });
+
+
+    })
+</script>
+</html>
