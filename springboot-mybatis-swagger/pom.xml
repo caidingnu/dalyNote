@@ -3,12 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--
-        groupId打出来的jar或者war包名称（可以改）
-        version打出来的jar或者war包名称（可以改）
-        <packaging>jar</packaging>打出来是jar包
-        <packaging>war</packaging>打出来是war包
-    -->
+
     <groupId>com.oceam</groupId>
     <artifactId>spring</artifactId>
     <version>1</version>
