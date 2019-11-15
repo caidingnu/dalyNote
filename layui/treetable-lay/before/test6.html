@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>故障查询</title>
+    <link rel="stylesheet" href="../../common/layui/css/layui.css">
+    <link rel="stylesheet" href="../../common/define/tree/css/tree.css">
+</head>
+<style>
+    .layui-form-checkbox{
+        height: 34px;
+    }
+    .layui-form-checkbox i{
+        height: 32px;
+    }
+    .layui-form-checked span, .layui-form-checked:hover span {
+        background-color: #1E9FFF;
+    }
+</style>
+<body>
+<form class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <input type="text" name="keyword" id="keyword_id" autocomplete="off" class="layui-input" placeholder="请输入关键字">
+        </div>
+        <div class="layui-inline">
+            <input type="checkbox" name="like[all]" id="stateCheckbox" title="全部">
+        </div>
+        <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-normal" id="dateSortBtn" lay-submit lay-filter="dateSortBtn">时间<i class="layui-icon layui-icon-down"></i></button>
+        </div>
+        <div class="layui-inline" style="float: right;margin-top: 3px">
+            <button type="button" class="layui-btn layui-btn-normal" id="keywordSearchBtn">确认检索</button>
+        </div>
+    </div>
+</form>
+<table class="layui-hide" id="dataTree" lay-filter="treeEvent"></table>
+</body>
+<script src="../../common/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: 'module/'
+    }).extend({
+        treetable: 'treetable-lay/treetable-2.0'
+    }).use(['layer', 'table', 'treetable','laydate','form'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var treetable = layui.treetable;
+        var form=layui.form;
+        var dataSortType='desc';
+
+        treetable.render({
+            treeColIndex: 0,
+            treeShowName:'name',//表格树显示字段，name可自定义。如：title:'系统管理'，这里treeShowName的值为title
+            treeSpid: -1,
+            treeIdName: 'id',
+            treePidName: 'pid',
+            treeDefaultClose: true,
+            treeLinkage: false,
+            updateTreeDataCache:false,//是否更新缓存的treeData数据，false为不更新，true为更新
+            elem: '#dataTree',
+            url:'/collect-monitor/exceptionManager/typeSearch',
+            id:'id',
+            where:{state:0},
+            sortInit: { //此字段相当于table的initSort，用于定位对哪个字段进行排序以及排序类型
+                field: 'createTime'
+                ,type: 'desc'
+            },
+            height: 'full-90',
+            page: false,
+            cols: [[
+                {field: 'name', title: '应用模块名称',event: 'nameEvent'},
+                {field: 'createTime', title: '故障产生时间'},
+            ]],
+            //加载完成回调事件
+            done: function () {
+                // to do
+            },
+            //点击列图标回调事件
+            clickIcon:function (id,type) {
+                //to do
+            }
+        });
+
+        form.on('submit(dateSortBtn)',function () {
+            var hasClass = $(this).find("i").hasClass("layui-icon-down");
+            if(hasClass){
+                dataSortType='asc';
+                $(this).find("i").removeClass("layui-icon-down");
+                $(this).find("i").addClass("layui-icon-up");
+            }else {
+                dataSortType='desc';
+                $(this).find("i").removeClass("layui-icon-up");
+                $(this).find("i").addClass("layui-icon-down");
+            }
+            var keyword = $('#keyword_id').val();
+            //reload({params:{},where:{}})，其中params为表格树treetable的参数，where为搜索字段参数，可为关键字搜索keyword或者自定义字段到后台搜索,前端关键字搜索只支持keyword字段
+            treetable.reload({params:{updateTreeDataCache:false,sortInit: {field: 'createTime',type: dataSortType},treeDefaultClose:true},where:{field:keyword}});
+        });
+
+        $('#keywordSearchBtn').bind('click',function () {
+            var keyword = $('#keyword_id').val();
+            if(''===keyword){
+                layer.msg("请输入关键字");
+                return;
+            }
+            treetable.reload({params:{updateTreeDataCache:false,sortInit: {field: 'createTime',type: dataSortType}},where:{keyword:keyword}});
+        });
+        
+        $('#stateCheckbox').next().bind('click',function () {
+            var isCheck = $(this).hasClass('layui-form-checked');
+            if(isCheck){
+                treetable.reload({params:{updateTreeDataCache:true,sortInit: {field: 'createTime',type: dataSortType}},where:{state:null}});
+            }else {
+                treetable.reload({params:{updateTreeDataCache:true,sortInit: {field: 'createTime',type: dataSortType}},where:{state:0}});
+            }
+        });
+    });
+</script>
+</html>
