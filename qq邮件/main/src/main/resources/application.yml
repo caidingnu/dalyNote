@@ -1,0 +1,4 @@
+emailaddr: xxx@qq.com
+authCode: 授权码
+server:
+  port: 80
