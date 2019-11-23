@@ -8,7 +8,7 @@ usage() {
 }
 #检查程序是否在运行
 is_exist(){
-  pid=ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'
+  pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
   #如果不存在返回1，存在返回0
   if [ -z "${pid}" ]; then
    return 1
@@ -21,11 +21,11 @@ is_exist(){
 start(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo "${APP_NAME} 已经运行. pid=${pid} ."
+    echo "${APP_NAME} is running. pid=${pid} ."
   else
    creare_log
     nohup java -jar $APP_NAME >> logs/log.out 2>&1 &
-    echo "${APP_NAME} 启动成功!. pid=${pid} ."
+    echo "${APP_NAME} run successful!. pid=${pid} ."
   fi
 }
 
@@ -47,9 +47,9 @@ stop(){
   is_exist
   if [ $? -eq "0" ]; then
     kill -9 $pid
-    echo "${APP_NAME} 已关闭！"
+    echo "${APP_NAME} has been closed!"
   else
-    echo "${APP_NAME} 没有运行！"
+    echo "${APP_NAME} no running!"
   fi
 }
 
@@ -62,9 +62,9 @@ sed -i 's/\r//g' boot.sh
 status(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo "${APP_NAME} 正在运行. Pid is ${pid}"
+    echo "${APP_NAME} is running!- Pid is ${pid}"
   else
-    echo "${APP_NAME} 未运行."
+    echo "${APP_NAME} no running!."
   fi
 }
 
