@@ -1,7 +1,8 @@
 package com.cun.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,16 @@ public class PageController {
     @RequestMapping("/index")
     public String list() {
         return "index";
+    }
+
+
+    //未登录，可以访问的页面
+    @RequestMapping(value = "/logout" , method = RequestMethod.GET)
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+
+        return  "redirect:login";
     }
 
 }

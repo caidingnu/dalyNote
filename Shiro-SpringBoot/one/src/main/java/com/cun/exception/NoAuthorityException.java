@@ -21,7 +21,7 @@ public class NoAuthorityException {
     @ExceptionHandler(value = AuthorizationException.class)//处理访问方法时权限不足问题
     public Map<String, Object> defaultErrorHandler(HttpServletRequest req, Exception e) {
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("success", false);
         map.put("msg", "无权限！");
 

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/urp?useUnicode=true&characterEncoding=utf-8  #解决中文乱码的问题
+    url: jdbc:mysql://129.28.171.44:3306/urp?useUnicode=true&characterEncoding=utf-8  #解决中文乱码的问题
     username: root
     password: root
   jpa:

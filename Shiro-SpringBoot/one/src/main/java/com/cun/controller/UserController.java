@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
@@ -40,7 +41,7 @@ public class UserController {
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
         // timeout:-1000ms 永不超时
-        SecurityUtils.getSubject().getSession().setTimeout(-1000l);
+        SecurityUtils.getSubject().getSession().setTimeout(-1000L);
 
         //记住我(下次登录则不会调用login方法)
         token.setRememberMe(rememberMe);
@@ -78,7 +79,6 @@ public class UserController {
             ae.printStackTrace();
             logger.error(ae.getMessage());
         }
-
         return map;
     }
 
@@ -145,6 +145,7 @@ public class UserController {
 
     @RequiresRoles({"p"}) //没有的话 AuthorizationException
     @PostMapping("/p")
+//    @RequiresRoles(value = {"admin","manager","writer"}, logical = Logical.OR)
     public Map<String, Object> pRole() {
         System.out.println("p");
         Map<String, Object> map = new HashMap<String, Object>();

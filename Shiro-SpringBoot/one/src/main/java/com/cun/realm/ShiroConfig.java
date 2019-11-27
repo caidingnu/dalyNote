@@ -3,6 +3,7 @@ package com.cun.realm;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -58,12 +59,18 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
 
+//        filterChainDefinitionMap.put("/user/index", "perms[system:user:index]");
+//        filterChainDefinitionMap.put("/user/add", "perms[system:user:add]");
+//        filterChainDefinitionMap.put("/user/edit", "perms[system:user:edit]");
+//        filterChainDefinitionMap.put("/user/delete", "perms[system:user:delete]");
+//        filterChainDefinitionMap.put("/user/grant/**", "perms[system:user:grant]");
+
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/index/", "anon");
         filterChainDefinitionMap.put("/main/", "anon");
-        filterChainDefinitionMap.put("/index/", "anon");
+        filterChainDefinitionMap.put("/url/v1/*", "anon");
         filterChainDefinitionMap.put("/403/", "anon");
         filterChainDefinitionMap.put("/login/", "anon");
         //测试权限用
@@ -228,6 +235,9 @@ public class ShiroConfig {
         return redisSessionDAO;
     }
 
-//    ————————————————————————————————————————————— 限制同一账号登录同时登录人数控制 ————————————————————————————————————————————————————
-
+    //    ————————————————————————————————————————————— 配置ShiroDialect，用于Thymeleaf和Shiro标签配合使用 ————————————————————————————————————————————————————
+    @Bean
+    public ShiroDialect getShiroDialect() {
+        return new ShiroDialect();
+    }
 }
