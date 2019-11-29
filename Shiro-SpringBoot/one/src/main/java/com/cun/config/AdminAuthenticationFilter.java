@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 /**
  * 解决一个账户在一个地方登陆之后，再次登陆无法打开登陆页面问题
  */
+@Configuration
 public class AdminAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
