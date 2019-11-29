@@ -43,13 +43,6 @@ public class PageController {
     }
 
 
-    //未登录，可以访问的页面
-    @RequestMapping(value = "/logout" , method = RequestMethod.GET)
-    public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-
-        return  "redirect:login";
-    }
+    
 
 }
