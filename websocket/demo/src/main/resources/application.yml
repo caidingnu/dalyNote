@@ -1,0 +1,50 @@
+server:
+  port: 80
+
+# mysql 属性配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/caidingnu?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: root
+
+  #  redis 配置
+  redis:
+    #    redis 库
+    database: 0
+    timeout: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+
+  # 上传文件大小限制
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 30MB #单个文件的最大上限
+      max-request-size: 30MB #单个请求的文件总大小上限
+
+
+# 下换线转驼峰
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+    #        sql 打印控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
