@@ -121,6 +121,16 @@ public class LogAspect {
 //        logService.insertSelective(erpLog);
 
         System.out.println("执行插入数据库"+ entityLog);
+		logger.info("\n#####[AOP-LOG-START]######\n\trequestMark: {}\n\trequestIP: {}\n\tcontentType:{}\n\trequestUrl: {}\n\t" +
+						"requestMethod: {}\n\trequestParams: {}\n\ttargetClassAndMethod: {}\n\t调用接口:{}", IdUtil.simpleUUID(), request.getRemoteAddr(),
+				request.getHeader("Content-Type"), request.getRequestURL(), request.getMethod(), entityLog.getParams(),
+				method.getDeclaringClass().getName(), method.getName());
+		try {
+			logger.info("\n######[AOP-LOG-END]######\n\t{}", rvt);
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+		}
+		
     }
 
     /**
