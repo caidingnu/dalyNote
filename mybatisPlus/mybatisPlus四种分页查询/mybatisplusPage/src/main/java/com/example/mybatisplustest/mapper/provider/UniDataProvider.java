@@ -16,6 +16,7 @@ import java.util.Map;
 public class UniDataProvider {
 
 
+
     /**
      * desc:
      * param:
@@ -23,10 +24,13 @@ public class UniDataProvider {
      * author: CDN
      * date: 2019/12/27
      */
-    public String providerPage(Map map) {
+    public String providerPage(IPage<UniData> page,Map map) {
         SQL sql = new SQL();
-        sql.SELECT("user.name,user.password,USER.nick_name as nickName,USER.age,role.role_id as roleId,role.role " +
-                "FROM user INNER JOIN role ON `user`.user_id = role.role_id where user.user_id = #{map.userId}");
+        sql.SELECT("user.name,user.password,user.nick_name as nickName,user.age,role.role_id as roleId,role.role " +
+                "FROM user INNER JOIN role ON `user`.user_id = role.role_id ");
+        if (map.get("userId")!=null && map.get("userId") !=""){
+            sql.WHERE("user.user_id = #{map.userId}");
+        }
         return sql.toString();
     }
 }
