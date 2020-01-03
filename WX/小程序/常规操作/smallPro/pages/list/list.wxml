@@ -1,0 +1,20 @@
+<!--pages/list/list.wxml-->
+
+<view class='container'>
+  <view class='item' wx:for="{{10}}" bindtap='tan'>
+    <view class='left'>
+      <view class='left_in'>
+       <image src='../img/c.jpg'></image>
+      </view>
+    </view>
+    <view class='right'>
+      <view class='title'>这是一个标题</view>
+      <view class='time'>2016-9-{{index+1}}</view>
+      <view>
+       <text>来源</text>
+       <text>分类{{index}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

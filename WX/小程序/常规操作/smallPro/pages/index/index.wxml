@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+<form bindsubmit='formSubmit' bindreset='rest'>
+    账号：<input type='text' name='username'  placeholder='输入账号' value='1'></input>
+     密码：<input type='password' placeholder='密码' value='123'></input>
+    电话： <input type='text' name='pwd'  placeholder='电话'  value='666666'></input>
+   <button class='btn1' open-type='openSetting' form-type='submit'>
+    <image class='btnImg' src='../img/b.png'></image>
+    <view>登录</view>
+ </button>
+</form> 
+<button style='margin-top:10px' type='primary' bindtap='to'>跳转参数页</button>
+<button style='margin-top:10rpx' type='primary' bindtap='toList'>跳转列表页面</button>
+<text>{{test}}</text>
+<button bindtap='getData' id='btn1' data-ccc='周杰伦'>周杰伦</button> 
+<button bindtap='getData' id='btn2' data-ccc='刘德华'>刘德华</button> 
+</view>

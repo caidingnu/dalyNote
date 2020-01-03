@@ -1,0 +1,4 @@
+/* pages/my/my.wxss */
+text{
+  color: red
+}

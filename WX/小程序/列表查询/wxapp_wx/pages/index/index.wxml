@@ -1,0 +1,32 @@
+<!--pages/index/index.wxml-->
+<view class="main">
+  <view class="page-body" style="width:100%;position: fixed">
+    <view class="page-section page-section-spacing swiper">
+      <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{3}}" wx:key="*this">
+          <swiper-item>
+            <image src="../img/3.jpg"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+  <view class="content">
+  <view style="height:152px"></view>
+  <!-- data-id="{{item.newsId}}" data-title="{{item.title}}" 传递参数 到bindtap-->
+    <view class="content-inline" wx:for="{{news}}" bindtap='tan' data-id="{{item.newsId}}" data-title="{{item.title}}">
+         <view style="width:60px;height:60px"> 
+          <image src="../img/3.jpg"></image>
+         </view>
+          <view style="width:80%;height:60px">
+          <view class="title" style="font-size:15px;">{{item.title}}</view>
+          <view class="title" style="margin-top:3px;font-size:10px;">{{item.content}}</view>
+          <text class="small" style="font-size:8px;">{{item.createTime}}</text>
+          <text wx:if="{{item.valid==1}}">可用</text>
+          <text wx:else style="margin-left:8px;color:red;font-size:10px">不可用</text>
+          </view>
+    </view>
+    
+  </view>
+</view>

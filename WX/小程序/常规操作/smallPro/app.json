@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/my/my",
+    "pages/aa/aa",
+    "pages/bb/bb",
+    "pages/list/list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2250751",
+    "navigationBarTitleText": "测试app",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+    "tabBar": {
+      "selectedColor": "#f00",  
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "pages/img/a.png",
+     "selectedIconPath": "pages/img/b.png"
+    },
+    {
+      "pagePath": "pages/aa/aa",
+      "text": "a页面",
+     "iconPath": "pages/img/a.png",
+      "selectedIconPath": "pages/img/b.png"
+    },
+    {
+      "pagePath": "pages/my/my",
+      "text": "my页面",
+     "iconPath": "pages/img/a.png",
+      "selectedIconPath": "pages/img/b.png"
+    }]
+  }
+
+}

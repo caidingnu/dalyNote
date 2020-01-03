@@ -1,0 +1,4 @@
+<!--pages/bb/bb.wxml-->
+<text>这是b页面</text>
+
+<view>{{name}}</view>
