@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button type="button" id="a" class="layui-btn layui-btn-danger">加载1</button>
+		<button type="button" id="b" class="layui-btn layui-btn-radius">加载2</button>
+	</body>
+	<script type="text/javascript">
+		layui.use(['layer', 'jquery'], function() {
+			var layer = layui.layer,
+				$ = layui.jquery;
+			//loading层
+
+// 第一种
+			$("#a").click(function() {
+				layer.closeAll()
+				 index = layer.load(1, {
+					content: '数据加载中',
+					shade: [0.4, '#393D49'],
+					// time: 10 * 1000,
+					success: function(layero) {
+						layero.css('padding-left', '30px');
+						layero.find('.layui-layer-content').css({
+							'padding-top': '40px',
+							'width': '70px',
+							'color':'white',
+							'background-position-x': '16px'
+						});
+					}
+				})
+			});
+			
+			// 第二种
+			$("#b").click(function(){
+				layer.closeAll()
+				layer.msg("加载中",{
+					icon:16,
+					time:-1
+				})
+			})
+
+		})
+	</script>
+</html>

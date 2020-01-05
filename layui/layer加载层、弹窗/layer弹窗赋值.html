@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		.a {
+			color: #009F95 !important;
+		}
+
+		.layui-unselect {
+			color: #009F95;
+		}
+
+		/* 选中的颜色 */
+		.layui-form-select dl dd.layui-this {
+			background-color: #5FB878;
+			color: #f00;
+		}
+	</style>
+	<body>
+		<button class="layui-btn" id="ck">laytpl</button>
+		<button class="layui-btn" id="two">$</button>
+		<!-- 模板 ------------------------- -->
+		<script type="text/html" id="model">
+			<form class="layui-form">
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">输入框</label>
+			    <div class="layui-input-block">
+			      <input type="text" value="{{d[0].name}}" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item" >
+			    <label class="layui-form-label">密码框</label>
+			    <div class="layui-input-inline">
+			      <input  type="text" value="{{d[1].name}}" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">选择框</label>
+			    <div class="layui-input-block" >
+			      <select name="city">
+					  {{#  layui.each(d, function(index, item){ }}
+							   {{#  if(item.id==3){ }}
+								<option  value="{{item.id}}" {{item.id==3?"selected":""}}>{{item.name}}</option>
+							   {{#  } else { }}
+								 <option value="{{item.id}}"  >{{item.name}}</option>
+							   {{#  } }} 
+					   {{#  }); }}
+			      </select>
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">复选框</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="like[write]" title="写作">
+			      <input type="checkbox" name="like[read]" title="阅读" checked>
+			      <input type="checkbox" name="like[dai]" title="发呆">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">开关</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="switch" lay-skin="switch">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">单选框</label>
+			    <div class="layui-input-block">
+			      <input type="radio" name="sex" value="男" title="男">
+			      <input type="radio" name="sex" value="女" title="女" checked>
+			    </div>
+			  </div>
+			  <div class="layui-form-item layui-form-text">
+			    <label class="layui-form-label">文本域</label>
+			    <div class="layui-input-block">
+			      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			    </div>
+			  </div>
+			</form>
+		</script>
+		<!-- 第二种-------------------- -->
+		<script type="text/html" id="twoModel">
+			<div class="layui-form-item">
+				  <label class="layui-form-label">输入框</label>
+				  <div class="layui-input-block layui-input-inline">
+					<input type="text"   id="one" name="one"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+				  </div>
+				</div>
+				<div class="layui-form-item">
+				  <label class="layui-form-label">输入框</label>
+				  <div class="layui-input-block layui-input-inline">
+					<input type="text"  id="two2"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+				  </div>
+				</div>
+				<div class="layui-form-item">
+				  <label class="layui-form-label">输入框</label>
+				  <div class="layui-input-block layui-input-inline">
+					<input type="text"  id="three"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+				  </div>
+				</div>
+		</script>
+	</body>
+	<script>
+		layui.use(['layer', 'form', 'laytpl'], function() {
+			var form = layui.form,
+				layer = layui.layer,
+				laytpl = layui.laytpl,
+				$ = layui.$;
+			var one = [{
+					id: 1,
+					name: "刘备"
+				},
+				{
+					id: 2,
+					name: "关羽"
+				},
+				{
+					id: 3,
+					name: "张飞"
+				},
+				{
+					id: 4,
+					name: "赵云"
+				},
+			]
+			var getTpl = $("#model").html();
+			laytpl(getTpl).render(one, function(html) {
+				$("#ck").click(function() {
+					layer.open({
+						type: 1,
+						skin: 'layui-layer-rim', //加上边框
+						area: ['80%', '70%'], //宽高
+						content: html,
+						success: function(index, layero) {
+							form.render()
+						}
+					});
+				})
+			});
+
+			// 第二种============================================
+			$("#two").click(function() {
+				layer.open({
+					type: 1,
+					skin: 'layui-layer-rim', //加上边框
+					area: ['80%', '70%'], //宽高
+					content: $("#twoModel").html(),
+					success: function() {
+						$("#one").val(1)
+						$("#two2").val(99992)
+						$("#three").val(3)
+					}
+				});
+			})
+		});
+	</script>
+</html>
