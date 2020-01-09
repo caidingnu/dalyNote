@@ -3,8 +3,15 @@
 <mapper namespace="com.example.mybatisplustest.mapper.UniDataMapper">
 
    <select id="xmlPage" resultType="com.example.mybatisplustest.entity.UniData">
-       SELECT user.name,user.password,USER.nick_name as nickName,USER.age,role.role_id as roleId,role.role " +
-            "FROM user INNER JOIN role ON `user`.user_id = role.role_id where user.user_id = #{map.userId}
+       SELECT user.name,user.password,USER.nick_name as nickName,USER.age,role.role_id as roleId,role.role
+       FROM user INNER JOIN role ON `user`.user_id = role.role_id where user.user_id = #{map.userId}
    </select>
+
+
+<!--    xml 利用wrapper传递条件-->
+    <select id="xmlWrapper" resultType="com.example.mybatisplustest.entity.UniData">
+       SELECT user.name,user.password,USER.nick_name as nickName,USER.age,role.role_id as roleId,role.role
+       FROM user INNER JOIN role ON `user`.user_id = role.role_id ${ew.customSqlSegment}
+    </select>
 
 </mapper>

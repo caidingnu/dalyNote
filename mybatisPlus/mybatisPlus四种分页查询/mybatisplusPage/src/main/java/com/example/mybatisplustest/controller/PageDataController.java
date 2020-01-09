@@ -10,7 +10,7 @@ import com.example.mybatisplustest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +37,10 @@ public class PageDataController {
      */
     @RequestMapping("/annotationsPage")
     public Object annotationsPage() {
-        IPage<UniData> page=new Page<>(1, 2);
-        Map map=new HashMap();
+        IPage<UniData> page = new Page<>(1, 2);
+        Map map = new HashMap();
         map.put("userId", 1);
-        IPage<UniData> all = uniDataMapper.annotationsPage(page,map);
+        IPage<UniData> all = uniDataMapper.annotationsPage(page, map);
         return all;
     }
 
@@ -54,10 +54,10 @@ public class PageDataController {
      */
     @RequestMapping("/providerPage")
     public Object providerPage() {
-        IPage<UniData> page=new Page<>(1, 2);
-        Map map=new HashMap();
+        IPage<UniData> page = new Page<>(1, 2);
+        Map map = new HashMap();
         map.put("userId", 1);
-        IPage<UniData> all = uniDataMapper.providerPage(page,map);
+        IPage<UniData> all = uniDataMapper.providerPage(page, map);
         return all;
     }
 
@@ -71,10 +71,10 @@ public class PageDataController {
      */
     @RequestMapping("/xmlPage")
     public Object xmlPage() {
-        IPage<UniData> page=new Page<>(1, 2);
-        Map map=new HashMap();
+        IPage<UniData> page = new Page<>(1, 2);
+        Map map = new HashMap();
         map.put("userId", 1);
-        IPage<UniData> all = uniDataMapper.xmlPage(page,map);
+        IPage<UniData> all = uniDataMapper.xmlPage(page, map);
         return all;
     }
 
@@ -88,11 +88,43 @@ public class PageDataController {
      */
     @RequestMapping("/commonPage")
     public Object commonPage() {
-        IPage<User> page=new Page<>(1, 2);
-        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        IPage<User> page = new Page<>(1, 2);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", 1);
-        IPage<User> all = userMapper.selectPage(page,queryWrapper);
+        IPage<User> all = userMapper.selectPage(page, queryWrapper);
         return all;
+    }
+
+//    利用wrapper传递条件查询
+
+    /**
+     * desc:   xml
+     * param:
+     * return:
+     * author: CDN
+     * date: 2020/1/9
+     */
+   @RequestMapping("xmlWrapper")
+    public Object xmlWrapper() {
+       IPage<UniData> page = new Page<>(1, 2);
+       QueryWrapper wrapper=new QueryWrapper();
+       wrapper.eq("user.user_id",1);
+        return uniDataMapper.xmlWrapper(page,wrapper);
+    }
+
+    /**
+     * desc:   注解
+     * param:
+     * return:
+     * author: CDN
+     * date: 2020/1/9
+     */
+   @RequestMapping("annotationsPageWrapper")
+    public Object annotationsPageWrapper() {
+       IPage<UniData> page = new Page<>(1, 2);
+       QueryWrapper wrapper=new QueryWrapper();
+       wrapper.eq("user.user_id",1);
+        return uniDataMapper.annotationsPageWrapper(page,wrapper);
     }
 
 
