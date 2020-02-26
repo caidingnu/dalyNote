@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ex.batisdemo.dao.UserDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ex.batisdemo.domain.User" id="BaseResultMap">
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="age" column="age"/>
+    </resultMap>
+
+    <!--
+          选择性插入
+        -->
+    <sql id="Base_Insert_Selective">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="age != null">
+                age
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
+
+    <!--
+      数据库表的基本查询列名集合
+    -->
+    <sql id="Base_Column_List">
+        user_id, name, password, nick_name, age
+    </sql>
+
+    <!--
+        Where子句
+      -->
+    <sql id="Base_Query_Where">
+        <if test="userId != null">
+            and user_id = #{userId,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+            and password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+            and nick_name = #{nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="age != null">
+            and age = #{age,jdbcType=INTEGER}
+        </if>
+    </sql>
+
+    <!--
+        基本更新字段
+    -->
+    <sql id="Base_Update_Column">
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER}
+            </if>
+        </set>
+    </sql>
+
+    <!--
+        分页查询数据库表
+      -->
+    <select id="selectPaged" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
+    <!--
+      根据主键查询数据库表
+    -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+
+    <!--
+      根据主键删除数据库表中的记录
+    -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete FROM user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <!--
+      添加一条记录到数据库表中
+    -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ex.batisdemo.domain.User">
+        insert into user
+        (<include refid="Base_Column_List"/>)
+        values (
+        <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            #{password,jdbcType=VARCHAR},
+        </if>
+        <if test="nickName != null">
+            #{nickName,jdbcType=VARCHAR},
+        </if>
+        <if test="age != null">
+            #{age,jdbcType=INTEGER}
+        </if>
+        )
+    </insert>
+
+    <!--
+     有选择的添加一条记录到数据库表中
+   -->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ex.batisdemo.domain.User">
+        insert into user
+        <include refid="Base_Insert_Selective"/>
+    </insert>
+
+    <!--
+      有选择的可忽略添加一条记录到数据库表中
+    -->
+    <insert id="insertSelectiveIgnore" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ex.batisdemo.domain.User">
+        insert ignore into user
+        <include refid="Base_Insert_Selective"/>
+    </insert>
+
+    <!--
+      根据主键有选择的更新数据库表
+    -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.ex.batisdemo.domain.User">
+        update user
+        <include refid="Base_Update_Column"></include>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+
+    <!--
+      根据主键更新数据库表
+    -->
+    <update id="updateByPrimaryKey" parameterType="com.ex.batisdemo.domain.User">
+        update user
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER}
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <!--
+      批量添加记录到数据库表中
+    -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_id, name, password, nick_name, age
+        </trim>
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.userId,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR},
+                #{item.nickName,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--
+      根据主键批量更新数据库表中的记录
+    -->
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" index="index" item="item" separator=";">
+            update user
+            <set>
+                <trim suffixOverrides=",">
+                    <if test="item.userId != null">
+                        user_id = #{item.userId,jdbcType=INTEGER},
+                    </if>
+                    <if test="item.name != null">
+                        name = #{item.name,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.password != null">
+                        password = #{item.password,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.nickName != null">
+                        nick_name = #{item.nickName,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.age != null">
+                        age = #{item.age,jdbcType=INTEGER}
+                    </if>
+                </trim>
+            </set>
+            <where>
+                <trim suffixOverrides=",">
+                    where user_id = #{item.userId,jdbcType=INTEGER}
+                </trim>
+            </where>
+        </foreach>
+    </update>
+
+    <!--
+     使用给定的字段名定义Where子句
+   -->
+    <sql id="Identifiers_Array_Conditions">
+        <foreach collection="array" index="index" item="item" separator=" and ">
+            <if test="item == 'userId'">
+                user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="item == 'name'">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="item == 'password'">
+                password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="item == 'nickName'">
+                nick_name = #{nickName,jdbcType=VARCHAR}
+            </if>
+            <if test="item == 'age'">
+                age = #{age,jdbcType=INTEGER}
+            </if>
+        </foreach>
+    </sql>
+
+    <!--
+      存在即更新否则插入
+    -->
+    <update id="upsert" parameterType="com.ex.batisdemo.domain.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_id, name, password, nick_name, age
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{nickName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{nickName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+        </trim>
+    </update>
+
+
+    <!--
+      带有空值检查的存在即更新否则插入
+    -->
+    <update id="upsertSelective" parameterType="com.ex.batisdemo.domain.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId !=null ">
+                user_id,
+            </if>
+            <if test="name !=null ">
+                name,
+            </if>
+            <if test="password !=null ">
+                password,
+            </if>
+            <if test="nickName !=null ">
+                nick_name,
+            </if>
+            <if test="age !=null ">
+                age
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId !=null ">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name !=null ">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password !=null ">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName !=null ">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age !=null ">
+                age = #{age,jdbcType=INTEGER}
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="userId !=null ">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name !=null ">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password !=null ">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName !=null ">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age !=null ">
+                age = #{age,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.ex.batisdemo.domain.User">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        <where>
+            <include refid="Base_Query_Where"></include>
+        </where>
+    </select>
+
+    <select id="queryTotal" resultType="long">
+        select count(*) from user
+    </select>
+
+
+    <delete id="deleteBatch">
+        delete from user where user_id in
+        <foreach item="userId" collection="list" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+</mapper>
