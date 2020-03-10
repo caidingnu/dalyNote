@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aa.bb.dao.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.aa.bb.model.Menu">
+        <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="menun_name" jdbcType="VARCHAR" property="menunName"/>
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        uuid, menun_name, id, pid, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from menu
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.aa.bb.model.Menu">
+        insert into menu (uuid, menun_name, id,
+        pid, create_time, update_time
+        )
+        values (#{uuid,jdbcType=VARCHAR}, #{menunName,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR},
+        #{pid,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.aa.bb.model.Menu">
+        insert into menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="menunName != null">
+                menun_name,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="menunName != null">
+                #{menunName,jdbcType=VARCHAR},
+            </if>
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.aa.bb.model.Menu">
+        update menu
+        <set>
+            <if test="menunName != null">
+                menun_name = #{menunName,jdbcType=VARCHAR},
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.aa.bb.model.Menu">
+        update menu
+        set menun_name = #{menunName,jdbcType=VARCHAR},
+        id = #{id,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=VARCHAR}
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+</mapper>
