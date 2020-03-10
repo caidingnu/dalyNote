@@ -1,0 +1,18 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: eureka
+  security:
+    user:
+      name: root
+      password: root123
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://root:root123@eureka:9999/eureka/    # eureka  在hosts中

@@ -1,0 +1,16 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: eureka
+  security:
+    user:
+      name: root
+      password: root123
+
+eureka:
+  client: #    单机版 以下连个都为false
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://root:root123@eureka:10000/eureka/    # eureka 在host文件中

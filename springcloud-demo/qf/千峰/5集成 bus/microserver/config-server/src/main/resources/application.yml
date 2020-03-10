@@ -1,0 +1,40 @@
+#   ************* 配置中心只要注册到Eureka  客户端调用的时候使用服务名就可以达到高可用
+
+server:
+  port: 12900
+
+
+#    云配置
+#spring:
+#  application:
+#    name: config-server
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://gitee.com/caidingnu/study-config.git      # #如果想要 配置文件放在和配置中心服务端不在同一个及其上，可以自检搭建git或者svn
+#          default-label: master    # 分支
+#          username:
+#          password:
+# 线下配置    （配置中心的文件是在本地）
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:D:/config   #配置文件在D盘的config文件夹下
+  security:
+    user:
+      name: root
+      password: root
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root123@eureka:9999/eureka/    # eureka  在hosts中

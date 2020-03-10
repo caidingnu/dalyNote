@@ -1,0 +1,24 @@
+server:
+  port: 90
+
+
+management:  #  添加actuator 的暴露地址
+  endpoints:
+    web:
+      exposure:
+        include: "*" #注意这里*要加引号，暴露全部，也可以只暴露相应endpoint
+
+
+#   发送post请求到    http://127.0.0.1:91/actuator/refresh   实现手动刷新 (单个)
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+spring:
+  rabbitmq:    #   集成 RubbtMQ  + springcloud-bus 实现手动刷新（批量）    http://127.0.0.1:91/actuator/bus-refresh    [刷新一个就会批量刷新]
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+
+#    如果要实现 自动刷新，要结合git或者svn 的WebHook，提交代码的时候发送一个post请求到 http://公网:91/actuator/bus-refresh

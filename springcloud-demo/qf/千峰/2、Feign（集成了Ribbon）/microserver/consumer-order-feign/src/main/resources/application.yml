@@ -1,0 +1,20 @@
+server:
+  port: 8902
+spring:
+  application:
+    name: consumer-order-feign
+
+
+user:
+  url: http://127.0.0.1:7900/hellouser
+
+
+eureka:
+  client:
+    region: yn
+    availability-zones:
+      yn: two,one
+    service-url:
+#      defaultZone:
+      one: http://eureka.springcloud.cn/eureka/
+      two: http://localhost:9999/eureka/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/movie" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springcloud-eurkar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springcloud-movie" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springcloud-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket" charset="UTF-8" />
+  </component>
+</project>

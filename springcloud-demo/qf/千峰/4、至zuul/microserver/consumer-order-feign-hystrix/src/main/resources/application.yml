@@ -1,0 +1,18 @@
+server:
+  port: 8908
+spring:
+  application:
+    name: consumer-order-feign-hystrix
+
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+
+
+feign:
+  hystrix:
+    enabled: true   #必须开启feign 断路器功能

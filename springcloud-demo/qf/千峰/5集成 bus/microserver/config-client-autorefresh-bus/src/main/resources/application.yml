@@ -1,0 +1,9 @@
+server:
+  port: 91
+
+
+management:  #  添加actuator 的暴露地址
+  endpoints:
+    web:
+      exposure:
+        include: "*" #注意这里*要加引号，暴露全部，也可以只暴露相应endpoint

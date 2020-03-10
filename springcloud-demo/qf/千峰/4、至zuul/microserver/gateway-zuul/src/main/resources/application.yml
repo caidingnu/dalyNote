@@ -1,0 +1,47 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: gateway-zuul
+#  security:   #访问zuul的routes时候需要
+#    user:
+#      name: user
+#      password: abc
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:9999/eureka/
+  instance:
+    prefer-ip-address: true    # 显示ip
+
+management:  #  添加actuator 的暴露地址
+  endpoints:
+    web:
+      exposure:
+        include: "*" #注意这里*要加引号，暴露全部，也可以只暴露相应endpoint
+
+
+#     可以使用http://127.0.0.1:10086/服务名称/接口url   进行访问
+#      默认通过zuul，只要注册到Eureka的服务都可以访问，
+#      取消某个服务的代理，也就是 通过zuul服务名不能直接访问，使用
+
+
+# http://127.0.0.1:10086/actuator/routes    可以查看zuul代理的映射
+
+#--------------------  别名映射 （第一种）  --------------------
+zuul:
+  routes: # 配置路由映射
+    provider-user: /user/**     #给provider-user服务添加映射，地址以/user/开头的就去provider-user服务
+    consumer-order-ribbon: /ribbon/**
+    consumer-order-hystrix: /orderhystrix/**
+    consumer-order-feign-hystrix: /feignhystrix/**
+#  ignored-services: consumer-order   #取消zuul对consumer-order服务的代理，多个服务使用逗号隔开
+
+#-------------------- path 映射  （第二种）------------------------
+#zuul:
+#  routes:
+#    abcd:  #  自己命名，保证唯一性即可    http://127.0.0.1:10086/api-user/a   详单与
+#      path: /api-user/**
+#      serviceId: provider-user

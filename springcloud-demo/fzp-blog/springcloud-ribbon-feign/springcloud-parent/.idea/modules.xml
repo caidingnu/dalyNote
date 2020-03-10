@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/springcloud-eurkar/springcloud-eurkar.iml" filepath="$PROJECT_DIR$/springcloud-eurkar/springcloud-eurkar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-movie/springcloud-movie.iml" filepath="$PROJECT_DIR$/springcloud-movie/springcloud-movie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-parent.iml" filepath="$PROJECT_DIR$/springcloud-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-user/springcloud-user.iml" filepath="$PROJECT_DIR$/springcloud-user/springcloud-user.iml" />
+    </modules>
+  </component>
+</project>

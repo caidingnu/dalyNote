@@ -1,0 +1,19 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: eureka
+#  security:
+#    user:
+#      name: user
+#      password: user
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+#    单机版 以下连个都为false
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:10000/eureka/

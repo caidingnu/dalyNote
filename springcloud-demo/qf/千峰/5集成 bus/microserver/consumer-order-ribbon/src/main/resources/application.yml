@@ -1,0 +1,15 @@
+server:
+  port: 8901
+spring:
+  application:
+    name: consumer-order-ribbon
+
+
+user:
+  url: http://127.0.0.1:7900/hellouser
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root123@eureka:9999/eureka/    # eureka  在hosts中

@@ -1,0 +1,31 @@
+##  指定配置中心服务端 ,  配置与配置中心相关的都要放在 bootstrap.yml中，让他加载在controller注解之前
+#
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root123@eureka:9999/eureka/    # eureka  在hosts中
+#
+## --------------------------
+spring:
+  cloud:
+    config:
+      discovery:
+        service-id: config-server
+        enabled: true
+      #      uri: http://localhost:12900/   #直接用ip调用配置中心服务端，用于没有将配置中心服务端注册到注册中心的时候
+      username: root   # 配置中心账号
+      password: root   # 配置中心密码
+      name: configclientapplication
+      profile: pro      # 如果有同名文件，还可以添加环境标识
+
+#                            # configclientapplication-dev.yml  和configclientapplication-pro.yml，可以是多个，用逗号隔开。
+#                            # 如果两个文件同事出现相同属性的，会取后边一个文件的
+#
+#
+  rabbitmq:    #   集成 RubbtMQ  + springcloud-bus 实现自动数显配置
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+

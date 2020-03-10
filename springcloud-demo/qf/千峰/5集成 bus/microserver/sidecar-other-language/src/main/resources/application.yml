@@ -1,0 +1,21 @@
+server:
+  port: 10085
+spring:
+  application:
+    name: side-car
+#  security:   #访问zuul的routes时候需要
+#    user:
+#      name: user
+#      password: abc
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root123@eureka:9999/eureka/    # eureka  在hosts中
+  instance:
+    prefer-ip-address: true    # 显示ip
+
+sidecar:
+  port: 8848   #配置异构服务端口，host 必须和当前的sidecar 所在的 host 一致，host不是机器，是域名
+#  health-uri: http://127.0.0.1:8848/layui/tt.json

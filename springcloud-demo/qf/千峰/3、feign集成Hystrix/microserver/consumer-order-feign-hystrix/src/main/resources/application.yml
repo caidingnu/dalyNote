@@ -1,0 +1,20 @@
+server:
+  port: 8909
+spring:
+  application:
+    name: consumer-order-feign-hystrix
+
+
+user:
+  url: http://127.0.0.1:7900/hellouser
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+
+
+feign:
+  hystrix:
+    enabled: true   #必须开启feign 断路器功能

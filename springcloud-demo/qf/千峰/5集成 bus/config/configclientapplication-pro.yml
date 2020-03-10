@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: config-clientpro
+
+
+name: 测试手动刷新
