@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.study.wxapp.mapper: debug
+    org.springframework: info
+
+spring:
+  #  output:
+  #    ansi:
+  #      enabled: always     # 日志彩色消失
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.174.128:3306/alipay?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Admin@123
+  db:
+    readsize: 1
+    read0:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.174.131:3306/alipay?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: selectUser
+      password: Admin@123
+
+#    read1:
+#      type: com.alibaba.druid.pool.DruidDataSource
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://localhost:3306/db_area?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#      username: root
+#      password: root
+
+
