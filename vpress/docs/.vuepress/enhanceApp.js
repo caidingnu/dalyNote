@@ -1,4 +1,12 @@
 /**
+ *  element 和 iview安装
+ *  npm add element-ui
+    npm install iview -S
+ *
+ */
+
+
+/**
  * 扩展 VuePress 应用   ****  全局导入  element
  */
 import Element from 'element-ui'
