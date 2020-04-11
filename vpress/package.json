@@ -1,0 +1,17 @@
+{
+  "name": "vpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "element-ui": "^2.13.0",
+    "iview": "^3.5.4"
+  }
+}
