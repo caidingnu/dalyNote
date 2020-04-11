@@ -1,0 +1,3 @@
+---
+layout: i-button
+---
