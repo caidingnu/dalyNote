@@ -1,0 +1,32 @@
+server:
+  port: 80
+
+# mysql 属性配置
+spring:
+  datasource:
+    test1:
+      driverClassName: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/spring?serverTimezone=GMT&useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true
+      username: root
+      password: root
+    test2:
+      driverClassName: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/spring2?serverTimezone=GMT&useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true
+      username: root
+      password: root
+
+
+
+# 打印日志
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.springboot.demo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
