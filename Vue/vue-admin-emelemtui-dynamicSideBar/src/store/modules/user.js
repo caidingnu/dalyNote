@@ -1,20 +1,22 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import store from "@/store";
 
 const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    menus:[]
   }
 }
 
 const state = getDefaultState()
 
 const mutations = {
-  RESET_STATE: (state) => {
-    Object.assign(getDefaultState())
+  RESET_STATE: () => {
+    Object.assign(state,getDefaultState())
   },
   SET_TOKEN: (state, token) => {
     state.token = token
@@ -45,7 +47,6 @@ const actions = {
       })
     })
   },
-
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
@@ -110,6 +111,7 @@ const actions = {
         removeToken() // must remove  token  first
         resetRouter()
         commit('RESET_STATE')
+        console.log(store.getters.name)
         resolve()
       }).catch(error => {
         reject(error)

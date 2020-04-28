@@ -21,7 +21,6 @@ router.beforeEach(async(to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
-
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
@@ -42,11 +41,9 @@ router.beforeEach(async(to, from, next) => {
 
 
           const menus = filterAsyncRouter(store.getters.menus) // 1.过滤路由
-          console.log(menus)
           router.addRoutes(menus) // 2.动态添加路由
           global.antRouter = menus // 3.将路由数据传递给全局变量，做侧边栏菜单渲染工作
 
-          console.log( global.antRouter)
           next({
             ...to,
             replace: true
@@ -86,8 +83,6 @@ function filterAsyncRouter(asyncRouterMap) {
       if (route.component === 'Layout') {
         route.component = Layout
       } else {
-        console.log(route.component)
-        console.log(_import(route.component))
         route.component = _import(route.component) // 导入组件
       }
     }
