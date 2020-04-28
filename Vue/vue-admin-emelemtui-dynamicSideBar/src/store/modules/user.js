@@ -29,6 +29,9 @@ const mutations = {
   },
   SET_MENUS: (state, menus) => {
     state.menus = menus
+  },
+  SET_PERMISSIONS: (state, permissions) => {
+    state.permissions = permissions
   }
 }
 
@@ -93,10 +96,11 @@ const actions = {
             redirect: '/404',
             hidden: true
           })
-        const { name, avatar } = data
+        const { name, avatar,permissions} = data
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_MENUS', menus)
+        commit('SET_PERMISSIONS', permissions)
         resolve(data)
       }).catch(error => {
         reject(error)

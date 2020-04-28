@@ -44,6 +44,11 @@
         <el-button @click="onCancel">Cancel</el-button>
       </el-form-item>
     </el-form>
+
+    <el-button type="primary" v-has-any-permission="['user:list:add']">增加</el-button>
+    <el-button type="danger"  v-has-any-permission="['user:list:delete']">删除</el-button>
+    <el-button type="warning"  v-has-any-permission="['user:list:update']">修改</el-button>
+    <el-button  v-has-any-permission="['user:list:select']">查询</el-button>
   </div>
 </template>
 
