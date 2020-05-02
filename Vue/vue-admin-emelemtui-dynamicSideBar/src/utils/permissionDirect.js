@@ -61,7 +61,6 @@ export const hasAnyPermission = {
     Vue.directive('hasAnyPermission', {
       bind (el, binding, vnode) {
         const permissions = vnode.context.$store.state.user.permissions
-        console.log(permissions)
         const per = []
         for (const v of permissions) {
           per.push(v)
