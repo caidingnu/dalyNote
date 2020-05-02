@@ -1,12 +1,15 @@
 package com.oceam.redis;
 
 import com.oceam.entity.UserInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description:
@@ -18,9 +21,16 @@ import java.util.List;
 @RestController
 public class RedisController {
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Resource
-    RedisUtil redisUtil;
+   RedisUtil redisUtil;
+
+
+
+
+
 
 
     /**
@@ -43,10 +53,8 @@ public class RedisController {
             add(1);
             add(1);
         }};
-        redisUtil.set("a", list.toString(), 10L);
-        System.out.println(redisUtil.get("a"));
-
-        return redisUtil.get("a");
+        redisUtil.setValueToDataBase("a", list, 20,5);
+        return redisUtil.getValueFromRedisDatabase("a",5);
     }
 
 
@@ -65,7 +73,7 @@ public class RedisController {
         userInfo.setPhone("123456");
         userInfo.setSex("男");
         userInfo.setPhone("11111");
-        redisUtil.set("user", userInfo, 100L);
+        redisUtil.set("user", userInfo, 20L);
         System.out.println(redisUtil.getExpire("user"));
         return redisUtil.get("user");
     }

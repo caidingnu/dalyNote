@@ -1,7 +1,8 @@
-package com.example.demo.utils;
+package com.oceam.redis;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -14,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis工具类
  *
- * @author zhangzhixiang
  * @date 2019年06月19日
  */
 @Component
@@ -134,6 +134,7 @@ public final class RedisUtil {
             return false;
         }
     }
+
 
     /**
      * 递增
@@ -486,7 +487,7 @@ public final class RedisUtil {
     public boolean lSet(String key, Object value, long time) {
         try {
             redisTemplate.opsForList().rightPush(key, value);
-            if (time > 0){
+            if (time > 0) {
                 expire(key, time);
             }
             return true;
@@ -569,4 +570,62 @@ public final class RedisUtil {
             return 0;
         }
     }
+
+
+    /**
+     * 指定库操作
+     *
+     * @param key     键
+     * @param value   值
+     * @param time    时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     * @param dbIndex 要存的库位置
+     * @return true成功 false 失败
+     */
+    public boolean setValueToDataBase(String key, Object value, long time, Integer dbIndex) {
+        try {
+            LettuceConnectionFactory redisConnectionFactory = (LettuceConnectionFactory) redisTemplate.getConnectionFactory();
+            if (dbIndex > 0) {
+                redisConnectionFactory.setDatabase(dbIndex);
+                redisTemplate.setConnectionFactory(redisConnectionFactory);
+                redisConnectionFactory.resetConnection();
+            }
+            if (time > 0) {
+                redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+            } else {
+                redisTemplate.opsForValue().set(key, value);
+            }
+
+            //重置为默认的第0个库
+            redisConnectionFactory.setDatabase(0);
+            redisTemplate.setConnectionFactory(redisConnectionFactory);
+            redisConnectionFactory.resetConnection();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * desc:   获取指定库中的指定key的value
+     * param:
+     * @dbIndex   数据库
+     * author: CDN
+     * date: 2020/5/2
+     */
+    public Object getValueFromRedisDatabase(String key, Integer dbIndex) {
+        LettuceConnectionFactory redisConnectionFactory = (LettuceConnectionFactory) redisTemplate.getConnectionFactory();
+        redisConnectionFactory.setDatabase(dbIndex);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisConnectionFactory.resetConnection();
+        Object o = redisTemplate.opsForValue().get(key);
+
+        //重置为默认的第0个库
+        redisConnectionFactory.setDatabase(0);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        redisConnectionFactory.resetConnection();
+        return o;
+    }
+
+
 }
