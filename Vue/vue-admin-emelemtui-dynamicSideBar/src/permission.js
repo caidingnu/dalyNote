@@ -81,7 +81,7 @@ function filterAsyncRouter(asyncRouterMap) {
       if (route.component === 'Layout') {
         route.component = Layout
       } else {
-        // route.component = require('@/views/' + route.component + '.vue')  //第一种，直接导入组件
+        // route.component = require('@/views/' + route.component + '.vue').default  //第一种，直接导入组件
         //
         route.component = _import(route.component) // 第二种方式，根据外部环境导入组件,
       }

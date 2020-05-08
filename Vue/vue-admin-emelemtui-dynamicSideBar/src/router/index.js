@@ -5,7 +5,10 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-
+import menu1 from '@/views/nested/menu1/index'
+import menu11 from '@/views/nested/menu1/menu1-1/index'
+import menu12 from '@/views/nested/menu1/menu1-2/index'
+import menu13 from '@/views/nested/menu1/menu1-3/index'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -44,8 +47,39 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: {title: 'Dashboard', icon: 'dashboard'}
     }]
+  },
+  {
+    path: '/menu',
+    component: Layout,
+    meta: {title: 'aaa', icon: 'dashboard'},
+    children: [
+      {
+        path: 'menu1',
+        name: 'menu1',
+        component: menu1,
+        meta: {title: 'Dashboard', icon: 'dashboard'}
+      },
+      {
+        path: 'menu11',
+        name: 'menu11',
+        component: menu11,
+        meta: {title: 'Dashboard', icon: 'dashboard'}
+      },
+      {
+        path: 'menu12',
+        name: 'menu12',
+        component: menu12,
+        meta: {title: 'Dashboard', icon: 'dashboard'}
+      },
+      {
+        path: 'menu13',
+        name: 'menu13',
+        component: menu13,
+        meta: {title: 'Dashboard', icon: 'dashboard'}
+      },
+    ]
   },
   // {
   //   path: '/form',
@@ -66,7 +100,7 @@ export const constantRoutes = [
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
