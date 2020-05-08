@@ -38,8 +38,6 @@ router.beforeEach(async(to, from, next) => {
             global.antRouter = []
             next()
           }
-
-
           const menus = filterAsyncRouter(store.getters.menus) // 1.过滤路由
           router.addRoutes(menus) // 2.动态添加路由
           global.antRouter = menus // 3.将路由数据传递给全局变量，做侧边栏菜单渲染工作
@@ -83,7 +81,9 @@ function filterAsyncRouter(asyncRouterMap) {
       if (route.component === 'Layout') {
         route.component = Layout
       } else {
-        route.component = _import(route.component) // 导入组件
+        // route.component = require('@/views/' + route.component + '.vue')  //第一种，直接导入组件
+        //
+        route.component = _import(route.component) // 第二种方式，根据外部环境导入组件,
       }
     }
     if (route.children && route.children.length) {
