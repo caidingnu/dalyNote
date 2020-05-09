@@ -1,5 +1,6 @@
 // 定义一些和权限有关的 Vue指令
 // 必须包含列出的所有权限，元素才显示
+// 如果a角色和b角色都能看到某个页面，但是a角色只有修改权没有删除权，直接用role判断，如果有特殊人需要特殊权限（不对应角色），则需要permisson（数据库表  直接user对menu的button权限）
 export const hasPermission = {
   install (Vue) {
     Vue.directive('hasPermission', {
