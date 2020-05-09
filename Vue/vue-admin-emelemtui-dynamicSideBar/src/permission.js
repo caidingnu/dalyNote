@@ -6,6 +6,7 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 import Layout from '@/layout'
+import el from 'element-ui/src/locale/lang/el'
 
 const _import = require('./router/_import_' + process.env.NODE_ENV) // 获取组件的方法
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -81,9 +82,15 @@ function filterAsyncRouter(asyncRouterMap) {
       if (route.component === 'Layout') {
         route.component = Layout
       } else {
-        // route.component = require('@/views/' + route.component + '.vue').default  //第一种，直接导入组件
-        //
-        route.component = _import(route.component) // 第二种方式，根据外部环境导入组件,
+        //  //第一种，直接导入组件，不需要新建js
+        // if (process.env.NODE_ENV === 'development'){
+        //   route.component = require('@/views/' + route.component + '.vue').default
+        // }else {
+        //   route.component = import('@/views/' + route.component  + '.vue')
+        // }
+
+        //// 第二种方式，根据外部环境导入预先js组件,
+        route.component = _import(route.component)
       }
     }
     if (route.children && route.children.length) {
