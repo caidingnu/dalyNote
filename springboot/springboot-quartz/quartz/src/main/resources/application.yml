@@ -1,0 +1,21 @@
+server:
+  port: 808
+spring:
+  profiles:
+    active: quartz
+  datasource:
+    username: root
+    password: Admin@123
+    url: jdbc:mysql://129.28.171.44/quart?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+#    schema: classpath*:/sql/quart.sql
+#    sql-script-encoding: utf-8
+#    continue-on-error: false
+#    initialization-mode: always
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:/mapper/*.xml
+
