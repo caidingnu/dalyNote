@@ -1,0 +1,29 @@
+server:
+  port: 80
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/urp?useUnicode=true&serverTimezone=UTC&characterEncoding=utf-8
+    username: root
+    password: root
+
+  thymeleaf:
+    mode: HTML
+
+  redis:
+    host: 129.28.171.44
+    port: 6379
+    password:
+    timeout: 0
+    database: 4  #默认库
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-wait: -1
+        max-active: 8
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
