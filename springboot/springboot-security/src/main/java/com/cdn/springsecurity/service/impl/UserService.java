@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * CDN
@@ -38,7 +39,6 @@ public class UserService implements UserDetailsService {
         TUser tUser1 = tUser.selectOne(lambdaQueryWrapper);
 
         if (tUser1 == null) {
-//          security的  provider 会自己抛异常，直接返回null就行
             throw new UsernameNotFoundException("账号密码错误");
         }
 
@@ -50,17 +50,10 @@ public class UserService implements UserDetailsService {
          ==================================================================================================
          */
 
-//        查询用户角色
+//        查询用户角色---------------------角色加 ROLE_   前缀
         List<String> roleList = roleMapper.selectRoleByUserId(tUser1.getId());
-        List<String> roleList2 = new ArrayList<>();
-        if (roleList.size() > 0) {
-            for (String s1 : roleList) {
-//                角色加 ROLE_   前缀
-                roleList2.add("ROLE_" + s1);
-            }
-        }
-        String roleString = String.join(",", roleList2);
-//        权限-------------------
+        String roleString =  roleList.stream().map(role->"ROLE_"+role).collect(Collectors.joining(","));
+//        查询用户权限-------------------
         List<String> authorityMarkByUserId = tPermissionMapper.getAuthorityMarkByUserId(tUser1.getId());
         String authString = String.join(",", authorityMarkByUserId);
 //        构建权限、角色集合
