@@ -21,4 +21,8 @@ public class Md5En implements PasswordEncoder {
 
         return s.equals(MD5Util.getMD5((String) charSequence));
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Md5En().encode("123"));
+    }
 }
