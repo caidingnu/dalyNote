@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 22/05/2020 21:35:51
+ Date: 24/05/2020 02:32:44
 */
 
 SET NAMES utf8mb4;
@@ -60,14 +60,14 @@ CREATE TABLE `oauth_client_details`  (
   `access_token_validity` int(11) NULL DEFAULT NULL,
   `refresh_token_validity` int(11) NULL DEFAULT NULL,
   `additional_information` varchar(4096) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `autoapprove` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `autoapprove` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '跳转到授权页面,false就是跳转到授权页面，true则直接跳转到目标url',
   PRIMARY KEY (`client_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of oauth_client_details
 -- ----------------------------
-INSERT INTO `oauth_client_details` VALUES ('admin', NULL, '$2a$10$UCzysD.HC13c1GZPSWNJV.zIQq0KZC4CmCGlF6KmdEj7EV/hylpuC', 'test', 'password,client_credentials,authorization_code,refresh_token', NULL, 'user:view', 3600, 3600, NULL, 'true');
+INSERT INTO `oauth_client_details` VALUES ('admin', 'testResouecesId', '$2a$10$UCzysD.HC13c1GZPSWNJV.zIQq0KZC4CmCGlF6KmdEj7EV/hylpuC', 'all', 'password,client_credentials,authorization_code,refresh_token,implicit', '', '', 3600000, 3600, NULL, 'false');
 
 -- ----------------------------
 -- Table structure for oauth_client_token
