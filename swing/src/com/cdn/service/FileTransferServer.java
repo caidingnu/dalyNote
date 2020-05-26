@@ -1,21 +1,23 @@
 package com.cdn.service;
 
+import com.cdn.client.User;
 import com.cdn.service.common.Constant;
 
 import javax.swing.*;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.math.RoundingMode;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 
 public class FileTransferServer extends ServerSocket {
     private static DecimalFormat df = null;
     JFrame jf = null;
     JLabel label1 = null;
     JPanel jPanel = null;
+
     static {
         // 设置数字格式，保留一位有效小数
         df = new DecimalFormat("#0.0");
@@ -23,6 +25,7 @@ public class FileTransferServer extends ServerSocket {
         df.setMinimumFractionDigits(1);
         df.setMaximumFractionDigits(1);
     }
+
     public FileTransferServer() throws Exception {
         super(Constant.SERVER_PORT);
         jf = new JFrame();
@@ -69,7 +72,8 @@ public class FileTransferServer extends ServerSocket {
      */
     class Task implements Runnable {
         private Socket socket;
-        private DataInputStream dis;
+        private ObjectInputStream objectInputStream;
+        private ObjectOutputStream objectOutputStream;
         private FileOutputStream fos;
 
         public Task(Socket socket) {
@@ -78,33 +82,58 @@ public class FileTransferServer extends ServerSocket {
 
         @Override
         public void run() {
+            int type = 0;
             try {
-                dis = new DataInputStream(socket.getInputStream());
+                objectInputStream = new ObjectInputStream(socket.getInputStream());
                 // 文件名和长度
-                String fileName = dis.readUTF();
-                long fileLength = dis.readLong();
-                File directory = new File(Constant.SERVER_SAVE_PATH);
-                if (!directory.exists()) {
-                    directory.mkdir();
+                String fileName = objectInputStream.readUTF();
+                type = (int) objectInputStream.readInt();
+                System.out.println(fileName);
+                System.out.println(type);
+                switch (type) {
+                    case 1:
+                        long fileLength = objectInputStream.readLong();
+                        File directory = new File(Constant.SERVER_SAVE_PATH);
+                        if (!directory.exists()) {
+                            directory.mkdir();
+                        }
+                        File file = new File(directory.getAbsolutePath() + File.separatorChar + socket.getInetAddress() + "@" + fileName);
+                        fos = new FileOutputStream(file);
+                        // 开始接收文件
+                        byte[] bytes = new byte[1024];
+                        int length;
+                        while ((length = objectInputStream.read(bytes, 0, bytes.length)) != -1) {
+                            fos.write(bytes, 0, length);
+                            fos.flush();
+                        }
+                        System.out.println("======== 文件接收成功 [File Name：" + fileName + "] [Size：" + getFormatFileSize(fileLength) + "] ========");
+                        break;
+                    case 2:
+                        System.out.println("222222222222222");
+                        File file1 = new File(Constant.SERVER_SAVE_PATH);
+                        File[] files = file1.listFiles();
+                        assert files != null;
+                        List<File> list = Arrays.asList(files);
+                        OutputStream outputStream = socket.getOutputStream();
+                        objectOutputStream = new ObjectOutputStream(outputStream);
+                        objectOutputStream.writeObject(new User(1, "root", "123456", 2));
+                        objectOutputStream.flush();
+                        objectOutputStream.close();
+                        socket.close();
+                        break;
+                    default:
+                        break;
                 }
-                File file = new File(directory.getAbsolutePath() + File.separatorChar + socket.getInetAddress() + "@" + fileName);
-                fos = new FileOutputStream(file);
-                // 开始接收文件
-                byte[] bytes = new byte[1024];
-                int length = 0;
-                while ((length = dis.read(bytes, 0, bytes.length)) != -1) {
-                    fos.write(bytes, 0, length);
-                    fos.flush();
-                }
-                System.out.println("======== 文件接收成功 [File Name：" + fileName + "] [Size：" + getFormatFileSize(fileLength) + "] ========");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
-                    if (fos != null)
+                    if (fos != null) {
                         fos.close();
-                    if (dis != null)
-                        dis.close();
+                    }
+                    if (objectInputStream != null) {
+                        objectInputStream.close();
+                    }
                     socket.close();
                 } catch (Exception e) {
                     e.printStackTrace();

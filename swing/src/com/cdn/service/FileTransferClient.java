@@ -13,7 +13,8 @@ public class FileTransferClient extends Socket {
 
     private Socket client;
     private FileInputStream fis;
-    private DataOutputStream dos;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
 
     /**
      * 构造函数<br/>
@@ -37,20 +38,21 @@ public class FileTransferClient extends Socket {
             File file = new File(path);
             if (file.exists()) {
                 fis = new FileInputStream(file);
-                dos = new DataOutputStream(client.getOutputStream());
+                objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 // 文件名和长度
-                dos.writeUTF(file.getName());
-                dos.flush();
-                dos.writeLong(file.length());
-                dos.flush();
+                objectOutputStream.writeUTF(file.getName());
+                objectOutputStream.writeInt(1);  //新建
+                objectOutputStream.flush();
+                objectOutputStream.writeLong(file.length());
+                objectOutputStream.flush();
                 // 开始传输文件
                 System.out.println("======== 开始传输文件 ========");
                 byte[] bytes = new byte[1024];
                 int length = 0;
                 long progress = 0;
                 while ((length = fis.read(bytes, 0, bytes.length)) != -1) {
-                    dos.write(bytes, 0, length);
-                    dos.flush();
+                    objectOutputStream.write(bytes, 0, length);
+                    objectOutputStream.flush();
                     progress += length;
                     System.out.print("| " + (100 * progress / file.length()) + "% |");
                 }
@@ -63,8 +65,8 @@ public class FileTransferClient extends Socket {
         } finally {
             if (fis != null)
                 fis.close();
-            if (dos != null)
-                dos.close();
+            if (objectOutputStream != null)
+                objectOutputStream.close();
             client.close();
         }
     }
@@ -114,6 +116,11 @@ public class FileTransferClient extends Socket {
 
 
     public void action(JMenuItem jMenuItem, JPanel jp1, JFrame jFrame) {
+        try {
+            new   FileTransferClient();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         jMenuItem.addActionListener(e -> {
             switch (e.getActionCommand()) {
                 case "新建":
@@ -178,15 +185,15 @@ public class FileTransferClient extends Socket {
                 case "打开":
                     System.out.println("打开--");
                     try {
-                        OutputStream outputStream = client.getOutputStream();
-//                                        outputStream.write(text.getBytes());
-//                                        outputStream.flush();
-                        DataOutputStream dataInputStream = new DataOutputStream(outputStream);
-                        dataInputStream.writeUTF("读取");
-                        dataInputStream.write("哈哈哈哈哈哈".getBytes());
-                        dataInputStream.flush();
+                        objectOutputStream = new ObjectOutputStream(client.getOutputStream());
+                        objectOutputStream.writeUTF("搜索");
+                        objectOutputStream.writeInt(2);
+                        objectOutputStream.flush();
+                         objectInputStream=new ObjectInputStream(client.getInputStream());
+                        System.out.println(objectInputStream.readObject());
+                       client.close();
 
-                    } catch (IOException ex) {
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                     break;
@@ -199,4 +206,6 @@ public class FileTransferClient extends Socket {
 
         });
     }
+
+
 }
