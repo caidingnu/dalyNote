@@ -56,7 +56,7 @@
 		</filter>
 	</appender>
 
-	<!-- mybatis打印sql语句 -->
+	<!-- mybatis打印sql语句 （关闭配置文件的控制台打印sql）-->
 	<logger name="ceshi.dao" level="DEBUG"></logger>
 
 	<root level="INFO">
