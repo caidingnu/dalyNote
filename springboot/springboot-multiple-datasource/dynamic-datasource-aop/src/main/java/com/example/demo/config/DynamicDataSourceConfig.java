@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -34,6 +35,9 @@ public class DynamicDataSourceConfig {
     @Qualifier("secondDataSource")
     private DataSource secondDataSource;
 
+    @Autowired
+    private Environment env;
+
     @Bean(name = "dynamicDataSource")
     public DataSource dynamicDataSource() {
         //动态数据源对象
@@ -53,12 +57,21 @@ public class DynamicDataSourceConfig {
     }
 
     @Primary
-    @Bean(name = "dynamicDataSourcesqlSessionFactory")
+    @Bean
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dynamicDataSource") DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.example.demo.entity");
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+//################################ 方法一 直接写死 ########################################
+//        配置mybatis的xml的位置
+//        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        //        指定数据库隐射实体
+//        sqlSessionFactoryBean.setTypeAliasesPackage("com.example.demo.entity");
+
+//         ######################### 方法二 获取配置文件的配置   #################################
+        // 指定xml文件位置
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+//        指定数据库隐射实体
+        sqlSessionFactoryBean.setTypeAliasesPackage(env.getProperty("type-aliases-package"));
         sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         return sqlSessionFactoryBean.getObject();
     }
