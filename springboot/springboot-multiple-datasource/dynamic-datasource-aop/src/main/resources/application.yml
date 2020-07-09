@@ -31,8 +31,9 @@ logging:
   config: classpath:config/logback.xml
 
 #----------------  整合动态数据源之后 以下配置被configuration中的SqlSessionFactoryBean覆盖了，也就是无效了
-#mybatis:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#  mapper-locations: classpath*:config/*.xml
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.example.demo.entity
 
