@@ -8,10 +8,13 @@
     <property name="maxHistory" value="90"/>
 
     <!-- ConsoleAppender 控制台输出日志 -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleOut" class="ch.qos.logback.core.ConsoleAppender">
         <!-- 对日志进行格式化 -->
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--        %green 控制台颜色     -->
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %boldGreen(%logger{36}) - %highlight(%msg) %n
+            </pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -71,7 +74,7 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
+            <pattern>>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -90,20 +93,18 @@
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
+            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n)</pattern>
         </encoder>
     </appender>
 
 
-    <logger name="org.springframework" level="info"/>
-    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
     <!--    自己项目的mapper 路径-->
-    <logger name="com.example.demo.mapper" level="DEBUG"/>
+    <logger name="ht.ldinfo.servicemanagement.mapper" level="DEBUG"/>
 
 
     <!-- 根日志,所有日志appender都必须包含在root/logger中,否则不会起作用 -->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="consoleOut"/>
         <appender-ref ref="DEBUG"/>
         <appender-ref ref="INFO"/>
         <appender-ref ref="WARN"/>
