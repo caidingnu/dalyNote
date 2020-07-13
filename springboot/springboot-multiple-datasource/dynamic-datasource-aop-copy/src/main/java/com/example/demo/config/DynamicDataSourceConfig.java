@@ -63,7 +63,7 @@ public class DynamicDataSourceConfig {
         sqlSessionFactoryBean.setDataSource(dataSource);
 //################################ 方法一 直接写死 ########################################
 //        配置mybatis的xml的位置
-//        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+//        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
         //        指定数据库隐射实体
 //        sqlSessionFactoryBean.setTypeAliasesPackage("com.example.demo.entity");
 

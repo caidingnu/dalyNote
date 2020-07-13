@@ -74,7 +74,7 @@ public class DynamicDataSourceConfig {
         if (mapperLocation != null) {
             sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapperLocation));
         } else {
-            sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+            sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
         }
         if (typeAliasesPackage != null) {
             sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
