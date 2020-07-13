@@ -28,7 +28,7 @@
 <!--		</filter>-->
 		<!-- 滚动策略: 时间 和 大小 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/debug/debugLog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+			<fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
 			<maxFileSize>256MB</maxFileSize>
 			<maxHistory>${maxHistory}</maxHistory>
 			<totalSizeCap>20GB</totalSizeCap>
