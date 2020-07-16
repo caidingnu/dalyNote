@@ -31,7 +31,7 @@ public class SendDirectExchangeMessageController {
 
 
         Map<String, Object> map2 = new HashMap<>();
-        map2.put("msg","我是队列2");
+        map2.put("messageData","我是队列2");
 
         //将消息携带绑定键值：TestDirectRouting TestDirectExchangeProvider
         rabbitTemplate.convertAndSend("TestDirectExchangeProvider", "TestDirectRoutingKey", map);
