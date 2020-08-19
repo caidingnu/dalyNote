@@ -13,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -89,17 +90,19 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) auth;
 
         String username = usernamePasswordToken.getUsername();
-        char[] password = usernamePasswordToken.getPassword();
+//        char[] password = usernamePasswordToken.getPassword();
+//        System.out.println(String.valueOf(password));
+
         SysUser sysUser = sysUserService.getOne(new QueryWrapper<SysUser>().lambda().eq(SysUser::getUsername, username));
         if (sysUser == null) {
-            throw new AuthenticationException("用户不存在!");
+            throw new AuthenticationException("账号或密码错误!");
         }
-
         // 校验token有效性
 //        SysUser SysUser = this.checkUserTokenIsEffect(token);
-        return new SimpleAuthenticationInfo(sysUser, password, getName());
+        return new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(),
+                ByteSource.Util.bytes(sysUser.getSalt()),
+                getName());
     }
-
 
 
     /**

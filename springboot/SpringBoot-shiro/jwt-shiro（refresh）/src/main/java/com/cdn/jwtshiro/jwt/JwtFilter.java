@@ -59,7 +59,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		String token = httpServletRequest.getHeader(DefContants.X_ACCESS_TOKEN);
 		if (token == null) {
-			log.info("————————身份认证失败——————————IP地址:  ");
+			log.error("————————身份认证失败——————————IP地址:  ");
 			throw new AuthenticationException("token为空!");
 		}
 		checkUserTokenIsEffect( token,request);

@@ -8,6 +8,7 @@ import com.cdn.jwtshiro.utils.JwtUtil;
 import com.cdn.jwtshiro.utils.RedisUtil;
 import net.bytebuddy.asm.Advice;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,7 @@ public class SysUserController {
         try {
             SecurityUtils.getSubject().login(usernamePasswordToken);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new AuthenticationException("用户不存在!");
         }
         return userInfo(sysUser);
     }
