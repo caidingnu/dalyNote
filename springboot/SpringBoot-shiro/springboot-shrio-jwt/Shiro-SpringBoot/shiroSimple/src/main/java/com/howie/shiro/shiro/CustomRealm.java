@@ -16,7 +16,6 @@ import java.util.Set;
 /**
  * Created with IntelliJ IDEA
  *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description 自定义 Realm
  * @Date 2018-03-25
  * @Time 21:46

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created with IntelliJ IDEA
  *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description 登陆 Controller
  * @Date 2018-04-03
  * @Time 22:28
