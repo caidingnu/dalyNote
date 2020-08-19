@@ -1,6 +1,7 @@
 package com.cdn.jwtshiro.exception;
 
 import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,8 +25,8 @@ public class ExceptionController {
     }
 
     // 捕捉shiro的异常
-    @ExceptionHandler(ShiroException.class)
-    public ResultMap handle401(ShiroException shiroException) {
+    @ExceptionHandler(AuthenticationException.class)
+    public ResultMap handle401(AuthenticationException shiroException) {
         return resultMap.fail().code(401).message(shiroException.getMessage());
     }
 
