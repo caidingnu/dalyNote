@@ -12,24 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA
- *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description admin角色权限controller
- * @Date 2018-04-29
- * @Time 17:32
  */
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    private final UserMapper userMapper;
-    private final ResultMap resultMap;
 
     @Autowired
-    public AdminController(UserMapper userMapper, ResultMap resultMap) {
-        this.userMapper = userMapper;
-        this.resultMap = resultMap;
-    }
+    private  UserMapper userMapper;
+    @Autowired
+    private  ResultMap resultMap;
+
 
     @GetMapping("/getUser")
     @RequiresRoles("admin")

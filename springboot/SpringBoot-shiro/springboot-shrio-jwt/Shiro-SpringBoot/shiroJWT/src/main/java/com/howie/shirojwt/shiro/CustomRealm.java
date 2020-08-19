@@ -19,19 +19,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
  * @Description 自定义 Realm
- * @Date 2018-04-09
- * @Time 16:58
  */
 @Component
 @Slf4j
 public class CustomRealm extends AuthorizingRealm {
-    private final UserMapper userMapper;
-
     @Autowired
-    public CustomRealm(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    private UserMapper userMapper;
+
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JWTToken;
     }
 
     /**
@@ -39,10 +37,11 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("————身份认证方法————");
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>身份认证开始————");
         String token = (String) authenticationToken.getCredentials();
         // 解密获得username，用于和数据库进行对比
         String username = JWTUtil.getUsername(token);
+        log.info("###################开始校验token-----》》{}",token);
         if (username == null || !JWTUtil.verify(token, username)) {
             throw new AuthenticationException("token认证失败！");
         }
@@ -53,6 +52,7 @@ public class CustomRealm extends AuthorizingRealm {
         if (user.getStatus() == 1) {
             throw new AuthenticationException("该用户已被封号！");
         }
+        log.info("===================== token校验通过  ============");
         return new SimpleAuthenticationInfo(user, token, "MyRealm");
     }
 

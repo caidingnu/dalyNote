@@ -19,10 +19,7 @@ import java.net.URLEncoder;
 /**
  * Created with IntelliJ IDEA
  *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description preHandle->isAccessAllowed->isLoginAttempt->executeLogin
- * @Date 2018-04-08
- * @Time 12:36
  */
 public class JWTFilter extends BasicHttpAuthenticationFilter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

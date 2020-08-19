@@ -19,12 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA
- *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description
- * @Date 2018-04-09
- * @Time 16:56
  */
 @Configuration
 public class ShiroConfig {

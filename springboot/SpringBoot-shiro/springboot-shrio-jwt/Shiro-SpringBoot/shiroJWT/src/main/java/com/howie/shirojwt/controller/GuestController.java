@@ -8,12 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created with IntelliJ IDEA
  *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description 游客角色可以访问的页面
- * @Date 2018-04-30
- * @Time 14:24
  */
 @RestController
 @RequestMapping("/guest")

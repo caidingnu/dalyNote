@@ -22,24 +22,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA
- *
- * @Author yuanhaoyue swithaoy@gmail.com
- * @Description
- * @Date 2018-04-29
- * @Time 13:20
  */
 @RestController
 public class LoginController {
-    private final UserMapper userMapper;
-    private final ResultMap resultMap;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public LoginController(UserMapper userMapper, ResultMap resultMap) {
-        this.userMapper = userMapper;
-        this.resultMap = resultMap;
-    }
+    private  UserMapper userMapper;
+    @Autowired
+    private  ResultMap resultMap;
+
 
     @PostMapping("/login")
     public ResultMap login(@RequestParam("username") String username,

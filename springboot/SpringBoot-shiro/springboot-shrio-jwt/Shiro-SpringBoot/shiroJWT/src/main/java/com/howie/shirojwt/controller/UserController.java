@@ -12,24 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created with IntelliJ IDEA
- *
- * @Author yuanhaoyue swithaoy@gmail.com
  * @Description user角色权限controller
- * @Date 2018-04-09
- * @Time 17:12
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private final UserMapper userMapper;
-    private final ResultMap resultMap;
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
-    public UserController(UserMapper userMapper, ResultMap resultMap) {
-        this.userMapper = userMapper;
-        this.resultMap = resultMap;
-    }
+    private ResultMap resultMap;
+
 
     /**
      * 拥有 user, admin 角色的用户可以访问下面的页面
