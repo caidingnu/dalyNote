@@ -34,6 +34,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserRoleMapper sysUserRoleMapper;
 
     @Override
+    @Cacheable(cacheNames = "userInfo",key = "#username")
     public SysUser getUserByName(String username) {
         return userMapper.getUserByName(username);
     }
