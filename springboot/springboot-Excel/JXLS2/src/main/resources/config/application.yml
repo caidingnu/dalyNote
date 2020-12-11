@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: cdn,dev
+  application:
+    name: yml
+  redis:
+    host: 129.28.171.44
+    password:
+    port: 87
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+knife4j:
+  enable: true
+#  production: true
+  basic:
+    enable: true
+    username: test
+    password: 123
