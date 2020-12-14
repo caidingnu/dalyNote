@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Admin@123
+    url: jdbc:mysql://127.0.0.1:3806/cdn?serverTimezone=UTC
+
+server:
+  port: 50
+
+#knife4j:
+#  production: false
+#  basic:
+#    enable: true
+#    username: zhangsan
+#    password: 123456
+#anti:
+#  reptile:
+#    manager:
+#      enabled: true
+#      ip-rule:
+#        request-max-size: 3
+#        expiration-time: 6000
+#        enabled: true
+#      global-filter-mode: true
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+logging:
+  config: classpath:config/logback.xml
+

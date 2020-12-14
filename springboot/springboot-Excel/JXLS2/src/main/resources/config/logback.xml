@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 属性定义 -->
+    <!--日志保存路劲-->
+    <property name="LOG_HOME" value="./logs"/>
+    <property name="appName" value="ERP_BOOT"/>
+    <property name="maxHistory" value="90"/>
+
+    <!-- ConsoleAppender 控制台输出日志 -->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 对日志进行格式化 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--        %green 控制台颜色     -->
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %boldGreen(%logger{36}) -%highlight(%msg) %n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- DEBUG日志 -->
+    <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 RollingFileAppender-->
+    <appender name="AllLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，记录「所有」级别的日志 -->
+        <!--		<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+        <!--			<level>DEBUG</level>-->
+        <!--			<onMatch>ACCEPT</onMatch>-->
+        <!--			<onMismatch>DENY</onMismatch>-->
+        <!--		</filter>-->
+        <!-- 滚动策略: 时间 和 大小 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <maxFileSize>256MB</maxFileSize>
+            <maxHistory>${maxHistory}</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{50}\(%F %L\) -%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    自己项目的mapper 路径-->
+    <logger name="com.cdn.common.mapper" level="DEBUG"/>
+
+    <!-- 根日志,所有日志appender都必须包含在root/logger中,否则不会起作用 -->
+    <root level="INFO">
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="AllLog"/>
+    </root>
+</configuration>
