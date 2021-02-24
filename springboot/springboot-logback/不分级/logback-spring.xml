@@ -38,8 +38,10 @@
 		</encoder>
 	</appender>
 
-	<!--    自己项目的mapper 路径-->
-	<logger name="ht.ldinfo.servicemanagement.mapper" level="DEBUG"/>
+    <!--    自己项目的mapper 路径-->
+    <springProfile name="prod">
+    <logger name="com.example.demo2.dao" level="DEBUG"/>
+    </springProfile>
 
 	<!-- 根日志,所有日志appender都必须包含在root/logger中,否则不会起作用 -->
 	<root level="INFO">
