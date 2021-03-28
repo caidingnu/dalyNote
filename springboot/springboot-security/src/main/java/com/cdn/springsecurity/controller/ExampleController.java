@@ -20,6 +20,7 @@ public class ExampleController {
         return "have a write authority";
     }
 
+//      @PreAuthorize("hasAuthority('user:update') and hasAuthority('user:update')")
     @GetMapping("/read")
     @PreAuthorize("hasAuthority('user:update')")
     public String readDate() {
