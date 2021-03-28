@@ -52,11 +52,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     //     安全拦截
+
+    /**
+     * 以下的详细权限也可以以注解的形式写在Controller的接口上
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/student/list").hasAuthority("student:list")   //访问  /student/list  需要 student:list权限
+                // /ha开头的需要同时拥有  ha:ha和ha2:ha2 才能访问
+                .antMatchers("/ha").access("hasAuthority('ha:ha') and hasAuthority('ha2:ha2')")
                 .antMatchers("/student/add").hasRole("student")  // //访问  /student/add  需要 student 角色
+                // /dba/开头的同时拥有多角色才可以访问
+                .antMatchers("/dba/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .antMatchers("/admin/**", "/example/**")
                 .authenticated()  //  /admin/    /example开头的需要认证
                 .anyRequest().permitAll()   //其他的不需要认证
