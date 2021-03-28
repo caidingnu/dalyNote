@@ -6,6 +6,7 @@ import com.cdn.springsecurity.handler.MyAccessDeniedHandler;
 import com.cdn.springsecurity.utils.Md5En;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -55,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 以下的详细权限也可以以注解的形式写在Controller的接口上
+     * 实际开发中实际只需要配置哪些开放（匿名）访问就行，其他的都需要鉴权
      * @param http
      * @throws Exception
      */
@@ -67,9 +69,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/student/add").hasRole("student")  // //访问  /student/add  需要 student 角色
                 // /dba/开头的同时拥有多角色才可以访问
                 .antMatchers("/dba/**").access("hasRole('ADMIN') and hasRole('DBA')")
-                .antMatchers("/admin/**", "/example/**")
-                .authenticated()  //  /admin/    /example开头的需要认证
+                //  /admin/    /example开头的需要认证
+                .antMatchers("/admin/**", "/example/**").authenticated()
                 .anyRequest().permitAll()   //其他的不需要认证
+//                // 允许对于网站静态资源的无授权访问
+//                .antMatchers(HttpMethod.GET,
+//                        "/*.html",
+//                        "/favicon.ico",
+//                        "/**/*.html",
+//                        "/**/*.css",
+//                        "/**/*.js",
+//                        "/swagger-resources/**",
+//                        "/v2/api-docs/**",
+//                        "/swagger-ui.html/*"
+//                ).permitAll()
                 .and()
                 .formLogin()  //允许表单登陆
                 .successHandler(loginSuccessHandler)
