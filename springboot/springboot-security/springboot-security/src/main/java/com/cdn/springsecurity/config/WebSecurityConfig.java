@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login-v?logout")   //登出成功之后到登陆页面
-//        .logoutSuccessHandler()   //自定义登出回调
+//        .logoutSuccessHandler()   //自定义登出回调,设置登出回调之后，登出成功的url就失效
                 .and()
                 .exceptionHandling().accessDeniedHandler(myAccessDeniedHandler)
         ;
