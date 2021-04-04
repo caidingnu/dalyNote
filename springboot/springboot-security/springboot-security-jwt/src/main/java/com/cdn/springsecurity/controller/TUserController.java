@@ -3,8 +3,9 @@ package com.cdn.springsecurity.controller;
 
 import com.cdn.springsecurity.entity.TUser;
 import com.cdn.springsecurity.entity.common.Result;
-import com.cdn.springsecurity.service.impl.UserService;
+import com.cdn.springsecurity.service.ITUserService;
 import com.cdn.springsecurity.utils.JwtTokenUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +22,13 @@ import java.util.Map;
  * @author cdn
  * @since 2020-05-17
  */
+@Slf4j
 @RestController
 @RequestMapping("/t-user")
 public class TUserController {
 
     @Autowired
-    UserService userService;
+    ITUserService userService;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
@@ -61,7 +63,7 @@ public class TUserController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        System.out.println("token:" + token);
+       log.info("token:" + token);
         return Result.success(tokenMap);
     }
 

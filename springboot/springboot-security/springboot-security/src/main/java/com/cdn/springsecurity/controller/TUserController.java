@@ -1,9 +1,8 @@
 package com.cdn.springsecurity.controller;
 
 
-import com.cdn.springsecurity.service.impl.UserService;
+import com.cdn.springsecurity.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TUserController {
 
     @Autowired
-    UserService userService;
+    ITUserService userService;
 
     /**
      * desc:

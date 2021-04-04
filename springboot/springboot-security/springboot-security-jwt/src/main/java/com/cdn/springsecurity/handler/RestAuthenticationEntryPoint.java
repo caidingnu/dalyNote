@@ -19,6 +19,7 @@ import java.io.IOException;
 
 /**
  * 当未登录或者token失效访问接口时，自定义的返回结果
+ * ☆☆☆☆☆☆☆   不能使用全局异常捕获，不然不会进入该回调  ☆☆☆☆☆☆☆☆☆☆
  */
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {

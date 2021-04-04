@@ -2,6 +2,7 @@ package com.cdn.springsecurity.service;
 
 import com.cdn.springsecurity.entity.TUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author cdn
  * @since 2020-05-17
  */
-public interface ITUserService extends IService<TUser> {
-
+public interface ITUserService extends IService<TUser>, UserDetailsService {
+    public TUser getCurrUser();
+    public String login(String username, String password);
 }

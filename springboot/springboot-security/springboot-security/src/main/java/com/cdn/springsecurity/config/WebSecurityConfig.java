@@ -1,5 +1,6 @@
 package com.cdn.springsecurity.config;
 
+import com.cdn.springsecurity.handler.LogOutSuccessHandler;
 import com.cdn.springsecurity.handler.LoginFailurehandler;
 import com.cdn.springsecurity.handler.LoginSuccessHandler;
 import com.cdn.springsecurity.handler.MyAccessDeniedHandler;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -25,9 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     LoginFailurehandler loginFailurehandler;
     @Autowired
     MyAccessDeniedHandler myAccessDeniedHandler;
-
     @Autowired
-    LoginOutSuccessHandler loginOutSuccessHandler;
+    LogOutSuccessHandler loginOutSuccessHandler;
     //    密码编码器 ---------------------------------密码编码器 start---------------------------------------
     //    - -->>>>不需要加密
 //    @Bean
@@ -93,9 +94,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login-v")   // 登陆页面 ( springsecurity 自带登陆页面， 这个是自已定义的登陆页面)
                 .loginProcessingUrl("/login") // 登陆处理器
                 .successForwardUrl("/index")   //自定义登陆成功之后的页面 -->>>>>  设置登陆成功跳转页面之后，登陆成功的hangler 回调就不起作用了
-//        .and()    //对session控制   IF_REQUIRED 有需要就创建session
-//        .sessionManagement()
-//        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+        .and()    //对session控制   IF_REQUIRED 有需要就创建session
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  //  基于token，所以不需要session,一定设置为STATELESS，否则会出现权限缓存（不回调AccessDeniedHandler 和 AuthenticationEntryPoint）
 
 //        自定义登出
                 .and()
