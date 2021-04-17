@@ -1,15 +1,8 @@
 package com.cdn.springsecurity.filter;
 
-/**
- * @author CDN
- * @desc
- * @date 2021/03/30 22:15
- */
 
 import com.cdn.springsecurity.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +37,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -54,8 +48,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             // The part after "Bearer "
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
             log.info("checking username:{}", username);
+//             SecurityContextHolder.getContext().getAuthentication()   单次请求有效，即一次请求只走一遍
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//                userDetails 单次请求有效，所以需要每次请求都查询加载
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -66,7 +60,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
-      }
-
+    }
 }
 

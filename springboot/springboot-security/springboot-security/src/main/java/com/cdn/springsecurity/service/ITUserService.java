@@ -14,4 +14,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface ITUserService extends IService<TUser>, UserDetailsService {
     public TUser getCurrUser();
+    public String login(String username, String password);
 }

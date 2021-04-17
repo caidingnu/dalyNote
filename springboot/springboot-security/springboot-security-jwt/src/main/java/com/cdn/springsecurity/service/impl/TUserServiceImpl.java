@@ -22,9 +22,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -53,6 +55,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     private UserDetailsService userDetailsService;
     @Resource
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    HttpServletRequest request;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
